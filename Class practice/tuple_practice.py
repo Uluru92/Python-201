@@ -5,3 +5,4 @@ print (tup[2][4])
 
 for word in tup:
     print(word[(len(word)-1)])
+
