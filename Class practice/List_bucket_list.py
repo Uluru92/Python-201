@@ -1,5 +1,9 @@
-bucket_list = ["Go to Asia", "get a full body tattoo", "Have a Dalmata", "jump from the sky"]
+bucket_list = ["Go to Asia", "get a full body tattoo", "Have a Dalmata", "jump from the sky", "Allow someone in"]
 print(bucket_list) #full list
+
+bucket_list.sort()
+print(bucket_list)
+
 print(bucket_list[1:2]) #returns the space 1 to the 2
 
 bucket_list.pop(0) #eliminates the first space
@@ -19,6 +23,8 @@ print(bucket_list)
 
 bucket_list.insert(1, "have 3 cats")
 print(bucket_list)
+
+
 
 a = [1,2,3]
 b = [1,2,3]
