@@ -1,8 +1,11 @@
 bucket_list = ["Go to Asia", "get a full body tattoo", "Have a Dalmata", "jump from the sky", "Allow someone in"]
-print(bucket_list) #full list
+print("bucket list:",bucket_list) #full list
 
-bucket_list.sort()
-print(bucket_list)
+lowercase_bucket_list = [elements.lower() for elements in bucket_list]
+print("bucket list in lower case:",lowercase_bucket_list) #full list in lower case
+
+lowercase_bucket_list.sort() #order by alphabetics... if there is an Upper case, it goes first ... apparently
+print(lowercase_bucket_list)
 
 print(bucket_list[1:2]) #returns the space 1 to the 2
 
