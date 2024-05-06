@@ -33,11 +33,13 @@ print("  -------  -------  -------  -------  -------")
 
 
 
-door_selection = None
+door_selection = int()
 sword = False
 shield = False
 continue_empty_room = None
+go_futher_empty_room = None
 continue_dragon_room = None
+
 pickup_sword = None
 fight_dragon = None
 
@@ -49,14 +51,14 @@ while door_selection != 1 and door_selection != 2 and door_selection != 3 and do
     if door_selection != 1 and door_selection != 2 and door_selection != 3 and door_selection != 4 and door_selection != 5:
         print("Please try again kid, you can only pick a room from the following numbers: 1|2|3|4|5")
 
-    elif door_selection == 1:
+    elif door_selection == 1 and inventory == {""}:
         print("---------------------------------")
         print("-                               -")
         print("-                               -")
         print("-                               -")
         print("-  Seems like an empty room..!  -")
-        print("-                               -")
-        print("-                         *     -")
+        print("-                        .      -")
+        print("-                       .*.     -")
         print("-                               -")
         print("---------------------------------")
 
@@ -104,7 +106,7 @@ while door_selection != 1 and door_selection != 2 and door_selection != 3 and do
                         pickup_shield = str(input("You found a shield! Do you want to add it to your inventory? (yes/no): ")) 
 
                         if pickup_shield == "yes":
-                            print("  Here it is! Pick it up!  ")
+                            print("                           ")
                             print("###########################")
                             print("##                       ##")
                             print("##  ||PALADIN SHIELD||   ##")
