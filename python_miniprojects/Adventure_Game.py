@@ -35,6 +35,7 @@ print("  -------  -------  -------  -------  -------")
 
 door_selection = None
 sword = False
+shield = False
 continue_empty_room = None
 continue_dragon_room = None
 pickup_sword = None
@@ -71,7 +72,17 @@ while door_selection != 1 and door_selection != 2 and door_selection != 3 and do
                     pickup_sword = str(input("You found a sword! Do you want to add it to your inventory? (yes/no): ")) 
 
                     if pickup_sword == "yes":
-                        print("Here it is! Pick it up!: -+----->")
+                        print("     Here it is! Pick it up!         ")
+                        print("#####################################")
+                        print("##                                 ##")
+                        print("##                                 ##")
+                        print("##        ||IRON AGE SWORD||       ##")
+                        print("##                                 ##")
+                        print("##         =|========}>>           ##")
+                        print("##                                 ##")
+                        print("##                                 ##")
+                        print("#####################################")
+                        print("                                     ")
                         inventory.add("sword")
                         print("*Now this is your inventory:", inventory)
                         sword = True #this way we confirm to pick up the sword!
@@ -91,21 +102,35 @@ while door_selection != 1 and door_selection != 2 and door_selection != 3 and do
 
                     if go_futher_empty_room == "yes":
                         pickup_shield = str(input("You found a shield! Do you want to add it to your inventory? (yes/no): ")) 
-                        print("     Here it is! Pick it up!         ")
-                        print("#####################################")
-                        print("##                                 ##")
-                        print("##                                 ##")
-                        print("##        ||IRON AGE SWORD||       ##")
-                        print("##                                 ##")
-                        print("##         =|========}>>          ##")
-                        print("##                                 ##")
-                        print("##                                 ##")
-                        print("#####################################")
-                        print("                                     ")
-                        
-                        inventory.add("sword")
+
+                        if pickup_shield == "yes":
+                            print("  Here it is! Pick it up!  ")
+                            print("###########################")
+                            print("##                       ##")
+                            print("##  ||PALADIN SHIELD||   ##")
+                            print("##                       ##")
+                            print("##          ,-.          ##")
+                            print("##         /   \         ##")
+                            print("##        /     \        ##")
+                            print("##       /       \       ##")
+                            print("##      |         \      ##")
+                            print("##      |    _     |     ##")
+                            print("##      |    _     |     ##")
+                            print("##      |    _     |     ##")
+                            print("##      |          |     ##")
+                            print("##      |         /      ##")
+                            print("##       \       /       ##")
+                            print("##        \     /        ##")
+                            print("##         \   /         ##")
+                            print("##          \-/          ##")
+                            print("##                       ##")
+                            print("##                       ##")
+                            print("###########################")
+                            print("                           ")
+
+                        inventory.add("shield")
                         print("*Now this is your inventory:", inventory)
-                        sword = True #this way we confirm to pick up the sword!
+                        shield = True #this way we confirm to pick up the sword!
 
             elif continue_empty_room == "no":
                 print("Ok, return to the previous room!")
