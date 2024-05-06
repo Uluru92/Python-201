@@ -49,11 +49,21 @@ while door_selection != 1 and door_selection != 2 and door_selection != 3 and do
         print("Please try again kid, you can only pick a room from the following numbers: 1|2|3|4|5")
 
     elif door_selection == 1:
-        print("---------------\n-              -\n-  EMPTY ROOM  -\n-              -\n---------------")
+        print("---------------------------------")
+        print("-                               -")
+        print("-                               -")
+        print("-                               -")
+        print("-  Seems like an empty room..!  -")
+        print("-                               -")
+        print("-                         *     -")
+        print("-                               -")
+        print("---------------------------------")
+
         door_selection = None #así volvemos a la elección entre left y right nuevamente
 
         while continue_empty_room != "yes" and continue_empty_room != "no":
             continue_empty_room = str(input("Do you want to go futher or return? (yes/no): "))
+            continue_empty_room.lower()
 
             if continue_empty_room == "yes":               
 
@@ -109,6 +119,7 @@ while door_selection != 1 and door_selection != 2 and door_selection != 3 and do
 
                 while fight_dragon != "yes" and fight_dragon != "no":
                     fight_dragon = str(input("Do you want to fight the dragon? (yes/no): "))
+                    fight_dragon.lower()
 
                     if fight_dragon == "yes" and sword == True:
                         print("Use your sword to kill the dragon! You won the game!")
