@@ -1,5 +1,6 @@
 set_1 = {1,2,33,44,55,66,77,88,88,88} #because it is a set, all repetitive elements are gone automatically
 print("set_1:",set_1)
+print(set_1.__len__())
 
 set_2 = set() # to create an empty set this is how! otherway... if you use {} you are actually creating an empty dictionary!
 print("set_2:",set_2)

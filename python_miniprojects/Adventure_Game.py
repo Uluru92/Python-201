@@ -51,93 +51,116 @@ while door_selection != 1 and door_selection != 2 and door_selection != 3 and do
     if door_selection != 1 and door_selection != 2 and door_selection != 3 and door_selection != 4 and door_selection != 5:
         print("Please try again kid, you can only pick a room from the following numbers: 1|2|3|4|5")
 
-    elif door_selection == 1 and inventory == {""}:
+    elif door_selection == 1 and inventory.__len__() != 2:
         print("---------------------------------")
         print("-                               -")
         print("-                               -")
         print("-                               -")
         print("-  Seems like an empty room..!  -")
-        print("-                        .      -")
-        print("-                       .*.     -")
+        print("-                         .     -")
+        print("-  HUH! what is that?!   .*.    -")
         print("-                               -")
         print("---------------------------------")
 
         door_selection = None #así volvemos a la elección entre left y right nuevamente
 
         while continue_empty_room != "yes" and continue_empty_room != "no":
-            continue_empty_room = str(input("Do you want to go futher or return? (yes/no): "))
+            continue_empty_room = str(input("Do you want to take a look around? (yes/no): "))
             continue_empty_room.lower()
 
             if continue_empty_room == "yes":               
+                
+                if "sword" not in inventory:
+                    while pickup_sword != "yes" and pickup_sword != "no" and sword == False:               
+                        pickup_sword = str(input("You found a sword! Do you want to add it to your inventory? (yes/no):")) 
+                        pickup_sword.lower()
 
-                while pickup_sword != "yes" and pickup_sword != "no" and sword == False:               
-                    pickup_sword = str(input("You found a sword! Do you want to add it to your inventory? (yes/no): ")) 
+                        if pickup_sword == "yes":
+                            print("                                     ")
+                            print("#####################################")
+                            print("##                                 ##")
+                            print("##                                 ##")
+                            print("##        ||IRON AGE SWORD||       ##")
+                            print("##                                 ##")
+                            print("##         =|========}>>           ##")
+                            print("##                                 ##")
+                            print("##                                 ##")
+                            print("#####################################")
+                            print("                                     ")
+                            inventory.add("sword")
+                            print("*Now this is your inventory:", inventory)
+                            sword = True #this way we confirm to pick up the sword!
 
-                    if pickup_sword == "yes":
-                        print("     Here it is! Pick it up!         ")
-                        print("#####################################")
-                        print("##                                 ##")
-                        print("##                                 ##")
-                        print("##        ||IRON AGE SWORD||       ##")
-                        print("##                                 ##")
-                        print("##         =|========}>>           ##")
-                        print("##                                 ##")
-                        print("##                                 ##")
-                        print("#####################################")
-                        print("                                     ")
-                        inventory.add("sword")
-                        print("*Now this is your inventory:", inventory)
-                        sword = True #this way we confirm to pick up the sword!
-
-                    elif pickup_sword == "no":
-                        print("Ok, you left the sword behind! Go back to the previus room")
-                        sword = False #this way to make clear the player do not have the sword in his hands
-
-                    else:
-                        print("Please, enter yes if you want to keep it, or no if you want to leave it behind!")
+                        elif pickup_sword == "no":
+                            print("Not the best choice kid...")
+                            sword = False #this way to make clear the player do not have the sword in his hands
+                        else:
+                            print("Please, enter YES if you want to keep it, or NO if you want to leave it behind!")
+                elif "sword" in inventory:
+                    print("Seems like there is nothing else here...")
 
                 pickup_sword = None #reset the option to pick up the sword in case the player comes back later
 
                 while go_futher_empty_room != "yes" and go_futher_empty_room != "no":
-                    go_futher_empty_room = str(input("Do you want to go even futher or return to the main room? (yes/no): "))
+                    go_futher_empty_room = str(input("Do you want to go even futher? (yes/no): "))
                     go_futher_empty_room.lower()
 
                     if go_futher_empty_room == "yes":
-                        pickup_shield = str(input("You found a shield! Do you want to add it to your inventory? (yes/no): ")) 
+                        if "shield" not in inventory:
+                            pickup_shield = str(input("You found a shield! Do you want to add it to your inventory? (yes/no): ")) 
+                            pickup_shield.lower()
+                            if pickup_shield == "yes":
+                                print("                           ")
+                                print("###########################")
+                                print("##                       ##")
+                                print("##  ||PALADIN SHIELD||   ##")
+                                print("##                       ##")
+                                print("##          ,-.          ##")
+                                print("##         /   \         ##")
+                                print("##        /     \        ##")
+                                print("##       /       \       ##")
+                                print("##      |         \      ##")
+                                print("##      |    _     |     ##")
+                                print("##      |    _     |     ##")
+                                print("##      |    _     |     ##")
+                                print("##      |          |     ##")
+                                print("##      |         /      ##")
+                                print("##       \       /       ##")
+                                print("##        \     /        ##")
+                                print("##         \   /         ##")
+                                print("##          \-/          ##")
+                                print("##                       ##")
+                                print("##                       ##")
+                                print("###########################")
+                                print("                           ")
 
-                        if pickup_shield == "yes":
-                            print("                           ")
-                            print("###########################")
-                            print("##                       ##")
-                            print("##  ||PALADIN SHIELD||   ##")
-                            print("##                       ##")
-                            print("##          ,-.          ##")
-                            print("##         /   \         ##")
-                            print("##        /     \        ##")
-                            print("##       /       \       ##")
-                            print("##      |         \      ##")
-                            print("##      |    _     |     ##")
-                            print("##      |    _     |     ##")
-                            print("##      |    _     |     ##")
-                            print("##      |          |     ##")
-                            print("##      |         /      ##")
-                            print("##       \       /       ##")
-                            print("##        \     /        ##")
-                            print("##         \   /         ##")
-                            print("##          \-/          ##")
-                            print("##                       ##")
-                            print("##                       ##")
-                            print("###########################")
-                            print("                           ")
+                            inventory.add("shield")
+                            print("*Now this is your inventory:", inventory)
+                            shield = True #this way we confirm to pick up the sword!
 
-                        inventory.add("shield")
-                        print("*Now this is your inventory:", inventory)
-                        shield = True #this way we confirm to pick up the sword!
+                        elif "shield" in inventory:
+                            print("Seems like the room is now truly empty!")
+
+                    elif go_futher_empty_room == "no":
+                        print("Ok, return to the main room!")    
 
             elif continue_empty_room == "no":
-                print("Ok, return to the previous room!")
+                print("Ok, return to the main room!")
 
         continue_empty_room = None #reset the option to continue to the empty room in case the player comes back to this room later
+        go_futher_empty_room = None #same reset
+    
+    elif door_selection == 1 and inventory.__len__() == 2:
+        print("---------------------------------")
+        print("-                               -")
+        print("-                               -")
+        print("-                               -")
+        print("-  Seems like an empty room..!  -")
+        print("-                               -")
+        print("-                               -")
+        print("-                               -")
+        print("---------------------------------")
+
 
     elif door_selection == 2:
         print("                  ,-.        ,-.                    ")
