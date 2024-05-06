@@ -43,7 +43,7 @@ fight_dragon = None
 inventory = set()
 
 while door_selection != 1 and door_selection != 2 and door_selection != 3 and door_selection != 4 and door_selection != 5: 
-    door_selection = int(input("You have to select a door, make a choice: 1|2|3|4|5?: "))
+    door_selection = int(input("You have to select a door, make a choice: 1|2|3|4|5: "))
 
     if door_selection != 1 and door_selection != 2 and door_selection != 3 and door_selection != 4 and door_selection != 5:
         print("Please try again kid, you can only pick a room from the following numbers: 1|2|3|4|5")
@@ -85,8 +85,27 @@ while door_selection != 1 and door_selection != 2 and door_selection != 3 and do
 
                 pickup_sword = None #reset the option to pick up the sword in case the player comes back later
 
-                if sword == True:
-                    print("Now the room is really empty, you already have the sword, go back to the previus room!")
+                while go_futher_empty_room != "yes" and go_futher_empty_room != "no":
+                    go_futher_empty_room = str(input("Do you want to go even futher or return to the main room? (yes/no): "))
+                    go_futher_empty_room.lower()
+
+                    if go_futher_empty_room == "yes":
+                        pickup_shield = str(input("You found a shield! Do you want to add it to your inventory? (yes/no): ")) 
+                        print("     Here it is! Pick it up!         ")
+                        print("#####################################")
+                        print("##                                 ##")
+                        print("##                                 ##")
+                        print("##        ||IRON AGE SWORD||       ##")
+                        print("##                                 ##")
+                        print("##         =|========}>>          ##")
+                        print("##                                 ##")
+                        print("##                                 ##")
+                        print("#####################################")
+                        print("                                     ")
+                        
+                        inventory.add("sword")
+                        print("*Now this is your inventory:", inventory)
+                        sword = True #this way we confirm to pick up the sword!
 
             elif continue_empty_room == "no":
                 print("Ok, return to the previous room!")
