@@ -1,16 +1,37 @@
-# Build a CLI RPG game following the instructions from the course.
-# Ask the player for their name.
-# Display a message that greets them and introduces them to the game world.
-# Present them with a choice between two doors.
-# If they choose the left door, they'll see an empty room.
-# In both cases, they have the option to return to the previous room or interact further.
-# When in the seemingly empty room, they can choose to look around. If they do so, they will find a sword. They can choose to take it or leave it.
-# If they choose the right door, then they encounter a dragon.
-# When encountering the dragon, they have the choice to fight it.
-# If they have the sword from the other room, then they will be able to defeat it and win the game.
-# If they don't have the sword, then they will be eaten by the dragon and lose the game.
+#Save the user input options you allow, e.g., in a set that you can check against when your user makes a choice.
+#Create an inventory for your player, where they can add and remove items.
+#Players should be able to collect items they find in rooms and add them to their inventory.
+#If they lose a fight against the dragon, then they should lose their inventory items.
+#Add more rooms to your game and allow your player to explore.
+#Some rooms can be empty, others can contain items, and yet others can contain an opponent.
+#Implement some logic that decides whether or not your player can beat the opponent depending on what items they have in their inventory
+#Use the random module to add a multiplier to your battles, similar to a dice roll in a real game. This pseudo-random element can have an effect on whether your player wins or loses when battling an opponent.
+
 player = str(input("CLI RPG GAME - Please enter your name: "))
-print(player,"welcome to the game!")
+life_points = 3
+print("       __  ")
+print("      ^  ^")
+print("    ( 0  0  )")
+print("     ( °   )","    ",player,"welcome to the game! You have", life_points,"Life points, good luck!")
+print("      |___|")
+print("       | |")
+print("    .-#---#-.")
+print("   || # | # ||")
+print("  ||  | # |  ||")
+print(" ||   |___|   ||")
+print(" ||   |   |   ||")
+print(" ||   |   |   ||")
+print(" ||   |___|  ||")
+print("  ||  | # | ||")
+print("   || | # |||")
+print("    .-#---#-.")
+print("       |||")
+print("        !!")
+print("  -------  -------  -------  -------  -------")
+print("  | ROOM 1  |  | ROOM 2  |  | ROOM 3  |  | ROOM 4  |  | ROOM 5  |")
+print("  -------  -------  -------  -------  -------")
+
+
 
 door_selection = None
 sword = False
@@ -19,13 +40,15 @@ continue_dragon_room = None
 pickup_sword = None
 fight_dragon = None
 
-while door_selection != "left" and door_selection != "right": 
-    door_selection = str(input("You have to select 1 door, make a choice: left or right?: "))
+inventory = set()
 
-    if door_selection != "left" and door_selection != "right":
-        print("Please try again, pick left o right, watch your grammar")
-        
-    elif door_selection == "left":
+while door_selection != "left" and door_selection != "right": 
+    door_selection = int(input("You have to select a door, make a choice: 1|2|3|4|5?: "))
+
+    if door_selection != 1 and door_selection != 2 and door_selection != 3 and door_selection != 4 and door_selection != 5:
+        print("Please try again kid, you can only pick a room from the following numbers: 1|2|3|4|5")
+
+    elif door_selection == 1:
         print("---------------\n-              -\n-  EMPTY ROOM  -\n-              -\n---------------")
         door_selection = None #así volvemos a la elección entre left y right nuevamente
 
@@ -35,12 +58,14 @@ while door_selection != "left" and door_selection != "right":
             if continue_empty_room == "yes":               
 
                 while pickup_sword != "yes" and pickup_sword != "no" and sword == False:               
-                    pickup_sword = str(input("You found a sword! Do you want to take it? (yes/no): ")) 
+                    pickup_sword = str(input("You found a sword! Do you want to add it to your inventory? (yes/no): ")) 
 
                     if pickup_sword == "yes":
                         print("Here it is! Pick it up!: -+----->")
+                        inventory.add("sword")
+                        print("*Now this is your inventory:", inventory)
                         sword = True #this way we confirm to pick up the sword!
-                        
+
                     elif pickup_sword == "no":
                         print("Ok, you left the sword behind! Go back to the previus room")
                         sword = False #this way to make clear the player do not have the sword in his hands
@@ -58,7 +83,7 @@ while door_selection != "left" and door_selection != "right":
 
         continue_empty_room = None #reset the option to continue to the empty room in case the player comes back to this room later
 
-    elif door_selection == "right":
+    elif door_selection == 2:
         print("---------------\n-              -\n-  DRAGON****  -\n-              -\n---------------")
 
         while continue_dragon_room != "yes" and continue_dragon_room != "no":
@@ -80,7 +105,7 @@ while door_selection != "left" and door_selection != "right":
                     elif fight_dragon == "yes" and sword == None:
                         print("oh no! you don't have any weapons to kill the dragon! You lost the game!")
                         exit(0)  # Successful exit
-                    
+
                     elif fight_dragon == "no" and sword == True:
                         print("Ok, you could have killed the dragon, but ok, return to the previus room!")
 
@@ -89,10 +114,10 @@ while door_selection != "left" and door_selection != "right":
 
                     elif fight_dragon == "no" and sword == None:
                         print("Ok, good choice because you are not prepared to kill the dragon yet! go find a weapon before coming back!")   
-                    
+
                     else:
                         print("Please, enter 'yes' if you want to fight the dragon, or 'no' if you want to leave the room")
-                        
+
                 fight_dragon = None
 
             elif continue_dragon_room == "no":
@@ -101,4 +126,3 @@ while door_selection != "left" and door_selection != "right":
         continue_dragon_room = None #reset the option to continue to the dragon room in case the player comes back to this room later
 
     door_selection = None
-

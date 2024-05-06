@@ -23,7 +23,7 @@ set_x = ["x","xx","xxx"]
 set_A_1_X = set_A_1.union(set_x)
 print("set_A_1_X:",set_A_1_X)
 
-set_B = ["b","bbb","bbbbb"]
+set_B = ["b","b","bbb","bbbbb"]
 print(set_B)
 set_B.append(set_1)
 print("set_B_1:",set_B)
