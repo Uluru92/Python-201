@@ -34,12 +34,16 @@ print("  -------  -------  -------  -------  -------")
 
 
 door_selection = None
+
 room_1 = None #WHERE YOU CAN FIND A SWORD AND A SHIELD...
-go_futher_empty_room = None
-continue_dragon_room = None
+go_futher_room_1 = None
 pickup_sword = None
 pickup_shield = None
+
+room_2 = None
+continue_dragon_room = None
 fight_dragon = None
+
 inventory = set()
 
 while door_selection == None:
@@ -47,8 +51,8 @@ while door_selection == None:
     if door_selection not in "12345":
         print("Please try again kid, you can only pick a room from the following numbers: 1|2|3|4|5")
     else:
-        door_selection = int(door_selection)
-        if door_selection == 1 and inventory.__len__() != 2:
+        door_selection = int(door_selection)         
+        if door_selection == 1 and "sword" not in inventory or "shield" not in inventory:
             print("---------------------------------")
             print("-                               -")
             print("-                               -")
@@ -58,7 +62,6 @@ while door_selection == None:
             print("-  WAIT! what is that?!   .*.   -")
             print("-                               -")
             print("---------------------------------")
-            #door_selection = None #así volvemos a la elección entre 1|2|3|4|5 nuevamente
             while room_1 != "yes" and room_1 != "no":
                 room_1 = str(input("Do you want to take a look around? (yes/no): "))
                 room_1 = room_1.lower()            
@@ -66,8 +69,9 @@ while door_selection == None:
                     if "sword" not in inventory:
                         while pickup_sword != "yes" and pickup_sword != "no":               
                             pickup_sword = str(input("You found a sword! Do you want to add it to your inventory? (yes/no):")) 
-                            pickup_sword.lower()
+                            pickup_sword = pickup_sword.lower()
                             if pickup_sword == "yes":
+                                inventory.add("sword")
                                 print("                                     ")
                                 print("#####################################")
                                 print("##                                 ##")
@@ -79,25 +83,24 @@ while door_selection == None:
                                 print("##                                 ##")
                                 print("#####################################")
                                 print("                                     ")
-                                inventory.add("sword")
                                 print("*Now this is your inventory:", inventory)
                             elif pickup_sword == "no":
-                                print("Not the best choice kid...")                            
+                                print("Not the best choice kid...")
                             else:
                                 print("Please, enter YES if you want to keep it, or NO if you want to leave it behind!")
+                        pickup_sword = None
                     elif "sword" in inventory:
                         print("Seems like there is nothing else here...")
-                    pickup_sword = None #reset the option to pick up the sword in case the player comes back later
-                    while go_futher_empty_room != "yes" and go_futher_empty_room != "no":
-                        go_futher_empty_room = str(input("Do you want to go even futher? (yes/no): "))
-                        go_futher_empty_room.lower()
-                        if go_futher_empty_room == "yes":
+                    while go_futher_room_1 != "yes" and go_futher_room_1 != "no":
+                        go_futher_room_1 = str(input("Do you want to go even futher? (yes/no): "))
+                        go_futher_room_1 = go_futher_room_1.lower()
+                        if go_futher_room_1 == "yes":
                             if "shield" not in inventory:
                                 while pickup_shield != "yes" and pickup_shield != "no":
                                     pickup_shield = str(input("You found a shield! Do you want to add it to your inventory? (yes/no): ")) 
                                     pickup_shield.lower()
                                     if pickup_shield == "yes":
-                                        pickup_shield == None
+                                        inventory.add("shield")
                                         print("                           ")
                                         print("###########################")
                                         print("##                       ##")
@@ -121,27 +124,27 @@ while door_selection == None:
                                         print("##                       ##")
                                         print("###########################")
                                         print("                           ")
-                                        inventory.add("shield")
                                         print("*Now this is your inventory:", inventory)
-                                        shield = True #this way we confirm to pick up the sword!                                
+                                        print("                           ")
+                                        print("Now the room is empty... return to the main room!")                            
                                     elif pickup_shield == "no":
-                                        pickup_shield == None
                                         print("You dont want to improve your defense... ok kid, return to the main room!")                                    
                                     else:
                                         print("Please try again kid, you can only type YES or NO...")
+                                pickup_shield = None
                             elif "shield" in inventory:
                                 print("Seems like there is nothing here!")
-                        elif go_futher_empty_room == "no":
+                        elif go_futher_room_1 == "no":
                             print("Ok, return to the main room!")                        
                         else:
                             print("Please try again kid, you can only type YES or NO...")
-                        go_futher_empty_room == None
+                    go_futher_room_1 = None
                 elif room_1 == "no":
                     print("Ok, return to the main room!")
                 else:
                     print("Please try again kid, you can only type YES or NO...")            
             room_1 = None #reset the option to continue to the empty room in case the player comes back to this room later
-        elif door_selection == 1 and inventory.__len__() == 2:
+        elif door_selection == 1 and "sword" in inventory and "shield" in inventory:
             print("---------------------------------")
             print("-                               -")
             print("-                               -")
