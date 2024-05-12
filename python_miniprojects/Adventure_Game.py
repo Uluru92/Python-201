@@ -31,7 +31,7 @@ print("  -------  -------  -------  -------  -------")
 print("  | ROOM 1  |  | ROOM 2  |  | ROOM 3  |  | ROOM 4  |  | ROOM 5  |")
 print("  -------  -------  -------  -------  -------")
 
-
+import random
 
 door_selection = None
 
@@ -41,7 +41,7 @@ pickup_sword = None
 pickup_shield = None
 
 room_2 = None
-continue_dragon_room = None
+attack_dragon = None
 fight_dragon = None
 
 room_3 = None
@@ -161,6 +161,9 @@ while door_selection == None:
                 print("-                               -")
                 print("---------------------------------")
         elif door_selection == 2:
+            print("#                                                    #")
+            print("#     THERE IS A DRAGON SLEEPING HERE!               #")
+            print("#                                                    #")
             print("#                  ,-.        ,-.                    #")
             print("#                 /   \      /   \                   #")
             print("#                /     \    /     \                  #")
@@ -177,34 +180,32 @@ while door_selection == None:
             print("#    | |    | || |      | |      || |    | |         #")
             print("#     \ '--' /  | |   .--.  .--.   |  \ '--' /       #")
             print("#      \___/    | |  /    \  /    \  |   \___/       #")
-            print("#       '-'        '-'        '-'                    ")
-            while continue_dragon_room != "yes" and continue_dragon_room != "no":
-                continue_dragon_room = str(input("Do you want to go futher or return?(yes/no): "))
-                if continue_dragon_room == "yes":
+            print("#       '-'        '-'        '-'                    #")
+            print("#                                                    #")
+            while attack_dragon != "yes" and attack_dragon != "no":
+                attack_dragon = str(input("Do you want to go attack the dragon?(yes/no): "))
+                if attack_dragon == "yes":
                     while fight_dragon != "yes" and fight_dragon != "no":
                         fight_dragon = str(input("Do you want to fight the dragon? (yes/no): "))
                         fight_dragon.lower()
-                        if fight_dragon == "yes" and sword == True:
+                        if fight_dragon == "yes":
                             print("Use your sword to kill the dragon! You won the game!")
-                            exit(0)  # Successful exit
-                        elif fight_dragon == "yes" and sword == False:
+                        elif fight_dragon == "yes":
                             print("oh no! you don't have any weapons to kill the dragon! You lost the game!")
-                            exit(0)  # Successful exit
-                        elif fight_dragon == "yes" and sword == None:
+                        elif fight_dragon == "yes":
                             print("oh no! you don't have any weapons to kill the dragon! You lost the game!")
-                            exit(0)  # Successful exit
-                        elif fight_dragon == "no" and sword == True:
+                        elif fight_dragon == "no":
                             print("Ok, you could have killed the dragon, but ok, return to the previus room!")
-                        elif fight_dragon == "no" and sword == False:
+                        elif fight_dragon == "no":
                             print("Ok, good choice because you are not prepared to kill the dragon yet! go find a weapon before coming back!")
-                        elif fight_dragon == "no" and sword == None:
+                        elif fight_dragon == "no":
                             print("Ok, good choice because you are not prepared to kill the dragon yet! go find a weapon before coming back!")   
                         else:
                             print("Please, enter 'yes' if you want to fight the dragon, or 'no' if you want to leave the room")
                     fight_dragon = None
-                elif continue_dragon_room == "no":
+                elif attack_dragon == "no":
                     print("Ok, return to the previous room!")
-            continue_dragon_room = None #reset the option to continue to the dragon room in case the player comes back to this room later
+            attack_dragon = None #reset the option to continue to the dragon room in case the player comes back to this room later
         elif door_selection == 3:        
             print("    *PRIEST APPEARS*                        ")                      
             print("   .-------.                                ")
@@ -263,129 +264,25 @@ while door_selection == None:
                     print("Ok, return to the main room!")               
                 else:
                     print("Please try again kid, you can only: keel or stand")
-            get_bless = None
-    
+            get_bless = None   
         elif door_selection == 4:
-            print("---------------\n-              -\n-  DRAGON****  -\n-              -\n---------------")
-
-            while continue_dragon_room != "yes" and continue_dragon_room != "no":
-                continue_dragon_room = str(input("Do you want to go futher or return?(yes/no): "))
-
-                if continue_dragon_room == "yes":
-
-                    while fight_dragon != "yes" and fight_dragon != "no":
-                        fight_dragon = str(input("Do you want to fight the dragon? (yes/no): "))
-
-                        if fight_dragon == "yes" and sword == True:
-                            print("Use your sword to kill the dragon! You won the game!")
-                            exit(0)  # Successful exit
-
-                        elif fight_dragon == "yes" and sword == False:
-                            print("oh no! you don't have any weapons to kill the dragon! You lost the game!")
-                            exit(0)  # Successful exit
-
-                        elif fight_dragon == "yes" and sword == None:
-                            print("oh no! you don't have any weapons to kill the dragon! You lost the game!")
-                            exit(0)  # Successful exit
-
-                        elif fight_dragon == "no" and sword == True:
-                            print("Ok, you could have killed the dragon, but ok, return to the previus room!")
-
-                        elif fight_dragon == "no" and sword == False:
-                            print("Ok, good choice because you are not prepared to kill the dragon yet! go find a weapon before coming back!")
-
-                        elif fight_dragon == "no" and sword == None:
-                            print("Ok, good choice because you are not prepared to kill the dragon yet! go find a weapon before coming back!")   
-
-                        else:
-                            print("Please, enter 'yes' if you want to fight the dragon, or 'no' if you want to leave the room")
-
-                    fight_dragon = None
-
-                elif continue_dragon_room == "no":
-                    print("Ok, return to the previous room!")
-
-            continue_dragon_room = None #reset the option to continue to the dragon room in case the player comes back to this room later
+            print("---------------------------------")
+            print("-                               -")
+            print("-                               -")
+            print("-  Seems like there is          -")
+            print("-  nothing here..!         -")
+            print("-  go back to the main room!    -")
+            print("-                               -")
+            print("---------------------------------")
         elif door_selection == 5:
-            print("---------------\n-              -\n-  DRAGON****  -\n-              -\n---------------")
+            print("-----------------------------------------")
+            print("-                                       -")
+            print("-                                       -")
+            print("-  You just entered the multiverse!     -")
+            print("-  You will be teleported to another    -")
+            print("-  room!                                -")
+            print("-                                       -")
+            print("-----------------------------------------")
+            door_selection = random.randint(1,4)
 
-            while continue_dragon_room != "yes" and continue_dragon_room != "no":
-                continue_dragon_room = str(input("Do you want to go futher or return?(yes/no): "))
-
-                if continue_dragon_room == "yes":
-
-                    while fight_dragon != "yes" and fight_dragon != "no":
-                        fight_dragon = str(input("Do you want to fight the dragon? (yes/no): "))
-
-                        if fight_dragon == "yes" and sword == True:
-                            print("Use your sword to kill the dragon! You won the game!")
-                            exit(0)  # Successful exit
-
-                        elif fight_dragon == "yes" and sword == False:
-                            print("oh no! you don't have any weapons to kill the dragon! You lost the game!")
-                            exit(0)  # Successful exit
-
-                        elif fight_dragon == "yes" and sword == None:
-                            print("oh no! you don't have any weapons to kill the dragon! You lost the game!")
-                            exit(0)  # Successful exit
-
-                        elif fight_dragon == "no" and sword == True:
-                            print("Ok, you could have killed the dragon, but ok, return to the previus room!")
-
-                        elif fight_dragon == "no" and sword == False:
-                            print("Ok, good choice because you are not prepared to kill the dragon yet! go find a weapon before coming back!")
-
-                        elif fight_dragon == "no" and sword == None:
-                            print("Ok, good choice because you are not prepared to kill the dragon yet! go find a weapon before coming back!")   
-
-                        else:
-                            print("Please, enter 'yes' if you want to fight the dragon, or 'no' if you want to leave the room")
-
-                    fight_dragon = None
-
-                elif continue_dragon_room == "no":
-                    print("Ok, return to the previous room!")
-
-            continue_dragon_room = None #reset the option to continue to the dragon room in case the player comes back to this room later
-        elif door_selection == "Roll the dice":
-            print("---------------\n-              -\n-  DRAGON****  -\n-              -\n---------------")
-
-            while continue_dragon_room != "yes" and continue_dragon_room != "no":
-                continue_dragon_room = str(input("Do you want to go futher or return?(yes/no): "))
-
-                if continue_dragon_room == "yes":
-
-                    while fight_dragon != "yes" and fight_dragon != "no":
-                        fight_dragon = str(input("Do you want to fight the dragon? (yes/no): "))
-
-                        if fight_dragon == "yes" and sword == True:
-                            print("Use your sword to kill the dragon! You won the game!")
-                            exit(0)  # Successful exit
-
-                        elif fight_dragon == "yes" and sword == False:
-                            print("oh no! you don't have any weapons to kill the dragon! You lost the game!")
-                            exit(0)  # Successful exit
-
-                        elif fight_dragon == "yes" and sword == None:
-                            print("oh no! you don't have any weapons to kill the dragon! You lost the game!")
-                            exit(0)  # Successful exit
-
-                        elif fight_dragon == "no" and sword == True:
-                            print("Ok, you could have killed the dragon, but ok, return to the previus room!")
-
-                        elif fight_dragon == "no" and sword == False:
-                            print("Ok, good choice because you are not prepared to kill the dragon yet! go find a weapon before coming back!")
-
-                        elif fight_dragon == "no" and sword == None:
-                            print("Ok, good choice because you are not prepared to kill the dragon yet! go find a weapon before coming back!")   
-
-                        else:
-                            print("Please, enter 'yes' if you want to fight the dragon, or 'no' if you want to leave the room")
-
-                    fight_dragon = None
-
-                elif continue_dragon_room == "no":
-                    print("Ok, return to the previous room!")
-
-            continue_dragon_room = None #reset the option to continue to the dragon room in case the player comes back to this room later
     door_selection = None
