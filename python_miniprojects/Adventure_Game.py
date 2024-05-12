@@ -178,48 +178,34 @@ while door_selection == None:
             print("#     \ '--' /  | |   .--.  .--.   |  \ '--' /       #")
             print("#      \___/    | |  /    \  /    \  |   \___/       #")
             print("#       '-'        '-'        '-'                    ")
-
             while continue_dragon_room != "yes" and continue_dragon_room != "no":
                 continue_dragon_room = str(input("Do you want to go futher or return?(yes/no): "))
-
                 if continue_dragon_room == "yes":
-
                     while fight_dragon != "yes" and fight_dragon != "no":
                         fight_dragon = str(input("Do you want to fight the dragon? (yes/no): "))
                         fight_dragon.lower()
-
                         if fight_dragon == "yes" and sword == True:
                             print("Use your sword to kill the dragon! You won the game!")
                             exit(0)  # Successful exit
-
                         elif fight_dragon == "yes" and sword == False:
                             print("oh no! you don't have any weapons to kill the dragon! You lost the game!")
                             exit(0)  # Successful exit
-
                         elif fight_dragon == "yes" and sword == None:
                             print("oh no! you don't have any weapons to kill the dragon! You lost the game!")
                             exit(0)  # Successful exit
-
                         elif fight_dragon == "no" and sword == True:
                             print("Ok, you could have killed the dragon, but ok, return to the previus room!")
-
                         elif fight_dragon == "no" and sword == False:
                             print("Ok, good choice because you are not prepared to kill the dragon yet! go find a weapon before coming back!")
-
                         elif fight_dragon == "no" and sword == None:
                             print("Ok, good choice because you are not prepared to kill the dragon yet! go find a weapon before coming back!")   
-
                         else:
                             print("Please, enter 'yes' if you want to fight the dragon, or 'no' if you want to leave the room")
-
                     fight_dragon = None
-
                 elif continue_dragon_room == "no":
                     print("Ok, return to the previous room!")
-
             continue_dragon_room = None #reset the option to continue to the dragon room in case the player comes back to this room later
-        elif door_selection == 3:
-            
+        elif door_selection == 3:        
             print("    *PRIEST APPEARS*                        ")                      
             print("   .-------.                                ")
             print("  /   -|-   \      _____________________    ")
@@ -236,12 +222,10 @@ while door_selection == None:
             print("    | | | |                                 ")
             print("    '-' '-'                                 ")
             print("                                            ")
-            print("                                            ")
-      
+            print("                                            ")     
             while get_bless != "kneel" and get_bless != "stand":
                 get_bless = input("Type: kneel or stand\nYour choice: ")
                 get_bless = get_bless.lower()
-
                 if get_bless == "kneel" and power_of_gods == 0:
                     life_points = life_points + 1
                     power_of_gods = int(power_of_gods)+1
@@ -256,8 +240,7 @@ while door_selection == None:
                     print(" **     |   ^   |    **                                 ")
                     print("  **    \  / \ /    **                                  ")
                     print("   **    \/   \/   **                                   ")
-                    print("                          *Now, return to the main room!")
-                
+                    print("                          *Now, return to the main room!")               
                 elif get_bless == "kneel" and power_of_gods != 0:
                     print("    *PRIEST APPEARS*                        ")                      
                     print("   .-------.                                ")
@@ -276,14 +259,10 @@ while door_selection == None:
                     print("    '-' '-'                                 ")
                     print("                                            ")
                     print("  *Return to the main room                  ")
-
                 elif get_bless == "stand":
-                    print("Ok, return to the main room!")
-                
+                    print("Ok, return to the main room!")               
                 else:
                     print("Please try again kid, you can only: keel or stand")
-
-
             get_bless = None
     
         elif door_selection == 4:
