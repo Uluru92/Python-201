@@ -241,19 +241,19 @@ while door_selection == None:
 
                 if get_bless == "kneel":
                     life_points = life_points + 1
-                    print("                                                      ")
-                    print("      * *     * *                                     ")
-                    print("    *    *   *   *    ", player," you recive          ")
-                    print("   *       **     *      the blessing of the          ")
-                    print("  *                *     Gods...                      ")
-                    print(" *       v          *                                 ")
-                    print("*       /     /      *   *You got +1 Life points      ")
-                    print("*      | (o.o) |     *   for a total of:", life_points )
-                    print(" *     |   ^   |    *                                 ")
-                    print("  *    \  / \ /    *                                  ")
-                    print("   *    \/   \/   *                                   ")
-                    print("                                                      ")
-                    
+                    print("                                                        ")
+                    print("      * *      **                                       ")
+                    print("    **   **  **  **    ", player," you recived          ")
+                    print("   **      **     **      the blessing of the           ")
+                    print("  **                **     Gods... use it wisely!       ")
+                    print(" **                  **                                 ")
+                    print("**       / ^ ^ \      **   *You got +1 Life points      ")
+                    print("**      | (o.o) |     **   for a total of:", life_points )
+                    print(" **     |   ^   |    **                                 ")
+                    print("  **    \  / \ /    **                                  ")
+                    print("   **    \/   \/   **                                   ")
+                    print("                                                        ")
+
                     while get_bless != "yes" and fight_dragon != "no":
                         fight_dragon = str(input("Do you want to fight the dragon? (yes/no): "))
 
