@@ -8,7 +8,7 @@
 #Use the random module to add a multiplier to your battles, similar to a dice roll in a real game. This pseudo-random element can have an effect on whether your player wins or loses when battling an opponent.
 
 player = str(input("CLI RPG GAME - Please enter your name: "))
-life_points = 3
+life_points = 1
 print("       __  ")
 print("      ^  ^")
 print("    ( 0  0  )")
@@ -43,6 +43,9 @@ pickup_shield = None
 room_2 = None
 continue_dragon_room = None
 fight_dragon = None
+
+room_2 = None
+get_bless = None
 
 inventory = set()
 
@@ -143,7 +146,7 @@ while door_selection == None:
                     print("Ok, return to the main room!")
                 else:
                     print("Please try again kid, you can only type YES or NO...")            
-            room_1 = None #reset the option to continue to the empty room in case the player comes back to this room later
+            room_1 = None
         elif door_selection == 1 and "sword" in inventory and "shield" in inventory:
             print("---------------------------------")
             print("-                               -")
@@ -154,7 +157,6 @@ while door_selection == None:
             print("-  go back to the main room!    -")
             print("-                               -")
             print("---------------------------------")
-
         elif door_selection == 2:
             print("                  ,-.        ,-.                    ")
             print("                 /   \      /   \                   ")
@@ -214,14 +216,45 @@ while door_selection == None:
 
             continue_dragon_room = None #reset the option to continue to the dragon room in case the player comes back to this room later
         elif door_selection == 3:
-            print("---------------\n-              -\n-  DRAGON****  -\n-              -\n---------------")
+            
+            
+            print("    *PRIEST APPEARS*                        ")                      
+            print("   .-------.                                ")
+            print("  /   -|-   \      _____________________    ")
+            print("  |    |    |     /  Do you want my    /    ")
+            print("  |   .+.   |    /  bless kid?        /     ")
+            print("  | ( o.o ) |   /  On your knees!!   /      ")
+            print("  |  |   |  |  /____________________/       ")
+            print("  |  |---|  | /                             ")
+            print("  |  |___|  |                               ")
+            print("  |         |                               ")
+            print("  |   / \   |                               ")
+            print("  |  (   )  |                               ")
+            print("   \-------/                                ")
+            print("    | | | |                                 ")
+            print("    '-' '-'                                 ")
+            print("                                            ")
+            print("                                            ")
+      
+            while get_bless != "kneel" and get_bless != "stand":
+                get_bless = str(input("Type: kneel \nType: stand"))
 
-            while continue_dragon_room != "yes" and continue_dragon_room != "no":
-                continue_dragon_room = str(input("Do you want to go futher or return?(yes/no): "))
-
-                if continue_dragon_room == "yes":
-
-                    while fight_dragon != "yes" and fight_dragon != "no":
+                if get_bless == "kneel":
+                    life_points = life_points + 1
+                    print("                                                      ")
+                    print("      * *     * *                                     ")
+                    print("    *    *   *   *    ", player," you recive          ")
+                    print("   *       **     *      the blessing of the          ")
+                    print("  *                *     Gods...                      ")
+                    print(" *       v          *                                 ")
+                    print("*       /     /      *   *You got +1 Life points      ")
+                    print("*      | (o.o) |     *   for a total of:", life_points )
+                    print(" *     |   ^   |    *                                 ")
+                    print("  *    \  / \ /    *                                  ")
+                    print("   *    \/   \/   *                                   ")
+                    print("                                                      ")
+                    
+                    while get_bless != "yes" and fight_dragon != "no":
                         fight_dragon = str(input("Do you want to fight the dragon? (yes/no): "))
 
                         if fight_dragon == "yes" and sword == True:
