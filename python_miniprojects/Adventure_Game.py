@@ -42,7 +42,6 @@ pickup_shield = None
 
 room_2 = None
 attack_dragon = None
-fight_dragon = None
 
 room_3 = None
 get_bless = None
@@ -59,8 +58,6 @@ while door_selection == None:
         print("Please try again kid, you can only pick a room from the following numbers: 1|2|3|4|5")
     else:
         door_selection = int(door_selection)         
-        print(door_selection)
-        print(type(door_selection))
         if door_selection == 1:
             if "sword" not in inventory or "shield" not in inventory:
                 print("---------------------------------")
@@ -190,91 +187,91 @@ while door_selection == None:
             print("########################################################")
             while attack_dragon != "yes" and attack_dragon != "no":
                 attack_dragon = str(input("Do you want to attack the dragon?(yes/no): "))
+                attack_dragon = attack_dragon.lower()
                 if attack_dragon == "yes":
                     win_chance = int()
-                    while fight_dragon != "yes" and fight_dragon != "no":
-                        fight_dragon = str(input("Do you want to fight the dragon? (yes/no): "))
-                        fight_dragon.lower()
-                        inventory_list = list(inventory)
-                        if fight_dragon == "yes" and inventory.__len__() == 0:
-                            win_chance = 1
-                            print("You have",inventory.__len__(),"items in your inventory")
-                            print("the chances of winning the battle are:", win_chance,"%...Good luck kid!")
-                            print("                                                                       ")
-                            print("                                                                       ")
-                            print("                ...BATTLE IN PROGRESS....                              ")
-                            print("                                                                       ")
-                            print("                                                                       ")
-                            print("                                                                       ")
-                            battle_result = random.randint(1,100)
-                            if battle_result == 1:
-                                print("YOU KILLED THE DRAGON WITH A PROBABILITY OF",win_chance,"IN A 100")
-                                print("YOU ARE ALMOST A GOD, CONGRATZ!", player,"!!!!                   ")
-                                exit(0)
-                            else:
-                                if life_points==2:
-                                    print("The dragon killed you, but you were blessed with the power ")
-                                    print("of the GODS, you revived! You can start over now!          ")
-                                    print("You better get some items before trying to kill the dragon!")
-                                else:
-                                    print("The dragon ate you... You lost the game!")
-                                    exit(0)
-                        elif fight_dragon == "yes" and inventory.__len__() == 1:
-                            win_chance = 50
-                            print("You have",inventory.__len__(),"items in your inventory")
-                            print("the chances of winning the battle are:", win_chance,"%...Good luck kid!")
-                            print("                                                                       ")
-                            print("                                                                       ")
-                            print("                ...BATTLE IN PROGRESS....                              ")
-                            print("                                                                       ")
-                            print("                                                                       ")
-                            print("                                                                       ")
-                            battle_result = random.randint(1,100)
-                            if battle_result >= 50:
-                                print("YOU KILLED THE DRAGON AND WON THE GAME!")
-                                print("CONGRAZ", player,"!!!!                 ")
-                                exit(0)
-                            else:
-                                if life_points==2:
-                                    print("The dragon killed you, but you were blessed with the power ")
-                                    print("of the GODS, you revived! You can start over now!          ")
-                                    print("You lost your",inventory_list[0],"!")
-                                    print("The chances of winning are higher if you get more items!   ")
-                                    inventory = set()
-                                else:
-                                    print("The dragon ate you... You lost the game!")
-                                    exit(0)
-                        elif fight_dragon == "yes" and inventory.__len__() == 2:
-                            win_chance = 80
-                            print("You have",inventory.__len__(),"items in your inventory")
-                            print("the chances of winning the battle are:", win_chance,"%...Good luck kid!")
-                            print("                                                                       ")
-                            print("                                                                       ")
-                            print("                ...BATTLE IN PROGRESS....                              ")
-                            print("                                                                       ")
-                            print("                                                                       ")
-                            print("                                                                       ")
-                            battle_result = random.randint(1,100)
-                            if battle_result >= 80:
-                                print("YOU KILLED THE DRAGON AND WON THE GAME!")
-                                print("CONGRAZ", player,"!!!!                 ")
-                                exit(0)
-                            else:
-                                if life_points==2:
-                                    print("The dragon killed you, but you were blessed with the power ")
-                                    print("of the GODS, you revived! You can start over now!          ")
-                                    print("You lost your",inventory_list[0],"and your",inventory_list[1])
-                                    inventory = set()
-                                else:
-                                    print("The dragon ate you... You lost the game!")
-                                    exit(0)
-                        elif fight_dragon == "no":
-                            print("Ok, good choice because you are not prepared to kill the dragon yet! go find a weapon before coming back!")   
+                    inventory_list = list(inventory)
+                    if inventory.__len__() == 0:
+                        win_chance = 10
+                        print("You have",inventory.__len__(),"items in your inventory")
+                        print("the chances of winning the battle are:", win_chance,"%...Good luck kid!")
+                        print("                                                                       ")
+                        print("                                                                       ")
+                        print("                ...BATTLE IN PROGRESS....                              ")
+                        print("                                                                       ")
+                        print("                                                                       ")
+                        print("                                                                       ")
+                        battle_result = random.randint(1,100)
+                        if battle_result <= 10:
+                            print("YOU KILLED THE DRAGON WITH A PROBABILITY OF",win_chance,"IN A 100")
+                            print("YOU ARE ALMOST A GOD, CONGRATZ!", player,"!!!!                   ")
+                            exit(0)
                         else:
-                            print("Please, enter 'yes' if you want to fight the dragon, or 'no' if you want to leave the room")
-                    fight_dragon = None
+                            if life_points==2:
+                                print("The dragon killed you, but you were blessed with the power ")
+                                print("of the GODS, you revived! You can start over now!          ")
+                                print("You better get some items before trying to kill the dragon!")
+                            else:
+                                print("The dragon ate you... You lost the game!")
+                                exit(0)
+                    elif inventory.__len__() == 1:
+                        win_chance = 50
+                        print("You have",inventory.__len__(),"items in your inventory")
+                        print("the chances of winning the battle are:", win_chance,"%...Good luck kid!")
+                        print("                                                                       ")
+                        print("                                                                       ")
+                        print("                ...BATTLE IN PROGRESS....                              ")
+                        print("                                                                       ")
+                        print("                                                                       ")
+                        print("                                                                       ")
+                        battle_result = random.randint(1,100)
+                        if battle_result <= 50:
+                            print("YOU KILLED THE DRAGON AND WON THE GAME!")
+                            print("CONGRAZ", player,"!!!!                 ")
+                            exit(0)
+                        else:
+                            if life_points==2:
+                                print("The dragon killed you, but you were blessed with the power ")
+                                print("of the GODS, you revived! You can start over now!          ")
+                                print("You lost your",inventory_list[0],"!")
+                                print("The chances of winning are higher if you get more items!   ")
+                                inventory = set()
+                            else:
+                                print("The dragon ate you... You lost the game!")
+                                exit(0)
+                    elif inventory.__len__() == 2:
+                        win_chance = 80
+                        print("You have",inventory.__len__(),"items in your inventory")
+                        print("the chances of winning the battle are:", win_chance,"%...Good luck kid!")
+                        print("                                                                       ")
+                        print("                                                                       ")
+                        print("                ...BATTLE IN PROGRESS....                              ")
+                        print("                                                                       ")
+                        print("                                                                       ")
+                        print("                                                                       ")
+                        battle_result = random.randint(1,100)
+                        if battle_result <= 80:
+                            print("YOU KILLED THE DRAGON AND WON THE GAME!")
+                            print("CONGRAZ", player,"!!!!                 ")
+                            exit(0)
+                        else:
+                            if life_points==2:
+                                print("The dragon killed you, but you were blessed with the power ")
+                                print("of the GODS, you revived! You can start over now!          ")
+                                print("You lost your",inventory_list[0],"and your",inventory_list[1])
+                                inventory = set()
+                            else:
+                                print("The dragon ate you... You lost the game!")
+                                exit(0)
                 elif attack_dragon == "no":
-                    print("Ok, return to the previous room!")
+                    if inventory.__len__() == 0:
+                        print("Ok, good choice because you are not prepared to kill the dragon yet! go find a weapon before coming back!")
+                    elif inventory.__len__() == 1:
+                        print("Ok, good choice because your chances of winning with just",inventory.__len__(),"item are 50%!")
+                    elif inventory.__len__() == 2:
+                        print("You had great chances of winning, but ok, return to the main room")                    
+                else:
+                    print("Please, enter 'yes' if you want to fight the dragon, or 'no' if you want to leave the room")
             attack_dragon = None #reset the option to continue to the dragon room in case the player comes back to this room later
         elif door_selection == 3:        
             print("    *PRIEST APPEARS*                        ")                      
@@ -345,6 +342,7 @@ while door_selection == None:
             print("-                               -")
             print("---------------------------------")
         elif door_selection == 5:
+            door_selection = random.randint(1,4)
             print("-----------------------------------------")
             print("-                                       -")
             print("-                                       -")
@@ -353,6 +351,4 @@ while door_selection == None:
             print("-  room!                                -")
             print("-                                       -")
             print("-----------------------------------------")
-            door_selection = random.randint(1,4)
-
     door_selection = None
