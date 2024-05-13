@@ -258,7 +258,7 @@ while door_selection == None:
                         else:
                             if life_points==2:
                                 print("The dragon killed you, but you were blessed with the power ")
-                                print("of the GODS, you revived! You can start over now!          ")
+                                print("of the GODS! You can start over now!                       ")
                                 print("You lost your",inventory_list[0],"and your",inventory_list[1])
                                 inventory = set()
                             else:
