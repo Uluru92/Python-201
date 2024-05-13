@@ -107,6 +107,7 @@ while door_selection == None:
                                         pickup_shield = str(input("You found a shield! Do you want to add it to your inventory? (yes/no): ")) 
                                         pickup_shield.lower()
                                         if pickup_shield == "yes":
+                                            pickup_shield = pickup_shield.lower()
                                             inventory.add("shield")
                                             print("                           ")
                                             print("###########################")
@@ -215,7 +216,7 @@ while door_selection == None:
                                 print("The dragon ate you... You lost the game!")
                                 exit(0)
                     elif inventory.__len__() == 1:
-                        win_chance = 50
+                        win_chance = 40
                         print("You have",inventory.__len__(),"items in your inventory")
                         print("the chances of winning the battle are:", win_chance,"%...Good luck kid!")
                         print("                                                                       ")
@@ -225,7 +226,7 @@ while door_selection == None:
                         print("                                                                       ")
                         print("                                                                       ")
                         battle_result = random.randint(1,100)
-                        if battle_result <= 50:
+                        if battle_result <= win_chance:
                             print("YOU KILLED THE DRAGON AND WON THE GAME!")
                             print("CONGRAZ", player,"!!!!                 ")
                             exit(0)
@@ -250,7 +251,7 @@ while door_selection == None:
                         print("                                                                       ")
                         print("                                                                       ")
                         battle_result = random.randint(1,100)
-                        if battle_result <= 80:
+                        if battle_result <= win_chance:
                             print("YOU KILLED THE DRAGON AND WON THE GAME!")
                             print("CONGRAZ", player,"!!!!                 ")
                             exit(0)
@@ -401,6 +402,7 @@ while door_selection == None:
                                             pickup_shield = str(input("You found a shield! Do you want to add it to your inventory? (yes/no): ")) 
                                             pickup_shield.lower()
                                             if pickup_shield == "yes":
+                                                pickup_shield = pickup_shield.lower()
                                                 inventory.add("shield")
                                                 print("                           ")
                                                 print("###########################")
@@ -510,7 +512,7 @@ while door_selection == None:
                                     print("The dragon ate you... You lost the game!")
                                     exit(0)
                         elif inventory.__len__() == 1:
-                            win_chance = 50
+                            win_chance = 40
                             print("You have",inventory.__len__(),"items in your inventory")
                             print("the chances of winning the battle are:", win_chance,"%...Good luck kid!")
                             print("                                                                       ")
@@ -520,7 +522,7 @@ while door_selection == None:
                             print("                                                                       ")
                             print("                                                                       ")
                             battle_result = random.randint(1,100)
-                            if battle_result <= 50:
+                            if battle_result <= win_chance:
                                 print("YOU KILLED THE DRAGON AND WON THE GAME!")
                                 print("CONGRAZ", player,"!!!!                 ")
                                 exit(0)
@@ -545,7 +547,7 @@ while door_selection == None:
                             print("                                                                       ")
                             print("                                                                       ")
                             battle_result = random.randint(1,100)
-                            if battle_result <= 80:
+                            if battle_result <= win_chance:
                                 print("YOU KILLED THE DRAGON AND WON THE GAME!")
                                 print("CONGRAZ", player,"!!!!                 ")
                                 exit(0)
