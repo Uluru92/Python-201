@@ -31,7 +31,8 @@ print(bucket_list)
 
 a = [1,2,3]
 b = [1,2,3]
-print(a,b)  
+print(a,b)
+print(type(a))  
 
 a[0] = 123
 print(a,b)
