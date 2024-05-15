@@ -7,4 +7,14 @@
 
 from resources import randlist
 
-print(randlist)
+random_list = randlist
+print("random list:",random_list)
+
+largest_number = max(random_list)
+print("The largest number in the list:", largest_number)
+
+product = 1
+for i in random_list:
+    product *= i
+
+print("The product of all of the numbers in the list:", product)

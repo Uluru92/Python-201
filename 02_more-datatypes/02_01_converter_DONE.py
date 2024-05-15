@@ -15,5 +15,3 @@ for i in string_to_tupple:
     print(i)
 
 print("WELL, SEEMS LIKE THERE IS NO DIFFERENCE MY FRIEND...")
-
-
