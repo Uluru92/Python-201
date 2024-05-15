@@ -13,6 +13,9 @@ print("random list:",random_list)
 largest_number = max(random_list)
 print("The largest number in the list:", largest_number)
 
+lowest_number = min(random_list) #extra: just to know a bit more....
+print("The lowest number in the list:", lowest_number)
+
 product = 1
 for i in random_list:
     product *= i
