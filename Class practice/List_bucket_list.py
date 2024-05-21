@@ -13,7 +13,7 @@ bucket_list.pop(0) #eliminates the first space
 print(bucket_list)
 
 bucket_list.append("ride a tiger") #add an element to the list
-print(bucket_list)
+print("bucket list append:",bucket_list, "this is type:",type(bucket_list))
 
 next_task = bucket_list.pop() #removes an element and at the same time assign it to a variable
 print("next_task: "+next_task)
