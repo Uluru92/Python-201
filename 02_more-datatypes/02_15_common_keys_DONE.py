@@ -9,3 +9,16 @@
 
 dict_1 = {"a": 1, "b": 2, "c": 3}
 dict_2 = {"a": 2, "c": 4 , "d": 2}
+dict_3 = {}
+
+for key,value in dict_1.items():
+    if key in dict_2:
+        dict_3[key] = value + dict_2[key]
+    else:
+        dict_3[key] = value
+
+for key, value in dict_2.items():
+    if key not in dict_3:
+        dict_3[key] = dict_2[key]
+
+print("result:", dict_3)
