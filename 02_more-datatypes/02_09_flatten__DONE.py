@@ -9,7 +9,6 @@
 # CHALLENGE: Do some research online and find a solution that works
 # to flatten a list of any depth. Can you understand the code used?
 
-
 def flatten(data):
 
   for item in data:
