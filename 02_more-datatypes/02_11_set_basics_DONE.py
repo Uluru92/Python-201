@@ -4,3 +4,9 @@
 
 s = {1, 2, 3, 4}
 t = {3, 4, 5, 6}
+
+intersection_ = s & t
+union_ = s | t 
+
+print("intersection between s and t:", intersection_)
+print("union between s and t:", union_)
