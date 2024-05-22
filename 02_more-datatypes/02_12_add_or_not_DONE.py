@@ -18,6 +18,12 @@ set_=set()
 user_input = 1
 life_points = int(5)
 
+print("Welcome to the MEMORY GAME:")
+print("Rules:")
+print("  -You need to introduce 10 numbers from 1 to 15 without duplicates")
+print("  -If you repeat a number you lose 1 point life")
+print("  -You start with:",life_points)
+
 while is_integer(user_input) == True and set_.__len__()<11:
     user_input = input("type a number:")
     if is_integer(user_input) == True:
