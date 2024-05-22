@@ -16,3 +16,8 @@ famous_quotes = [
     {"full_name": "Nathan Myhrvold", "quote": "Software is a gas; it expands to fill its container."},
     {"full_name": "Alan Bennett", "quote": "Standards are always out of date.  That’s what makes them standards."}
 ]
+
+counter_ = 0
+while counter_<= len(famous_quotes)-1:
+    print(f"{famous_quotes[counter_]["quote"]} - {famous_quotes[counter_]["full_name"]}")
+    counter_+=1
