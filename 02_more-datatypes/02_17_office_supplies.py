@@ -22,3 +22,9 @@ office = [
     {"full_name": "Creed Bratton", "item": "mung beans"},
     {"full_name": "Darryl Philbin", "item": "forklift"},
 ]
+max_width1 = 40
+counter_ = 0
+for key, value in zip(office[counter_]["full_name"], office[counter_]["item"]):
+  if counter_<len(office):
+     print("{:<{}} {:>}".format((f"{office[counter_]["full_name"].split()[1]}, {office[counter_]["full_name"].split()[0]}"), max_width1, (f"Office supply {office[counter_]["item"]}")))
+     counter_+=1
