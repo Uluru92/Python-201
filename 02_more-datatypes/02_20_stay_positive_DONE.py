@@ -11,6 +11,5 @@ for i in numbers:
     elif i<0:
         negative_list.append(i)
 
-
 print("positive_list:",positive_list)
 print("positive_list:",negative_list)
