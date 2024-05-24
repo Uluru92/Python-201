@@ -15,18 +15,18 @@ list_items = sorted(input_dict)
 print("input_dict:",input_dict)
 print("list_items",list_items)
 list_items_sorted_by_values = sorted(list_items, key=input_dict.__getitem__)
-print("list_items_sorted_by_values:",list_items_sorted_by_values)
+print("list_items_sorted_by_values:",list_items_sorted_by_values," and its type is:", type(list_items_sorted_by_values))
 counter = 0
-
-for i in list_items_sorted_by_values:
-    if counter <= list_items_sorted_by_values.__len__():
-        tuple_ = tuple()
-        new_tuple_ = tuple()
-        tuple_ = tuple(i)
-        print("tuple_:",tuple_)
-        new_tuple_ = tuple_ + str((input_dict[i]),)
-        print("new_tuple_:",new_tuple_)
-        result_list.append(new_tuple_)
-        counter 
-
+while counter <= list_items_sorted_by_values.__len__()-1:
+    new_word = str(list_items_sorted_by_values[counter])
+    print("new_word",new_word,"type:",type(new_word))
+    new_list = list()
+    new_list.append(new_word)
+    new_list.append(input_dict[list_items_sorted_by_values[counter]])
+    print("new_list",new_list)
+    new_tuple = tuple(new_list)
+    result_list.append(new_tuple)
+    new_list=list()
+    new_tuple=tuple()
+    counter+=1
 print("result_list:",result_list)
