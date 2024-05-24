@@ -10,10 +10,9 @@ print(a)
 a.sort() #this method is only defined for lists. 
 print(a)
 
-b = {1: 'D', 2: 'B', 3: 'B', 4: 'E', 5: 'A'}
+b = {2: 'B', 3: 'B', 4: 'E', 5: 'A',1: 'D',}
 print(b)
-print(type(b))
-print(b[3])
-b = sorted(b) #sort the dictionary but transform it into a list..... do I lose the values or what???
+b = sorted(b)
 print(b)
-print(type(b))
+
+
