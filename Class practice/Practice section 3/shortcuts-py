@@ -1,0 +1,6 @@
+from pathlib import Path
+
+p = Path("hello.txt")
+p.write_text("Hello world!")
+p.read_text()  # OUTPUT: "Hello world!"
+print(p.read_text())
