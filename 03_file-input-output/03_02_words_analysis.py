@@ -14,3 +14,4 @@
 #... hacer lo mismo con la longitud máxima
 #... contar todas las palabras de la lista indiferentemente de su longitud
 #... nos vemos mañana pa
+#... hoy seguire en 2do plano... desarrollando en offline mode pa
