@@ -5,8 +5,6 @@
 # 2. The longest word (if there is a tie, print all)
 # 3. The total number of words in the file.
 
-#... dejaré el pseudocógido en mi mente en segundo plano por ahora pa
-#... primero que todo... necesito abrir el archivo
 #... segundo que todo... necesito hacer los filtros:
 #... buscar la longitud más corta...
 #... buscar todas las palabras con esa longitud minima
@@ -27,4 +25,3 @@ with open(file_words_path, "r") as file_words:
             new_shortest_len = word.__len__()
             print("new shortest:", word, " with len:",new_shortest_len)
             word_len = new_shortest_len
-
