@@ -11,9 +11,10 @@ file_words_path = Path("Python-201-main/03_file-input-output/words.txt")
 words=[]
 with open(file_words_path, "r") as file_words:
     for word in file_words.readlines():
-        new_word = word.strip()
         words.append(word)
 
+words[words.__len__()-1] = words[words.__len__()-1]+"\n"
+words[0] = words[0][:2]
 reversed_words=words[::-1]
 
 with open("Python-201-main/03_file-input-output/words_reverse.txt", "a") as file_reverse_words:
