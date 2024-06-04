@@ -10,7 +10,6 @@ from pathlib import Path
 # Set up the folder we where we want to do the searching 
 main_path = str(input("Please enter the folder path where you want to search: "))
 main_path = pathlib.Path(main_path)
-print("My actual path is:",main_path)
 count = {"": 0, ".csv": 0, ".md": 0, ".png": 0, ".jpg":0, ".html": 0, ".py": 0, ".js": 0, ".pdf": 0, ".txt": 0}
 
 # Count every file type inside the folder
