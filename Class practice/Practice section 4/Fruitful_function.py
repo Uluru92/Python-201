@@ -6,3 +6,4 @@ print(n)
 
 print(type(nstr))
 print(type(n))
+
