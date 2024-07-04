@@ -12,7 +12,6 @@ def void_func(message):
     print(message)
 
 
-
 saludando = greet("Hey","Be")
 saludando = greet2("Hi","Pat")
 void_func("hola!!")
