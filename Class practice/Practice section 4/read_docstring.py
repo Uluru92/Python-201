@@ -1,4 +1,4 @@
-def greet(greeting, name):
+def greet(greeting: str, name: str) -> str:
     """Generates a greeting.
 
     Args:
