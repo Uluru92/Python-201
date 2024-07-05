@@ -12,12 +12,17 @@ print_args("apta 1", "apta 2", "apta 3", "apta 4", "apta 5", "airbnb") #modified
 # koh tao
 
 def greet_many(greeting, *args):
+    """Generates a greeting.
+    Args:
+        greeting (str): The greeting to use, e.g., "Hello"
+        name (str): The name of the person you want to greet
+    Returns:
+        str: A personalized greeting message
+    """
     greetings = ""
-    counter = 0
     for name in args:
         sentence = f"{greeting}, {name}! good morning!"
         greetings += sentence + "\n"
-        counter += 1
         print(counter)
     return greetings
 
