@@ -15,3 +15,4 @@ def greet(greeting, name):
 #help(): you can pass the function object as an argument to help()
 #.__doc__: you can access the __doc__ attribute of greet
 
+print(greet.__doc__)
