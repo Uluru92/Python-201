@@ -1,12 +1,12 @@
 def greet(greeting, name):
-    """_summary_
+    """Generates a greeting.
 
     Args:
-        greeting (_type_): _description_
-        name (_type_): _description_
+        greeting (str): The greeting to use, e.g., "Hello"
+        name (str): The name of the person you want to greet
 
     Returns:
-        _type_: _description_
+        str: A personalized greeting message
     """
 
     sentence = f"{greeting}, {name}! How are you?"
