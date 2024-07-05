@@ -44,3 +44,13 @@ def greet(greeting, name):
 user_tuple = ("Hello", "Waheed")
 print(greet(*user_tuple))  
 # OUTPUT: Hello, Waheed! How are you?
+
+def greet_many_using_tuples_2(greeting, *args):
+    greetings = ""
+    for names in args:
+        greetings = f"{greeting} {names[0]}, {names[1]} y {names[2]}! buenos días!"
+    return greetings
+
+tuple_names = ("Jorddy", "Carlos", "Brayan")
+Hello_tuples = greet_many_using_tuples_2("Hola!!!", tuple_names)
+print(Hello_tuples)
