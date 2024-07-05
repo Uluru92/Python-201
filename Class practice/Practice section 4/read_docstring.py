@@ -1,17 +1,17 @@
 def greet(greeting, name):
-    """Generates a greeting.
+    """_summary_
 
     Args:
-        greeting (str): The greeting to use, e.g., "Hello"
-        name (str): The name of the person you want to greet
+        greeting (_type_): _description_
+        name (_type_): _description_
 
     Returns:
-        str: A personalized greeting message
+        _type_: _description_
     """
+
     sentence = f"{greeting}, {name}! How are you?"
     return sentence
 
 #help(): you can pass the function object as an argument to help()
 #.__doc__: you can access the __doc__ attribute of greet
 
-print(greet.__doc__)
