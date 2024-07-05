@@ -20,3 +20,14 @@ def greet_many(greeting, *args):
 
 Hello = greet_many("Hey!!!", "Maria", "Ana", "Jose", "Luis", "Fernando")
 print(Hello)
+
+def greet_many_using_tuples(greeting, *args):
+    greetings = ""
+    for names in args:
+        sentence = f"{greeting}, {names}! good morning!"
+        greetings += sentence + "\n"
+    return greetings
+
+tuple_names = ("Jorddy", "Carlos", "Brayam")
+Hello_tuples = greet_many_using_tuples("Hey!!!", tuple_names[0],tuple_names[1],tuple_names[2])
+print(Hello_tuples)
