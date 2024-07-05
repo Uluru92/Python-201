@@ -28,7 +28,7 @@ def greet_many_using_tuples(greeting, *args):
     greetings = ""
     counter = 0
     for names in args:
-        sentence = f"{greeting}, {names[counter]}! buenos días!"
+        sentence = f"{greeting} {names[counter]}! buenos días!"
         greetings += sentence + "\n"
         counter += 1
     return greetings
@@ -37,19 +37,15 @@ tuple_names = ("Jorddy", "Carlos", "Brayam")
 Hello_tuples = greet_many_using_tuples("Hola!!!", tuple_names)
 print(Hello_tuples)
 
-def greet(greeting, name):
-    sentence = f"{greeting}, {name}! How are you?"
-    return sentence
-
-user_tuple = ("Hello", "Waheed")
-print(greet(*user_tuple))  
-# OUTPUT: Hello, Waheed! How are you?
 
 def greet_many_using_tuples_2(greeting, *args):
     greetings = ""
+    counter = 0
     for names in args:
-        greetings = f"{greeting} {names[0]}, {names[1]} y {names[2]}! buenos días!"
-    return greetings
+        sentence = f"{greeting} {names[counter]}! buenos días!"
+        greetings += sentence + "\n"
+        counter += 1
+        return sentence
 
 tuple_names = ("Jorddy", "Carlos", "Brayan")
 Hello_tuples = greet_many_using_tuples_2("Hola!!!", tuple_names)
