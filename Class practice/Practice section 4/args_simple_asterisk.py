@@ -23,7 +23,6 @@ def greet_many(greeting, *args):
     for name in args:
         sentence = f"{greeting}, {name}! good morning!"
         greetings += sentence + "\n"
-        print(counter)
     return greetings
 
 Hello = greet_many("Hey!!!", "Maria", "Ana", "Jose", "Luis", "Fernando")
