@@ -13,9 +13,12 @@ print_args("apta 1", "apta 2", "apta 3", "apta 4", "apta 5", "airbnb") #modified
 
 def greet_many(greeting, *args):
     greetings = ""
+    counter = 0
     for name in args:
         sentence = f"{greeting}, {name}! good morning!"
         greetings += sentence + "\n"
+        counter += 1
+        print(counter)
     return greetings
 
 Hello = greet_many("Hey!!!", "Maria", "Ana", "Jose", "Luis", "Fernando")
@@ -23,11 +26,21 @@ print(Hello)
 
 def greet_many_using_tuples(greeting, *args):
     greetings = ""
+    counter = 0
     for names in args:
-        sentence = f"{greeting}, {names}! good morning!"
+        sentence = f"{greeting}, {names[counter]}! buenos días!"
         greetings += sentence + "\n"
+        counter += 1
     return greetings
 
 tuple_names = ("Jorddy", "Carlos", "Brayam")
-Hello_tuples = greet_many_using_tuples("Hey!!!", tuple_names[0],tuple_names[1],tuple_names[2])
+Hello_tuples = greet_many_using_tuples("Hola!!!", tuple_names)
 print(Hello_tuples)
+
+def greet(greeting, name):
+    sentence = f"{greeting}, {name}! How are you?"
+    return sentence
+
+user_tuple = ("Hello", "Waheed")
+print(greet(*user_tuple))  
+# OUTPUT: Hello, Waheed! How are you?
