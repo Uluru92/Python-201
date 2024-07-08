@@ -15,4 +15,9 @@ def greet(greeting: str, name: str) -> str:
 #help(): you can pass the function object as an argument to help()
 #.__doc__: you can access the __doc__ attribute of greet
 
+print(greet("Hello!", "Jorddy"))
 print(greet.__doc__)
+
+my_list = ["apple", "banana", "orange"]
+obj1 = enumerate(my_list)
+print(obj1)
