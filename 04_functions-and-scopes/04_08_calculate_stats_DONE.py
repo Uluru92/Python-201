@@ -12,6 +12,4 @@ def stats(example_list):
   print("Minimum number:",minimun_list)
   print("Average number:",average_list)
 
-# call the function below here
-
 stats(example_list)
