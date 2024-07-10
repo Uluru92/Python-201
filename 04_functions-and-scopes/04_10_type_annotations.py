@@ -1,5 +1,9 @@
 # Add type annotations to the three functions shown below.
 
+#args: int
+#return: int 
+#etc...
+
 def multiply(num1, num2):
     return num1 * num2
 
