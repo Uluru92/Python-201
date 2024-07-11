@@ -2,15 +2,15 @@
 
 #args: int
 #return: int 
-#etc...
 
-def multiply(num1, num2):
+
+def multiply(num1: int,  num2: int)-> int:
     return num1 * num2
 
-def greet(greeting, name):
+def greet(greeting: str, name: str)-> str:
     sentence = f"{greeting}, {name}! How are you?"
     return sentence
 
-def shopping_list(*args):
+def shopping_list(*args: str)-> str:
     [print(f"* {item}") for item in args]
     return args
