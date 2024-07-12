@@ -8,12 +8,18 @@
 
 def real_estate_adv(intro: str, property_name: str, *args)-> str:
     
+    """Prints out nicely formatted information about a real estate advertisement.
+    Args:
+        intro (str): The text to use as an introduction to the property description
+        property_name (str): The name of the property
+        *args: details about the property
+    """
+
     details = ""
     for detail in args:
         details += detail + "\ln"
     
     information = ""
     information = f"{intro}\n This is what this property {property_name} offers:\n"+details
-
-    return information
+    print(information)
 
