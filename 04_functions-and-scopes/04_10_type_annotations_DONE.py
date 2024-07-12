@@ -12,3 +12,5 @@ def greet(greeting: str, name: str)-> str:
 def shopping_list(*args: str)-> str:
     [print(f"* {item}") for item in args]
     return args
+
+shopping_list("1","2","3","t")
