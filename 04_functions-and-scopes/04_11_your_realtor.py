@@ -3,3 +3,5 @@
 # is why your function should be able to take an arbitrary amount of
 # keyword arguments, and display them all in a list form with some 
 # introductory information.
+
+#paréntesis... (entrega final de proyecto SQL en 8 días...)
