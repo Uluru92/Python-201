@@ -5,3 +5,9 @@
 # introductory information.
 
 #paréntesis... (entrega final de proyecto SQL en 8 días...)
+
+def real_estate_adv(intro: str,*args)-> str:
+
+    information = f"{intro}\n This is what this property offers:\n"
+
+    return information
