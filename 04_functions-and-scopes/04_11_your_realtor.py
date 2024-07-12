@@ -6,8 +6,14 @@
 
 #paréntesis... (entrega final de proyecto SQL en 8 días...)
 
-def real_estate_adv(intro: str,*args)-> str:
-
-    information = f"{intro}\n This is what this property offers:\n"
+def real_estate_adv(intro: str, property_name: str, *args)-> str:
+    
+    details = ""
+    for detail in args:
+        details += detail + "\ln"
+    
+    information = ""
+    information = f"{intro}\n This is what this property {property_name} offers:\n"+details
 
     return information
+
