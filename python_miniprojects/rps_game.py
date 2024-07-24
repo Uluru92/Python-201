@@ -19,3 +19,5 @@
     # 0 = scissor, 1 = rock, 2 = paper
     # for example if the variable hand is 0, it should return the string "scissor"
     # pass
+
+#Pseudocodigo... let's go!
