@@ -7,6 +7,17 @@
 #Implement some logic that decides whether or not your player can beat the opponent depending on what items they have in their inventory
 #Use the random module to add a multiplier to your battles, similar to a dice roll in a real game. This pseudo-random element can have an effect on whether your player wins or loses when battling an opponent.
 
+#functions:
+def get_life_points (life_points: int)-> int:
+    """Get an extra +1 life point.
+    Args:
+        Actual life points (int): Initial life points
+    Returns:
+        Final life points int(): Total life points
+    """
+    total_life_points = life_points + 1
+    return total_life_points
+#Start!
 player = str(input("CLI RPG GAME - Please enter your name: "))
 life_points = 1
 print("       __  ")
@@ -296,7 +307,8 @@ while door_selection == None:
                 get_bless = input("Type: kneel or stand\nYour choice: ")
                 get_bless = get_bless.lower()
                 if get_bless == "kneel" and power_of_gods == 0:
-                    life_points = life_points + 1
+                    life_points = get_life_points(life_points)
+                    print(life_points)
                     power_of_gods = int(power_of_gods)+1
                     print("                                                        ")
                     print("      * *      **                                       ")
