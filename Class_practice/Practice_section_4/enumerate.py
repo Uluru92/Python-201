@@ -10,6 +10,6 @@ print("Alternative way to do it: ")
 for index in range(len(siblings)):
     print(f"Sibling #{index+1}: {siblings[index]}")
 
-print("Alternative way to do it: ")
+print("Just enumerate a list: ")
 siblings_list = list(enumerate(siblings))
 print(siblings_list)    
