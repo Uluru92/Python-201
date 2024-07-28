@@ -1,6 +1,8 @@
-def my_enumerate():
-    # You implement this function
-    pass
+def my_enumerate(sequence):
+    index = 0
+    for item in sequence:
+        yield index, item
+        index += 1
 
 courses = ['Intro', 'Intermediate', 'Advanced', 'Professional']
 
