@@ -1,4 +1,4 @@
-# Create a virtual environment and edit the activation script to add
+# Create a virtual environment (called VENVs) and edit the activation script to add
 # the following information:
 # 
 # - ENVIRONMENT="development"
