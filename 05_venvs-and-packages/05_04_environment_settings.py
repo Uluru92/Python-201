@@ -9,11 +9,8 @@
 
 import os
 
-def print_VENVs_variables():
-    environment = os.getenv('ENVIRONMENT')
-    secret = os.getenv('SECRET')
-    
-    print(f'ENVIRONMENT: {environment}')
-    print(f'SECRET: {secret}')
+environment = os.getenv('ENVIRONMENT')
+secret = os.getenv('day')
 
-print_VENVs_variables()
+print(f'ENVIRONMENT: {environment}')
+print(f'SECRET: {secret}')
