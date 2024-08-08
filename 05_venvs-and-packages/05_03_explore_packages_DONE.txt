@@ -18,4 +18,5 @@ WORK DONE:
 # python -m pip freeze
 # Inside the venv_50_03 folder I uploaded my selfie: mirror_Jor.jpg
 # I used the package to create a pixelated image from my selfie: mirror_Jor_pixelated.png
+# Exit the venv_50_03: Desactivate
 # exercise 05_03 DONE!
