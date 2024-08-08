@@ -1,0 +1,21 @@
+Do an online search for interesting Python packages on PyPI.
+You can search for something you're interested to do with your programming
+skills and add "Python package" to the search query.
+- What do you find?
+- Create a new virtual environment and install the package.
+- Check out its documentation and their "Getting Started" guide
+  and code examples, if there are any.
+- Can you get some basic functionality of the package to work locally?
+
+WORK DONE:
+# I found pixelgreat 1.4.2
+# In the folder VENVs_for_exercises_chapter05 I created a venv_50_03 for this exercise.
+# python -m venv venv_50_03 
+# venv_50_03\Scripts\Activate
+# python -m pip install pixelgreat==1.4.2
+# Just to check if everything ok: 
+# python -m pip list
+# python -m pip freeze
+# Inside the venv_50_03 folder I uploaded my selfie: mirror_Jor.jpg
+# I used the package to create a pixelated image from my selfie: mirror_Jor_pixelated.png
+# exercise 05_03 DONE!
