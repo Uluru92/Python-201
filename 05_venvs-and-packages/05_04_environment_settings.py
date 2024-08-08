@@ -7,6 +7,8 @@
 # Then write the necessary code to access and print the values of these
 # two environment variables in this script.
 
+#I called my venv: venv_05_04 just to be more organized with all this VENVs lately :D
+
 import os
 
 environment = os.getenv('ENVIRONMENT')
