@@ -6,3 +6,11 @@ skills and add "Python package" to the search query.
 - Check out its documentation and their "Getting Started" guide
   and code examples, if there are any.
 - Can you get some basic functionality of the package to work locally?
+
+# I found pixelgreat 1.4.2
+# python -m venv venv_50_03 
+# venv_50_03\Scripts\Activate
+# python -m pip install pixelgreat==1.4.2
+# Just to check if everything ok: 
+# python -m pip list
+# python -m pip freeze
