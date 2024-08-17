@@ -12,7 +12,7 @@
 import os
 
 environment = os.getenv('ENVIRONMENT')
-secret = os.getenv('day')
+secret = os.getenv('SECRET')
 
-print(f'ENVIRONMENT: {environment}')
-print(f'SECRET: {secret}')
+print(f"ENVIRONMENT: {environment}")
+print(f"SECRET: {secret}")
