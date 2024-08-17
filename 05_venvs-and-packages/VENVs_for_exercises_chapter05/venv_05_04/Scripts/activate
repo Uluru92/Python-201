@@ -2,6 +2,10 @@
 # You cannot run it directly
 
 deactivate () {
+
+    unset ENVIRONMENT
+    unset secret
+
     # reset old environment variables
     if [ -n "${_OLD_VIRTUAL_PATH:-}" ] ; then
         PATH="${_OLD_VIRTUAL_PATH:-}"
@@ -68,3 +72,6 @@ fi
 # Call hash to forget past commands. Without forgetting
 # past commands the $PATH changes we made may not be respected
 hash -r 2> /dev/null
+
+export ENVIRONMENT="development"
+export secret="i ate your sweets"
