@@ -1,0 +1,5 @@
+secret_1 = "sugar"
+secret_2 = "oil"
+secret_3 = "beef"
+secret_4 = "onion"
+secret_5 = "pepper"
