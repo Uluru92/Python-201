@@ -23,3 +23,6 @@ print(i.secret_3)
 print(i.secret_4)
 print(i.secret_5)
 
+#import #5 errors
+from prepare_function import carrot
+print(carrot)

@@ -6,9 +6,11 @@ carrot = "carrot"
 salt = "salt"
 potato = "potato"
 
-print(prepare(potato))
+
 
 from ingredients import ingredient_4
 
-print(prepare(ingredient_4))
-print(prepare(carrot))
+if __name__ == "__main__":
+    print(prepare(potato))
+    print(prepare(carrot))
+    print(prepare(ingredient_4))
