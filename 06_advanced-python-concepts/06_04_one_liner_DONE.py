@@ -5,6 +5,7 @@
 #     letters.append(letter)
 # print(letters)
 
+#solution
 letters = []
 listcomp = [letters.append(letter) for letter in "suchalongword"]
 print(letters)
