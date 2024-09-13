@@ -10,3 +10,7 @@
 
 s = {1, 2, 3, 4}
 t = {2, 3, 4, 5, 7}
+
+#solution
+
+print({x*x for x in s|t if x>2})
