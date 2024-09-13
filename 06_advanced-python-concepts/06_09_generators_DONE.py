@@ -4,7 +4,7 @@
 
 #solution
 
-generator_multiply_by_itself = (n*n for n in range(10)) #create a generator object.
+generator_multiply_by_itself = (n*n for n in range(10)) #create a generator object using ()
 
 print(generator_multiply_by_itself)  #Print the object: <generator object <genexpr> at 0x000001F31EAE9700>
 
