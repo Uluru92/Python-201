@@ -51,9 +51,7 @@ def create_account():
 
 def view_tasks():
     response = requests.get(base_url_task)
-
     task_list = []
-
     if response.status_code == 200:
         tasks = response.json()["data"] 
         print("\nYour tasks:")
@@ -65,30 +63,36 @@ def view_tasks():
 
 def view_completed_tasks():
     response = requests.get("http://demo.codingnomads.co:8080/tasks_api/tasks?completed=true")
+    task_completed_list = []
     if response.status_code == 200:
-        tasks = response.json()
+        tasks = response.json()["data"]
         print("\nYour completed tasks:")
         for task in tasks:
-            print(f"ID: {task[0]} - Name: {task[2]}")
+            task_completed_list.append(f"ID: {task["id"]} / Name: {task["name"]}")
+        pprint(task_completed_list)
     else:
         print("Failed to fetch tasks.")
 
 def view_incomplete_tasks():
     response = requests.get("http://demo.codingnomads.co:8080/tasks_api/tasks?completed=false")
+    task_incompleted_list = []
     if response.status_code == 200:
-        tasks = response.json()
+        tasks = response.json()["data"]
         print("\nYour incomplete tasks:")
         for task in tasks:
-            print(f"ID: {task[3]} - Name: {task[2]}")
+            task_incompleted_list.append(f"ID: {task["id"]} / Name: {task["name"]}")
+        pprint(task_incompleted_list)
     else:
         print("Failed to fetch tasks.")
 
 def create_task():
     task_name = input("Enter task name: ")
     task_description = input("Enter task description: ")
+    userId = int(input("Enter user ID: "))
     data = {
-        "task_name": task_name,
-        "task_description": task_description,
+        "name": task_name,
+        "description": task_description,
+        "userId": userId,
         "completed": False
     }
     response = requests.post(base_url_task, json=data)
