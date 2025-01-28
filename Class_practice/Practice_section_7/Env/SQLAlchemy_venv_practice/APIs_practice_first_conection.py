@@ -1,11 +1,10 @@
 import requests
+from pprint import pprint
 
 base_url = "http://demo.codingnomads.co:8080/tasks_api/users"
 
-body = {
-    "first_name": "Jorddy",
-    "last_name": "Castro Araya",
-    "email": "jorddy.castro@gmail.com"
-}
+response = requests.get(base_url)
 
-response = requests.post(base_url, json=body)
+print(response.status_code)
+print(response.encoding)
+pprint(response.text)

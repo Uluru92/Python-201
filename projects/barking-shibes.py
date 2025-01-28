@@ -7,3 +7,4 @@
 # Write the code logic to make the API calls and assign the output to
 # `doged_quote` and `doge_image_url` respectively.
 # Then write the `html` string to a `.html` file and look at it in your browser.
+
