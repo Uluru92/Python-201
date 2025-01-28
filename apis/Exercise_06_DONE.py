@@ -103,14 +103,21 @@ def create_task():
 
 def update_task():
     task_id = input("Enter task ID to update: ")
+    userId = input("Enter user ID to update: ")
     task_name = input("Enter updated task name: ")
     task_description = input("Enter updated task description: ")
     completed = input("Is the task completed? (yes/no): ").strip().lower()
+
+    if completed == "yes":
+        completed_task = True
+    if completed == "no":
+        completed_task = False
     
     data = {
-        "task_name": task_name,
-        "task_description": task_description,
-        "completed": completed
+        "userId":userId,
+        "name": task_name,
+        "description": task_description,
+        "completed": completed_task
     }
     response = requests.put(f"{base_url_task}/{task_id}", json=data)
     if response.status_code == 200:
