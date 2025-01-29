@@ -16,18 +16,35 @@ import requests
 from pprint import pprint
 
 base_url = "https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest"
+base_url_names = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/map"
 
 headers = {
-    'Accepts': 'application/json',
-    "X-CMC_PRO_API_KEY": "b54bcf4d-1bca-4e8e-9a24-22ff2c3d462c"
+    "X-CMC_PRO_API_KEY": "d8b8630f-dc62-4cd7-86d8-d4c7f7189bd1"
 }
 
 response = requests.get(base_url, headers=headers)
+response2 = requests.get(base_url_names, headers=headers)
 
 if response.status_code == 200:
     data = response.json()
+    data2 = response2.json()
+
     print("\nDATA:\n")
-    print(data)
+    print(data["data"][0]["quote"])
+    print(" ")
+    
+    USD_price = data["data"][0]["quote"]["USD"]["price"]
+    BTC_price = data["data"][1]["quote"]["BTC"]["volume_24h"]
+    
+    name_1 = data2["data"][0]["name"]
+    name_2 = data2["data"][1]["name"]
+    name_3 = data2["data"][2]["name"]
+    print(f"Crytocurrency names:\n-{name_1}\n-{name_2}\n-{name_3}")
+    
+    print(" ")
+    print(f"USD price: {USD_price}")
+    print(f"BTC price: {BTC_price}")
+
 else:
     print(f"Error: {response.status_code}")
     print(response.json())
