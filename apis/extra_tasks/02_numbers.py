@@ -30,7 +30,7 @@ if response.status_code == 200:
     data2 = response2.json()
 
     print("\nDATA:\n")
-    print(data["data"][0]["quote"])
+    print(data)
     print(" ")
     
     USD_price = data["data"][0]["quote"]["USD"]["price"]
@@ -42,7 +42,8 @@ if response.status_code == 200:
     print(f"Crytocurrency names:\n-{name_1}\n-{name_2}\n-{name_3}")
     
     print(" ")
-    print(f"USD price: {USD_price}")
+    print(f"BTC price: {BTC_price}")
+    print(f"BTC price: {BTC_price}")
     print(f"BTC price: {BTC_price}")
 
 else:
