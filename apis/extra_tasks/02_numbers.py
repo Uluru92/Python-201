@@ -15,6 +15,7 @@ TIP: consider using a cryptocurrency API such as coinmarketcap (but anything goe
 import requests
 from pprint import pprint
 
+base_ = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=5000&convert=USD"
 base_url = "https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest"
 base_url_names = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/map"
 
@@ -22,8 +23,11 @@ headers = {
     "X-CMC_PRO_API_KEY": "d8b8630f-dc62-4cd7-86d8-d4c7f7189bd1"
 }
 
+response0 = requests.get(base_, headers=headers)
 response = requests.get(base_url, headers=headers)
 response2 = requests.get(base_url_names, headers=headers)
+print(response2.json())
+
 
 if response.status_code == 200:
     data = response.json()
