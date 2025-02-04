@@ -14,6 +14,6 @@ with open(filecounts_path, "r") as csvfile:
     reader = csv.DictReader(csvfile, fieldnames=["Folder", "CSV", "MD", "PNG","JPJ","HTML","PY","JS"])
     counts = list(reader)
 
-print(counts)
+print(counts[0][2])
 print(type(count))
 print(count.__len__())

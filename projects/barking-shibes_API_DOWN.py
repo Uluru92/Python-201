@@ -8,3 +8,10 @@
 # `doged_quote` and `doge_image_url` respectively.
 # Then write the `html` string to a `.html` file and look at it in your browser.
 
+
+# Could not solve:
+# C:\Users\User>nslookup api.quotable.io
+# Servidor:  www.routerlogin.com
+# Address:  192.168.1.1##
+#
+# *** www.routerlogin.com no encuentra api.quotable.io: Server failed##
