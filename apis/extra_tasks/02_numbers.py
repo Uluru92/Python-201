@@ -11,6 +11,7 @@ however it needs to fulfill the following specs:
 TIP: consider using a cryptocurrency API such as coinmarketcap (but anything goes)!
 
 '''
+
 #FIRST STEP: ingest API data from at least 1 external source
 import requests
 from pprint import pprint
