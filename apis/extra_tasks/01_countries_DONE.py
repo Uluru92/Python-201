@@ -37,6 +37,7 @@ if response.status_code == 200:
     capital = tasks[0]["capital"][0]
 
     print(f"\nMy actual country is {country_name}.\nNative name: {native_name}. \nPopulation: {population_CR} people. \nCapital: {capital}.")
+
 else:
     print("Failed to fetch country details")
 
