@@ -25,17 +25,16 @@ headers = {
 }
 
 response0 = requests.get(base_, headers=headers)
-response = requests.get(base_url, headers=headers)
+response1 = requests.get(base_url, headers=headers)
 response2 = requests.get(base_url_names, headers=headers)
-print(response2.json())
 
 
-if response.status_code == 200:
-    data = response.json()
+if response1.status_code == 200:
+    data = response1.json()
     data2 = response2.json()
 
     print("\nDATA:\n")
-    print(data)
+    pprint(data)
     print(" ")
     
     USD_price = data["data"][0]["quote"]["USD"]["price"]
@@ -52,5 +51,5 @@ if response.status_code == 200:
     print(f"BTC price: {BTC_price}")
 
 else:
-    print(f"Error: {response.status_code}")
-    print(response.json()) 
+    print(f"Error: {response1.status_code}")
+    print(response1.json())
