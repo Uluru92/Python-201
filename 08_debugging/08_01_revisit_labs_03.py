@@ -10,8 +10,4 @@
 #This will give you a chance to revisit challenging tasks, as well as
 #to train using your debugger tool.
 
-#Pick 2: Re-Solution to exercise 06_11_floored_generetor
-
-nums = (x for x in range(1, 1000000))
-for x in nums:
-    print("x=",x, "-> x/1111=", x//1111)
+#Pick 3: Re-Solution to exercise 
