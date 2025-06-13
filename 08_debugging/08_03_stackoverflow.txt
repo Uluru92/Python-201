@@ -6,3 +6,4 @@ it working in your local environment.
 
 Use your debugger to attempt to solve the challenge that the user ran into.
 If you can solve it, post your solution as an answer to the question.
+
