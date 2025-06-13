@@ -3,7 +3,7 @@
 
 from pathlib import Path
 
-file_words_path = Path("Python-201-main/03_file-input-output/words.txt")
+file_words_path = Path("03_file-input-output/words.txt")
 
 words = []
 with open(file_words_path, "r") as file_words:

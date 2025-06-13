@@ -36,7 +36,7 @@ for file in main_path.iterdir():
             count[".txt"] +=1
 print(count)
 
-filecounts_path = Path("Python-201-main/03_file-input-output/filecounts.csv")
+filecounts_path = Path("03_file-input-output/filecounts.csv")
 
 with open(filecounts_path, "w") as csvfile:
     countwriter = csv.writer(csvfile)

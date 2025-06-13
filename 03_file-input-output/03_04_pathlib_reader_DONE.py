@@ -5,7 +5,7 @@
 import csv  #cvs stands for comma-separated values
 from pathlib import Path
 
-filecounts_path = Path("Python-201-main/03_file-input-output/filecounts.csv")
+filecounts_path = Path("03_file-input-output/filecounts.csv")
 count = {"": 9, ".csv": 3, ".md": 2, ".png": 11}
 
 with open(filecounts_path, "a") as csvfile:

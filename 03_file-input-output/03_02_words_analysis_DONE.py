@@ -2,7 +2,7 @@
 # Then find and print:
 
 from pathlib import Path
-file_words_path = Path("Python-201-main/03_file-input-output/words.txt")
+file_words_path = Path("03_file-input-output/words.txt")
 
 # 1. The shortest word (if there is a tie, print all)
 shortest_len = int(1000)
