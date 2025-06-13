@@ -13,7 +13,6 @@ Please select from the following options (enter the number of the action you'd l
 
 It is your responsibility to build out the application to handle all menu options above.
 
-
 '''
 
 import requests
