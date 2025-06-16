@@ -9,7 +9,6 @@ however it needs to fulfill the following specs:
 * serve the data at an endpoint (e.g. using sandman2)
 
 TIP: consider using a cryptocurrency API such as coinmarketcap (but anything goes)!
-
 '''
 
 #FIRST STEP: ingest API data from at least 1 external source
@@ -27,7 +26,6 @@ headers = {
 response0 = requests.get(base_, headers=headers)
 response1 = requests.get(base_url, headers=headers)
 response2 = requests.get(base_url_names, headers=headers)
-
 
 if response1.status_code == 200:
     data = response1.json()

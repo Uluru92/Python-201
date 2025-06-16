@@ -55,7 +55,7 @@ def view_tasks():
         tasks = response.json()["data"] 
         print("\nYour tasks:")
         for task in tasks:
-            task_list.append(f"ID: {task["id"]} / Name: {task["name"]}")
+            task_list.append(f"ID: {task["id"]} / User ID:{task["userId"]} / Name: {task["name"]}")
         pprint(task_list)
     else:
         print("Failed to fetch tasks.")
@@ -67,7 +67,7 @@ def view_completed_tasks():
         tasks = response.json()["data"]
         print("\nYour completed tasks:")
         for task in tasks:
-            task_completed_list.append(f"ID: {task["id"]} / Name: {task["name"]}")
+            task_completed_list.append(f"ID: {task["id"]} / User ID:{task["userId"]} / Name: {task["name"]}")
         pprint(task_completed_list)
     else:
         print("Failed to fetch tasks.")
@@ -79,7 +79,7 @@ def view_incomplete_tasks():
         tasks = response.json()["data"]
         print("\nYour incomplete tasks:")
         for task in tasks:
-            task_incompleted_list.append(f"ID: {task["id"]} / Name: {task["name"]}")
+            task_incompleted_list.append(f"ID: {task["id"]} / User ID:{task["userId"]}  / Name: {task["name"]}")
         pprint(task_incompleted_list)
     else:
         print("Failed to fetch tasks.")
