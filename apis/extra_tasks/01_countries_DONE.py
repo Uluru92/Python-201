@@ -41,4 +41,4 @@ if response.status_code == 200:
 else:
     print("Failed to fetch country details")
 
-print(f"\nCosta Rica has {area_cr} km2 and Chile has {area_chile} km2, they differ in {area_chile-area_cr} km2")
+print(f"\nCosta Rica has {area_cr} km2 and Chile has {area_chile} km2, they differ in {area_chile-area_cr} km2\n")
