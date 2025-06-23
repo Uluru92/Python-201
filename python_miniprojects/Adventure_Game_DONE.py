@@ -17,8 +17,21 @@ def get_life_points (life_points: int)-> int:
     """
     total_life_points = life_points + 1
     return total_life_points
+
 #Start!
+import requests
 player = str(input("CLI RPG GAME - Please enter your name: "))
+
+min_len = len(player)
+max_len = len(player)
+URL = f"https://uzby.com/api.php?min={min_len}&max={max_len}"
+
+response = requests.get(URL)
+player_random_name = response.text
+
+#CLI Game:
+print(f"{player}, welcome to the game! From noW on, your name is going to be: {player_random_name}!")
+
 life_points = 1
 print("       __  ")
 print("      ^  ^")

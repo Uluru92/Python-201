@@ -11,7 +11,7 @@ response = requests.get(URL)
 player_random_name = response.text
 
 #CLI Game:
-print(f"{player}, welcome to the game! From no on, your name is going to be: {player_random_name}!")
+print(f"{player}, welcome to the game! From noW on, your name is going to be: {player_random_name}!")
 
 door_selection = None
 sword = False
