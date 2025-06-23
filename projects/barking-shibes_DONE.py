@@ -14,21 +14,15 @@
 ##               ## 
 ###################
 
-# I used the following API for my quotes: https://api.api-ninjas.com/v1/quotes
+# I used the following API for my quotes: https://api.kanye.rest
 # I used the following API for my images: https://api.thecatapi.com/v1/images/search
-# I hide my API-key in a .env and added it to gitignore, the first time I commited my key and exposed to the world XD... hope it works out when you run it, not sure if is going to work.
 
 from pathlib import Path
 import requests
 import webbrowser
-import os
-from dotenv import load_dotenv
 
-load_dotenv()
-api_key = os.getenv("API_NINJAS_KEY")
-
-quotes_api_url = 'https://api.api-ninjas.com/v1/quotes'
-quotes_response = requests.get(quotes_api_url, headers={'X-Api-Key': api_key})
+quotes_api_url = 'https://api.kanye.rest' 
+quotes_response = requests.get(quotes_api_url)
 
 if quotes_response.status_code == 200:
     ninja_info = quotes_response.json()
@@ -77,7 +71,7 @@ html_content = f"""
     </style>
 </head>
 <body>
-    <div class="quote">"{ninja_info[0]['quote']}"</div>
+    <div class="quote">"{ninja_info['quote']}"</div>
     <img src="{cats_info[0]['url']}" alt="Gato">
 </body>
 </html>
