@@ -1,13 +1,10 @@
-# Adapt your file counter script so that it records more different file types
-# in your CSV file. Remember that the format of your output needs to be
-# consistent across multiple runs of your script. This means you'll need to
-# make a compromise and choose which file types you want to record beforehand.
+# Add the code for the file counter script that you wrote in the course.
 
-import csv  #cvs stands for comma-separated values
+import csv
 import pathlib
 from pathlib import Path
 
-# Set up the folder we where we want to do the searching 
+# Set up the folder we where we want to do the searching and counting
 main_path = str(input("Please enter the folder path where you want to search: "))
 main_path = pathlib.Path(main_path)
 count = {"": 0, ".csv": 0, ".md": 0, ".png": 0, ".jpg":0, ".html": 0, ".py": 0, ".js": 0, ".pdf": 0, ".txt": 0}
