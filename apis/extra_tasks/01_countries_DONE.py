@@ -30,6 +30,7 @@ response = requests.get("https://restcountries.com/v3.1/name/chile")
 
 if response.status_code == 200:
     tasks = response.json()
+   
     country_name = tasks[0]["name"]["common"] 
     population_Chile = tasks[0]["population"]
     area_chile = tasks[0]["area"]
