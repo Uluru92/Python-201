@@ -16,17 +16,22 @@
 
 # I used the following API for my quotes: https://api.api-ninjas.com/v1/quotes
 # I used the following API for my images: https://api.thecatapi.com/v1/images/search
+# I hide my API-key in a .env and added it to gitignore, the first time I commited my key and exposed to the world XD... hope it works out when you run it, not sure if is going to work.
 
 from pathlib import Path
 import requests
 import webbrowser
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv("API_NINJAS_KEY")
 
 quotes_api_url = 'https://api.api-ninjas.com/v1/quotes'
-quotes_response = requests.get(quotes_api_url, headers={'X-Api-Key': 'rC8upqL87FNIKm89o5k1nw==VIKuOcnltHt2wKUB'})
+quotes_response = requests.get(quotes_api_url, headers={'X-Api-Key': api_key})
 
 if quotes_response.status_code == 200:
     ninja_info = quotes_response.json()
-    print(ninja_info[0]['quote'])
 else:
     print("Error:", quotes_response.status_code, quotes_response.text)
 
@@ -35,7 +40,6 @@ images_response = requests.get(images_api_url)
 
 if images_response.status_code == 200:
     cats_info = images_response.json()
-    print(cats_info[0]['url'])
 else:
     print("Error:", images_response.status_code, images_response.text)
 
@@ -44,12 +48,37 @@ html_content = f"""
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Frase e Imagen</title>
+    <title>Barking-shibes-exercise</title>
+    <style>
+        body {{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            padding: 2rem;
+            background-color: #f9f9f9;
+            text-align: center;
+        }}
+        .quote {{
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            max-width: 700px;
+        }}
+        img {{
+            max-width: 80%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }}
+    </style>
 </head>
-<body style="text-align: center; font-family: Arial;">
-    <q>{ninja_info[0]['quote']}</q>
-    <q>" "</q>
-    <img src="{cats_info[0]['url']}" alt="Gato" style="max-width: 80%; height: auto;">
+<body>
+    <div class="quote">"{ninja_info[0]['quote']}"</div>
+    <img src="{cats_info[0]['url']}" alt="Gato">
 </body>
 </html>
 """

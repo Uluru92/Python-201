@@ -1,3 +1,4 @@
 .vscode/
 *.pyc
 venv_and_variable_test/
+.env
