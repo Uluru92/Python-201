@@ -1,6 +1,9 @@
 # Add an API call to your CLI game that assigns a name to your player.
 
 import requests
+
+# Rename the player
+
 player = str(input("CLI RPG GAME - Please enter your name: "))
 
 min_len = len(player)
@@ -10,8 +13,7 @@ URL = f"https://uzby.com/api.php?min={min_len}&max={max_len}"
 response = requests.get(URL)
 player_random_name = response.text
 
-#CLI Game:
-print(f"{player}, welcome to the game! From noW on, your name is going to be: {player_random_name}!")
+print(f"{player}, welcome to the game! From now on, your name is going to be: {player_random_name}!")
 
 door_selection = None
 sword = False
