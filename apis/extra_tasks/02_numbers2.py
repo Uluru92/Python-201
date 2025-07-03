@@ -23,6 +23,7 @@ import requests
 import os
 from pprint import pprint
 from dotenv import load_dotenv
+import mysql.connector
 
 # API resources:
 load_dotenv()
@@ -61,6 +62,7 @@ for index, symbol in enumerate(symbols):
         sentiment_score = strong_buy + 0.5 * buy - 0.5 * sell - strong_sell
         description = symbol_to_company.get(symbol, "unknown")
 
+        # save the data calculated in a list
         recommendation_data.append({
             "symbol": symbol,
             "company": description,
@@ -76,5 +78,22 @@ for index, symbol in enumerate(symbols):
     else:
         print(f"{index}: {symbol} - sin datos o error ({response.status_code})")
 
-# Mostrar resultados
+# Show results extracted, manipulated, in a list of dictionaries
 pprint(recommendation_data)
+
+# For the next step, I am using MySQL Workbench. Let's connect:
+connection = mysql.connector.connect(
+    host="localhost",
+    user="TU_USUARIO",
+    password="TU_CONTRASEÑA",
+    database="stocks_db"
+)
+
+cursor = connection.cursor()
+
+# 
+insert_query = """
+    INSERT INTO recommendations 
+    (symbol, company, strongBuy, buy, hold, sell, strongSell, sentiment_score)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+"""
