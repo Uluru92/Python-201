@@ -11,44 +11,136 @@ however it needs to fulfill the following specs:
 TIP: consider using a cryptocurrency API such as coinmarketcap (but anything goes)!
 '''
 
-#FIRST STEP: ingest API data from at least 1 external source
+# Solution
+#   Pseudocode
+#       Topic: Currencies
+#       GET: extract company's symbols, API https://finnhub.io/api/v1/stock/symbol?exchange=US&token={api_key}
+#       GET: extract recomendations for every company, API https://finnhub.io/api/v1/stock/recommendation?symbol=GWH&token={api_key}
+#
+# FIRST STEP: ingest API data from at least 1 external source
+
 import requests
+import os
 from pprint import pprint
+from dotenv import load_dotenv
+import mysql.connector
 
-base_ = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=5000&convert=USD"
-base_url = "https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest"
-base_url_names = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/map"
+# API resources:
+load_dotenv()
+api_key = os.getenv("API_FINNHUB")
+url_companies = f"https://finnhub.io/api/v1/stock/symbol?exchange=US&token={api_key}"
 
-headers = {
-    "X-CMC_PRO_API_KEY": "d8b8630f-dc62-4cd7-86d8-d4c7f7189bd1"
+
+# Data received:
+data_finnhub_companies = requests.get(url_companies).json()
+
+# Create a list of every company's symbol. This is a REQUIRED argument to get latest analyst recommendation trends for a company.
+symbol_to_company = {
+    item["displaySymbol"]: item["description"]
+    for item in data_finnhub_companies[:20]  # limit to 20 for testing porpuses
 }
+symbols = list(symbol_to_company.keys())
 
-response0 = requests.get(base_, headers=headers)
-response1 = requests.get(base_url, headers=headers)
-response2 = requests.get(base_url_names, headers=headers)
+recommendation_data = []
 
-if response0.status_code == 200:
-    data = response1.json()
-    data2 = response2.json()
-
-    print("\nDATA:\n")
-    pprint(data)
-    print(" ")
+for index, symbol in enumerate(symbols):
+    url_recommendation = f"https://finnhub.io/api/v1/stock/recommendation?symbol={symbol}&token={api_key}"
+    response = requests.get(url_recommendation)
     
-    USD_price = data["data"][0]["quote"]["USD"]["price"]
-    BTC_price = data["data"][1]["quote"]["BTC"]["volume_24h"]
-    
-    name_1 = data2["data"][0]["name"]
-    name_2 = data2["data"][1]["name"]
-    name_3 = data2["data"][2]["name"]
-    print(f"Crytocurrency names:\n-{name_1}\n-{name_2}\n-{name_3}")
-    
-    print(" ")
-    print(f"BTC price: {BTC_price}")
-    print(f"BTC price: {BTC_price}")
-    print(f"BTC price: {BTC_price}")
+    if response.status_code == 200 and response.json():
+        all_recommendations = response.json()
 
+        # manipulate data
+        total_entries = len(all_recommendations)
+        strong_buy = sum(r.get("strongBuy", 0) for r in all_recommendations)/ total_entries
+        buy = sum(r.get("buy", 0) for r in all_recommendations)/ total_entries
+        hold = sum(r.get("hold", 0) for r in all_recommendations)/ total_entries
+        sell = sum(r.get("sell", 0) for r in all_recommendations)/ total_entries
+        strong_sell = sum(r.get("strongSell", 0) for r in all_recommendations)/ total_entries
+
+        # calculate a new score based on the last recomendations for each company
+        sentiment_score = strong_buy + 0.5 * buy - 0.5 * sell - strong_sell
+        description = symbol_to_company.get(symbol, "unknown")
+
+        # save the data calculated in a list
+        recommendation_data.append({
+            "symbol": symbol,
+            "company": description,
+            "strongBuy": round(strong_buy, 2),
+            "buy": round(buy, 2),
+            "hold": round(hold, 2),
+            "sell": round(sell, 2),
+            "strongSell": round(strong_sell, 2),
+            "sentiment_score": round(sentiment_score, 2)
+        })
+
+        print(f"{index}: {symbol} procesado con promedio de {total_entries} entradas.")
+    else:
+        print(f"{index}: {symbol} - sin datos o error ({response.status_code})")
+
+# Show results extracted, manipulated, in a list of dictionaries
+pprint(recommendation_data)
+
+# For the next step, I am using MySQL Workbench, Let's connect:
+user = os.getenv("MYSQL_USER")
+password = os.getenv("MYSQL_PASSWORD")
+host = os.getenv("MYSQL_HOST")
+database = os.getenv("MYSQL_DATABASE")
+
+connection = mysql.connector.connect(
+    host=host,
+    user=user,
+    password=password,
+    database=database
+)
+
+cursor = connection.cursor()
+
+# Conection verify 
+if connection.is_connected():
+    print("✅ Conenection activated.")
 else:
-    print(f"Error: {response1.status_code}")
-    print(response1.json())
-    
+    print("❌ Connection error.")
+
+# save our API data in the db 
+insert_or_update_query = """
+    INSERT INTO recommendations 
+    (symbol, company, strongBuy, buy, hold, sell, strongSell, sentiment_score)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+    ON DUPLICATE KEY UPDATE 
+        company = VALUES(company),
+        strongBuy = VALUES(strongBuy),
+        buy = VALUES(buy),
+        hold = VALUES(hold),
+        sell = VALUES(sell),
+        strongSell = VALUES(strongSell),
+        sentiment_score = VALUES(sentiment_score)
+"""
+
+for item in recommendation_data:
+    values = (
+        item["symbol"],
+        item["company"],
+        item["strongBuy"],
+        item["buy"],
+        item["hold"],
+        item["sell"],
+        item["strongSell"],
+        item["sentiment_score"]
+    )
+    cursor.execute(insert_or_update_query, values)
+
+# Consultar todos los datos
+cursor.execute("SELECT * FROM recommendations")
+rows = cursor.fetchall()
+
+# Mostrar cada fila
+for row in rows:
+    print(row)
+
+connection.commit()
+cursor.close()
+connection.close()
+
+
+
