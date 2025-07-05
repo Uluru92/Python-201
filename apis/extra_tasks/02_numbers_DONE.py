@@ -11,9 +11,10 @@ however it needs to fulfill the following specs:
 TIP: consider using a cryptocurrency API such as coinmarketcap (but anything goes)!
 '''
 
-# Solution: please use venv37 for this exercise \apis\extra_tasks\venv37
-#   Pseudocode
-#       Topic: Currencies
+# Solution:  activate virtual enviroment venv37 path: \apis\extra_tasks\venv37
+# python -m sandman2 "mysql+pymysql://root:Hojancha22%21@localhost/stocks_db"
+#   
+# Topic: Currencies
 #       GET: extract company's symbols, API https://finnhub.io/api/v1/stock/symbol?exchange=US&token={api_key}
 #       GET: extract recomendations for every company, API https://finnhub.io/api/v1/stock/recommendation?symbol=GWH&token={api_key}
 #
@@ -133,6 +134,15 @@ rows = cursor.fetchall()
 for row in rows:
     print(row)
 
+# Using sandman2 execute the API
+url_api_recomendations = "http://localhost:5000/recommendations"
+data_recomendations = requests.get(url_api_recomendations).json()
+
+print("Data from sandman2:\n")
+pprint(data_recomendations)
+
+
 connection.commit()
 cursor.close()
 connection.close()
+
