@@ -80,7 +80,6 @@ for index, symbol in enumerate(symbols):
     else:
         print(f"{index}: {symbol} - sin datos o error ({response.status_code})")
 
-
 # For the next step, I am using MySQL Workbench, Let's connect:
 connection = mysql.connector.connect(
     host= os.getenv("MYSQL_HOST"),
