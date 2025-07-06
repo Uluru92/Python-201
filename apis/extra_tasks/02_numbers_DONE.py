@@ -12,7 +12,7 @@ TIP: consider using a cryptocurrency API such as coinmarketcap (but anything goe
 '''
 
 # Solution:  activate virtual enviroment venv37 path: \apis\extra_tasks\venv37
-# python -m sandman2 "mysql+pymysql://root:Hojancha22%21@localhost/stocks_db"
+# python -m sandman2 "mysql+pymysql://user:pasword@localhost/stocks_db"
 #   
 # Topic: Currencies
 #       GET: extract company's symbols, API https://finnhub.io/api/v1/stock/symbol?exchange=US&token={api_key}
@@ -36,9 +36,10 @@ url_companies = f"https://finnhub.io/api/v1/stock/symbol?exchange=US&token={api_
 data_finnhub_companies = requests.get(url_companies).json()
 
 # Create a list of every company's symbol. This is a REQUIRED argument to get latest analyst recommendation trends for a company.
+data_finnhub_companies_sorted = sorted(data_finnhub_companies, key=lambda x: x["displaySymbol"])
 symbol_to_company = {
     item["displaySymbol"]: item["description"]
-    for item in data_finnhub_companies[:20]  # limit to 20 for testing porpuses
+    for item in data_finnhub_companies_sorted[:100]
 }
 symbols = list(symbol_to_company.keys())
 
@@ -79,8 +80,6 @@ for index, symbol in enumerate(symbols):
     else:
         print(f"{index}: {symbol} - sin datos o error ({response.status_code})")
 
-# Show results extracted, manipulated, in a list of dictionaries
-pprint(recommendation_data)
 
 # For the next step, I am using MySQL Workbench, Let's connect:
 connection = mysql.connector.connect(
@@ -97,6 +96,25 @@ if connection.is_connected():
     print("✅ Conenection activated.")
 else:
     print("❌ Connection error.")
+
+create_table_query = """
+CREATE TABLE IF NOT EXISTS recommendations (
+    id INT NOT NULL AUTO_INCREMENT,
+    symbol VARCHAR(10) NOT NULL,
+    company VARCHAR(255),
+    strongBuy FLOAT,
+    buy FLOAT,
+    hold FLOAT,
+    sell FLOAT,
+    strongSell FLOAT,
+    sentiment_score FLOAT,
+    PRIMARY KEY (id),
+    UNIQUE KEY unique_symbol (symbol)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+"""
+
+cursor.execute(create_table_query)
+connection.commit()
 
 # save our API data in the db 
 insert_or_update_query = """
@@ -122,7 +140,7 @@ for item in recommendation_data:
         item["hold"],
         item["sell"],
         item["strongSell"],
-        item["sentiment_score"]
+        int(item["sentiment_score"])
     )
     cursor.execute(insert_or_update_query, values)
 
@@ -136,13 +154,14 @@ for row in rows:
 
 # Using sandman2 execute the API
 url_api_recomendations = "http://localhost:5000/recommendations"
-data_recomendations = requests.get(url_api_recomendations).json()
+data_recommendations = requests.get(url_api_recomendations).json()
 
-print("Data from sandman2:\n")
-pprint(data_recomendations)
+print("\nTop 10 sentiment score, data from sandman2:\n")
+top_10 = sorted(data_recommendations["resources"], key=lambda x: x["sentiment_score"], reverse=True)[:10]
 
+for index, entry in enumerate(top_10):
+    print(f"TOP {index + 1}: Symbol: {entry['symbol']}, Company: {entry['company']}, sentiment score: {entry['sentiment_score']}")
 
 connection.commit()
 cursor.close()
 connection.close()
-
