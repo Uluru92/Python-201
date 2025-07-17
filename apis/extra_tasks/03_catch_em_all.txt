@@ -1,0 +1,906 @@
+ID: 001
+Name: Bulbasaur
+Weight: 69 (decagrams)
+Height: 7 (decimetres)
+Body Mass Index (BMI): 1.41
+---------------------------------------------
+ID: 002
+Name: Ivysaur
+Weight: 130 (decagrams)
+Height: 10 (decimetres)
+Body Mass Index (BMI): 1.30
+---------------------------------------------
+ID: 003
+Name: Venusaur
+Weight: 1000 (decagrams)
+Height: 20 (decimetres)
+Body Mass Index (BMI): 2.50
+---------------------------------------------
+ID: 004
+Name: Charmander
+Weight: 85 (decagrams)
+Height: 6 (decimetres)
+Body Mass Index (BMI): 2.36
+---------------------------------------------
+ID: 005
+Name: Charmeleon
+Weight: 190 (decagrams)
+Height: 11 (decimetres)
+Body Mass Index (BMI): 1.57
+---------------------------------------------
+ID: 006
+Name: Charizard
+Weight: 905 (decagrams)
+Height: 17 (decimetres)
+Body Mass Index (BMI): 3.13
+---------------------------------------------
+ID: 007
+Name: Squirtle
+Weight: 90 (decagrams)
+Height: 5 (decimetres)
+Body Mass Index (BMI): 3.60
+---------------------------------------------
+ID: 008
+Name: Wartortle
+Weight: 225 (decagrams)
+Height: 10 (decimetres)
+Body Mass Index (BMI): 2.25
+---------------------------------------------
+ID: 009
+Name: Blastoise
+Weight: 855 (decagrams)
+Height: 16 (decimetres)
+Body Mass Index (BMI): 3.34
+---------------------------------------------
+ID: 010
+Name: Caterpie
+Weight: 29 (decagrams)
+Height: 3 (decimetres)
+Body Mass Index (BMI): 3.22
+---------------------------------------------
+ID: 011
+Name: Metapod
+Weight: 99 (decagrams)
+Height: 7 (decimetres)
+Body Mass Index (BMI): 2.02
+---------------------------------------------
+ID: 012
+Name: Butterfree
+Weight: 320 (decagrams)
+Height: 11 (decimetres)
+Body Mass Index (BMI): 2.64
+---------------------------------------------
+ID: 013
+Name: Weedle
+Weight: 32 (decagrams)
+Height: 3 (decimetres)
+Body Mass Index (BMI): 3.56
+---------------------------------------------
+ID: 014
+Name: Kakuna
+Weight: 100 (decagrams)
+Height: 6 (decimetres)
+Body Mass Index (BMI): 2.78
+---------------------------------------------
+ID: 015
+Name: Beedrill
+Weight: 295 (decagrams)
+Height: 10 (decimetres)
+Body Mass Index (BMI): 2.95
+---------------------------------------------
+ID: 016
+Name: Pidgey
+Weight: 18 (decagrams)
+Height: 3 (decimetres)
+Body Mass Index (BMI): 2.00
+---------------------------------------------
+ID: 017
+Name: Pidgeotto
+Weight: 300 (decagrams)
+Height: 11 (decimetres)
+Body Mass Index (BMI): 2.48
+---------------------------------------------
+ID: 018
+Name: Pidgeot
+Weight: 395 (decagrams)
+Height: 15 (decimetres)
+Body Mass Index (BMI): 1.76
+---------------------------------------------
+ID: 019
+Name: Rattata
+Weight: 35 (decagrams)
+Height: 3 (decimetres)
+Body Mass Index (BMI): 3.89
+---------------------------------------------
+ID: 020
+Name: Raticate
+Weight: 185 (decagrams)
+Height: 7 (decimetres)
+Body Mass Index (BMI): 3.78
+---------------------------------------------
+ID: 021
+Name: Spearow
+Weight: 20 (decagrams)
+Height: 3 (decimetres)
+Body Mass Index (BMI): 2.22
+---------------------------------------------
+ID: 022
+Name: Fearow
+Weight: 380 (decagrams)
+Height: 12 (decimetres)
+Body Mass Index (BMI): 2.64
+---------------------------------------------
+ID: 023
+Name: Ekans
+Weight: 69 (decagrams)
+Height: 20 (decimetres)
+Body Mass Index (BMI): 0.17
+---------------------------------------------
+ID: 024
+Name: Arbok
+Weight: 650 (decagrams)
+Height: 35 (decimetres)
+Body Mass Index (BMI): 0.53
+---------------------------------------------
+ID: 025
+Name: Pikachu
+Weight: 60 (decagrams)
+Height: 4 (decimetres)
+Body Mass Index (BMI): 3.75
+---------------------------------------------
+ID: 026
+Name: Raichu
+Weight: 300 (decagrams)
+Height: 8 (decimetres)
+Body Mass Index (BMI): 4.69
+---------------------------------------------
+ID: 027
+Name: Sandshrew
+Weight: 120 (decagrams)
+Height: 6 (decimetres)
+Body Mass Index (BMI): 3.33
+---------------------------------------------
+ID: 028
+Name: Sandslash
+Weight: 295 (decagrams)
+Height: 10 (decimetres)
+Body Mass Index (BMI): 2.95
+---------------------------------------------
+ID: 029
+Name: Nidoran-f
+Weight: 70 (decagrams)
+Height: 4 (decimetres)
+Body Mass Index (BMI): 4.38
+---------------------------------------------
+ID: 030
+Name: Nidorina
+Weight: 200 (decagrams)
+Height: 8 (decimetres)
+Body Mass Index (BMI): 3.12
+---------------------------------------------
+ID: 031
+Name: Nidoqueen
+Weight: 600 (decagrams)
+Height: 13 (decimetres)
+Body Mass Index (BMI): 3.55
+---------------------------------------------
+ID: 032
+Name: Nidoran-m
+Weight: 90 (decagrams)
+Height: 5 (decimetres)
+Body Mass Index (BMI): 3.60
+---------------------------------------------
+ID: 033
+Name: Nidorino
+Weight: 195 (decagrams)
+Height: 9 (decimetres)
+Body Mass Index (BMI): 2.41
+---------------------------------------------
+ID: 034
+Name: Nidoking
+Weight: 620 (decagrams)
+Height: 14 (decimetres)
+Body Mass Index (BMI): 3.16
+---------------------------------------------
+ID: 035
+Name: Clefairy
+Weight: 75 (decagrams)
+Height: 6 (decimetres)
+Body Mass Index (BMI): 2.08
+---------------------------------------------
+ID: 036
+Name: Clefable
+Weight: 400 (decagrams)
+Height: 13 (decimetres)
+Body Mass Index (BMI): 2.37
+---------------------------------------------
+ID: 037
+Name: Vulpix
+Weight: 99 (decagrams)
+Height: 6 (decimetres)
+Body Mass Index (BMI): 2.75
+---------------------------------------------
+ID: 038
+Name: Ninetales
+Weight: 199 (decagrams)
+Height: 11 (decimetres)
+Body Mass Index (BMI): 1.64
+---------------------------------------------
+ID: 039
+Name: Jigglypuff
+Weight: 55 (decagrams)
+Height: 5 (decimetres)
+Body Mass Index (BMI): 2.20
+---------------------------------------------
+ID: 040
+Name: Wigglytuff
+Weight: 120 (decagrams)
+Height: 10 (decimetres)
+Body Mass Index (BMI): 1.20
+---------------------------------------------
+ID: 041
+Name: Zubat
+Weight: 75 (decagrams)
+Height: 8 (decimetres)
+Body Mass Index (BMI): 1.17
+---------------------------------------------
+ID: 042
+Name: Golbat
+Weight: 550 (decagrams)
+Height: 16 (decimetres)
+Body Mass Index (BMI): 2.15
+---------------------------------------------
+ID: 043
+Name: Oddish
+Weight: 54 (decagrams)
+Height: 5 (decimetres)
+Body Mass Index (BMI): 2.16
+---------------------------------------------
+ID: 044
+Name: Gloom
+Weight: 86 (decagrams)
+Height: 8 (decimetres)
+Body Mass Index (BMI): 1.34
+---------------------------------------------
+ID: 045
+Name: Vileplume
+Weight: 186 (decagrams)
+Height: 12 (decimetres)
+Body Mass Index (BMI): 1.29
+---------------------------------------------
+ID: 046
+Name: Paras
+Weight: 54 (decagrams)
+Height: 3 (decimetres)
+Body Mass Index (BMI): 6.00
+---------------------------------------------
+ID: 047
+Name: Parasect
+Weight: 295 (decagrams)
+Height: 10 (decimetres)
+Body Mass Index (BMI): 2.95
+---------------------------------------------
+ID: 048
+Name: Venonat
+Weight: 300 (decagrams)
+Height: 10 (decimetres)
+Body Mass Index (BMI): 3.00
+---------------------------------------------
+ID: 049
+Name: Venomoth
+Weight: 125 (decagrams)
+Height: 15 (decimetres)
+Body Mass Index (BMI): 0.56
+---------------------------------------------
+ID: 050
+Name: Diglett
+Weight: 8 (decagrams)
+Height: 2 (decimetres)
+Body Mass Index (BMI): 2.00
+---------------------------------------------
+ID: 051
+Name: Dugtrio
+Weight: 333 (decagrams)
+Height: 7 (decimetres)
+Body Mass Index (BMI): 6.80
+---------------------------------------------
+ID: 052
+Name: Meowth
+Weight: 42 (decagrams)
+Height: 4 (decimetres)
+Body Mass Index (BMI): 2.62
+---------------------------------------------
+ID: 053
+Name: Persian
+Weight: 320 (decagrams)
+Height: 10 (decimetres)
+Body Mass Index (BMI): 3.20
+---------------------------------------------
+ID: 054
+Name: Psyduck
+Weight: 196 (decagrams)
+Height: 8 (decimetres)
+Body Mass Index (BMI): 3.06
+---------------------------------------------
+ID: 055
+Name: Golduck
+Weight: 766 (decagrams)
+Height: 17 (decimetres)
+Body Mass Index (BMI): 2.65
+---------------------------------------------
+ID: 056
+Name: Mankey
+Weight: 280 (decagrams)
+Height: 5 (decimetres)
+Body Mass Index (BMI): 11.20
+---------------------------------------------
+ID: 057
+Name: Primeape
+Weight: 320 (decagrams)
+Height: 10 (decimetres)
+Body Mass Index (BMI): 3.20
+---------------------------------------------
+ID: 058
+Name: Growlithe
+Weight: 190 (decagrams)
+Height: 7 (decimetres)
+Body Mass Index (BMI): 3.88
+---------------------------------------------
+ID: 059
+Name: Arcanine
+Weight: 1550 (decagrams)
+Height: 19 (decimetres)
+Body Mass Index (BMI): 4.29
+---------------------------------------------
+ID: 060
+Name: Poliwag
+Weight: 124 (decagrams)
+Height: 6 (decimetres)
+Body Mass Index (BMI): 3.44
+---------------------------------------------
+ID: 061
+Name: Poliwhirl
+Weight: 200 (decagrams)
+Height: 10 (decimetres)
+Body Mass Index (BMI): 2.00
+---------------------------------------------
+ID: 062
+Name: Poliwrath
+Weight: 540 (decagrams)
+Height: 13 (decimetres)
+Body Mass Index (BMI): 3.20
+---------------------------------------------
+ID: 063
+Name: Abra
+Weight: 195 (decagrams)
+Height: 9 (decimetres)
+Body Mass Index (BMI): 2.41
+---------------------------------------------
+ID: 064
+Name: Kadabra
+Weight: 565 (decagrams)
+Height: 13 (decimetres)
+Body Mass Index (BMI): 3.34
+---------------------------------------------
+ID: 065
+Name: Alakazam
+Weight: 480 (decagrams)
+Height: 15 (decimetres)
+Body Mass Index (BMI): 2.13
+---------------------------------------------
+ID: 066
+Name: Machop
+Weight: 195 (decagrams)
+Height: 8 (decimetres)
+Body Mass Index (BMI): 3.05
+---------------------------------------------
+ID: 067
+Name: Machoke
+Weight: 705 (decagrams)
+Height: 15 (decimetres)
+Body Mass Index (BMI): 3.13
+---------------------------------------------
+ID: 068
+Name: Machamp
+Weight: 1300 (decagrams)
+Height: 16 (decimetres)
+Body Mass Index (BMI): 5.08
+---------------------------------------------
+ID: 069
+Name: Bellsprout
+Weight: 40 (decagrams)
+Height: 7 (decimetres)
+Body Mass Index (BMI): 0.82
+---------------------------------------------
+ID: 070
+Name: Weepinbell
+Weight: 64 (decagrams)
+Height: 10 (decimetres)
+Body Mass Index (BMI): 0.64
+---------------------------------------------
+ID: 071
+Name: Victreebel
+Weight: 155 (decagrams)
+Height: 17 (decimetres)
+Body Mass Index (BMI): 0.54
+---------------------------------------------
+ID: 072
+Name: Tentacool
+Weight: 455 (decagrams)
+Height: 9 (decimetres)
+Body Mass Index (BMI): 5.62
+---------------------------------------------
+ID: 073
+Name: Tentacruel
+Weight: 550 (decagrams)
+Height: 16 (decimetres)
+Body Mass Index (BMI): 2.15
+---------------------------------------------
+ID: 074
+Name: Geodude
+Weight: 200 (decagrams)
+Height: 4 (decimetres)
+Body Mass Index (BMI): 12.50
+---------------------------------------------
+ID: 075
+Name: Graveler
+Weight: 1050 (decagrams)
+Height: 10 (decimetres)
+Body Mass Index (BMI): 10.50
+---------------------------------------------
+ID: 076
+Name: Golem
+Weight: 3000 (decagrams)
+Height: 14 (decimetres)
+Body Mass Index (BMI): 15.31
+---------------------------------------------
+ID: 077
+Name: Ponyta
+Weight: 300 (decagrams)
+Height: 10 (decimetres)
+Body Mass Index (BMI): 3.00
+---------------------------------------------
+ID: 078
+Name: Rapidash
+Weight: 950 (decagrams)
+Height: 17 (decimetres)
+Body Mass Index (BMI): 3.29
+---------------------------------------------
+ID: 079
+Name: Slowpoke
+Weight: 360 (decagrams)
+Height: 12 (decimetres)
+Body Mass Index (BMI): 2.50
+---------------------------------------------
+ID: 080
+Name: Slowbro
+Weight: 785 (decagrams)
+Height: 16 (decimetres)
+Body Mass Index (BMI): 3.07
+---------------------------------------------
+ID: 081
+Name: Magnemite
+Weight: 60 (decagrams)
+Height: 3 (decimetres)
+Body Mass Index (BMI): 6.67
+---------------------------------------------
+ID: 082
+Name: Magneton
+Weight: 600 (decagrams)
+Height: 10 (decimetres)
+Body Mass Index (BMI): 6.00
+---------------------------------------------
+ID: 083
+Name: Farfetchd
+Weight: 150 (decagrams)
+Height: 8 (decimetres)
+Body Mass Index (BMI): 2.34
+---------------------------------------------
+ID: 084
+Name: Doduo
+Weight: 392 (decagrams)
+Height: 14 (decimetres)
+Body Mass Index (BMI): 2.00
+---------------------------------------------
+ID: 085
+Name: Dodrio
+Weight: 852 (decagrams)
+Height: 18 (decimetres)
+Body Mass Index (BMI): 2.63
+---------------------------------------------
+ID: 086
+Name: Seel
+Weight: 900 (decagrams)
+Height: 11 (decimetres)
+Body Mass Index (BMI): 7.44
+---------------------------------------------
+ID: 087
+Name: Dewgong
+Weight: 1200 (decagrams)
+Height: 17 (decimetres)
+Body Mass Index (BMI): 4.15
+---------------------------------------------
+ID: 088
+Name: Grimer
+Weight: 300 (decagrams)
+Height: 9 (decimetres)
+Body Mass Index (BMI): 3.70
+---------------------------------------------
+ID: 089
+Name: Muk
+Weight: 300 (decagrams)
+Height: 12 (decimetres)
+Body Mass Index (BMI): 2.08
+---------------------------------------------
+ID: 090
+Name: Shellder
+Weight: 40 (decagrams)
+Height: 3 (decimetres)
+Body Mass Index (BMI): 4.44
+---------------------------------------------
+ID: 091
+Name: Cloyster
+Weight: 1325 (decagrams)
+Height: 15 (decimetres)
+Body Mass Index (BMI): 5.89
+---------------------------------------------
+ID: 092
+Name: Gastly
+Weight: 1 (decagrams)
+Height: 13 (decimetres)
+Body Mass Index (BMI): 0.01
+---------------------------------------------
+ID: 093
+Name: Haunter
+Weight: 1 (decagrams)
+Height: 16 (decimetres)
+Body Mass Index (BMI): 0.00
+---------------------------------------------
+ID: 094
+Name: Gengar
+Weight: 405 (decagrams)
+Height: 15 (decimetres)
+Body Mass Index (BMI): 1.80
+---------------------------------------------
+ID: 095
+Name: Onix
+Weight: 2100 (decagrams)
+Height: 88 (decimetres)
+Body Mass Index (BMI): 0.27
+---------------------------------------------
+ID: 096
+Name: Drowzee
+Weight: 324 (decagrams)
+Height: 10 (decimetres)
+Body Mass Index (BMI): 3.24
+---------------------------------------------
+ID: 097
+Name: Hypno
+Weight: 756 (decagrams)
+Height: 16 (decimetres)
+Body Mass Index (BMI): 2.95
+---------------------------------------------
+ID: 098
+Name: Krabby
+Weight: 65 (decagrams)
+Height: 4 (decimetres)
+Body Mass Index (BMI): 4.06
+---------------------------------------------
+ID: 099
+Name: Kingler
+Weight: 600 (decagrams)
+Height: 13 (decimetres)
+Body Mass Index (BMI): 3.55
+---------------------------------------------
+ID: 100
+Name: Voltorb
+Weight: 104 (decagrams)
+Height: 5 (decimetres)
+Body Mass Index (BMI): 4.16
+---------------------------------------------
+ID: 101
+Name: Electrode
+Weight: 666 (decagrams)
+Height: 12 (decimetres)
+Body Mass Index (BMI): 4.62
+---------------------------------------------
+ID: 102
+Name: Exeggcute
+Weight: 25 (decagrams)
+Height: 4 (decimetres)
+Body Mass Index (BMI): 1.56
+---------------------------------------------
+ID: 103
+Name: Exeggutor
+Weight: 1200 (decagrams)
+Height: 20 (decimetres)
+Body Mass Index (BMI): 3.00
+---------------------------------------------
+ID: 104
+Name: Cubone
+Weight: 65 (decagrams)
+Height: 4 (decimetres)
+Body Mass Index (BMI): 4.06
+---------------------------------------------
+ID: 105
+Name: Marowak
+Weight: 450 (decagrams)
+Height: 10 (decimetres)
+Body Mass Index (BMI): 4.50
+---------------------------------------------
+ID: 106
+Name: Hitmonlee
+Weight: 498 (decagrams)
+Height: 15 (decimetres)
+Body Mass Index (BMI): 2.21
+---------------------------------------------
+ID: 107
+Name: Hitmonchan
+Weight: 502 (decagrams)
+Height: 14 (decimetres)
+Body Mass Index (BMI): 2.56
+---------------------------------------------
+ID: 108
+Name: Lickitung
+Weight: 655 (decagrams)
+Height: 12 (decimetres)
+Body Mass Index (BMI): 4.55
+---------------------------------------------
+ID: 109
+Name: Koffing
+Weight: 10 (decagrams)
+Height: 6 (decimetres)
+Body Mass Index (BMI): 0.28
+---------------------------------------------
+ID: 110
+Name: Weezing
+Weight: 95 (decagrams)
+Height: 12 (decimetres)
+Body Mass Index (BMI): 0.66
+---------------------------------------------
+ID: 111
+Name: Rhyhorn
+Weight: 1150 (decagrams)
+Height: 10 (decimetres)
+Body Mass Index (BMI): 11.50
+---------------------------------------------
+ID: 112
+Name: Rhydon
+Weight: 1200 (decagrams)
+Height: 19 (decimetres)
+Body Mass Index (BMI): 3.32
+---------------------------------------------
+ID: 113
+Name: Chansey
+Weight: 346 (decagrams)
+Height: 11 (decimetres)
+Body Mass Index (BMI): 2.86
+---------------------------------------------
+ID: 114
+Name: Tangela
+Weight: 350 (decagrams)
+Height: 10 (decimetres)
+Body Mass Index (BMI): 3.50
+---------------------------------------------
+ID: 115
+Name: Kangaskhan
+Weight: 800 (decagrams)
+Height: 22 (decimetres)
+Body Mass Index (BMI): 1.65
+---------------------------------------------
+ID: 116
+Name: Horsea
+Weight: 80 (decagrams)
+Height: 4 (decimetres)
+Body Mass Index (BMI): 5.00
+---------------------------------------------
+ID: 117
+Name: Seadra
+Weight: 250 (decagrams)
+Height: 12 (decimetres)
+Body Mass Index (BMI): 1.74
+---------------------------------------------
+ID: 118
+Name: Goldeen
+Weight: 150 (decagrams)
+Height: 6 (decimetres)
+Body Mass Index (BMI): 4.17
+---------------------------------------------
+ID: 119
+Name: Seaking
+Weight: 390 (decagrams)
+Height: 13 (decimetres)
+Body Mass Index (BMI): 2.31
+---------------------------------------------
+ID: 120
+Name: Staryu
+Weight: 345 (decagrams)
+Height: 8 (decimetres)
+Body Mass Index (BMI): 5.39
+---------------------------------------------
+ID: 121
+Name: Starmie
+Weight: 800 (decagrams)
+Height: 11 (decimetres)
+Body Mass Index (BMI): 6.61
+---------------------------------------------
+ID: 122
+Name: Mr-mime
+Weight: 545 (decagrams)
+Height: 13 (decimetres)
+Body Mass Index (BMI): 3.22
+---------------------------------------------
+ID: 123
+Name: Scyther
+Weight: 560 (decagrams)
+Height: 15 (decimetres)
+Body Mass Index (BMI): 2.49
+---------------------------------------------
+ID: 124
+Name: Jynx
+Weight: 406 (decagrams)
+Height: 14 (decimetres)
+Body Mass Index (BMI): 2.07
+---------------------------------------------
+ID: 125
+Name: Electabuzz
+Weight: 300 (decagrams)
+Height: 11 (decimetres)
+Body Mass Index (BMI): 2.48
+---------------------------------------------
+ID: 126
+Name: Magmar
+Weight: 445 (decagrams)
+Height: 13 (decimetres)
+Body Mass Index (BMI): 2.63
+---------------------------------------------
+ID: 127
+Name: Pinsir
+Weight: 550 (decagrams)
+Height: 15 (decimetres)
+Body Mass Index (BMI): 2.44
+---------------------------------------------
+ID: 128
+Name: Tauros
+Weight: 884 (decagrams)
+Height: 14 (decimetres)
+Body Mass Index (BMI): 4.51
+---------------------------------------------
+ID: 129
+Name: Magikarp
+Weight: 100 (decagrams)
+Height: 9 (decimetres)
+Body Mass Index (BMI): 1.23
+---------------------------------------------
+ID: 130
+Name: Gyarados
+Weight: 2350 (decagrams)
+Height: 65 (decimetres)
+Body Mass Index (BMI): 0.56
+---------------------------------------------
+ID: 131
+Name: Lapras
+Weight: 2200 (decagrams)
+Height: 25 (decimetres)
+Body Mass Index (BMI): 3.52
+---------------------------------------------
+ID: 132
+Name: Ditto
+Weight: 40 (decagrams)
+Height: 3 (decimetres)
+Body Mass Index (BMI): 4.44
+---------------------------------------------
+ID: 133
+Name: Eevee
+Weight: 65 (decagrams)
+Height: 3 (decimetres)
+Body Mass Index (BMI): 7.22
+---------------------------------------------
+ID: 134
+Name: Vaporeon
+Weight: 290 (decagrams)
+Height: 10 (decimetres)
+Body Mass Index (BMI): 2.90
+---------------------------------------------
+ID: 135
+Name: Jolteon
+Weight: 245 (decagrams)
+Height: 8 (decimetres)
+Body Mass Index (BMI): 3.83
+---------------------------------------------
+ID: 136
+Name: Flareon
+Weight: 250 (decagrams)
+Height: 9 (decimetres)
+Body Mass Index (BMI): 3.09
+---------------------------------------------
+ID: 137
+Name: Porygon
+Weight: 365 (decagrams)
+Height: 8 (decimetres)
+Body Mass Index (BMI): 5.70
+---------------------------------------------
+ID: 138
+Name: Omanyte
+Weight: 75 (decagrams)
+Height: 4 (decimetres)
+Body Mass Index (BMI): 4.69
+---------------------------------------------
+ID: 139
+Name: Omastar
+Weight: 350 (decagrams)
+Height: 10 (decimetres)
+Body Mass Index (BMI): 3.50
+---------------------------------------------
+ID: 140
+Name: Kabuto
+Weight: 115 (decagrams)
+Height: 5 (decimetres)
+Body Mass Index (BMI): 4.60
+---------------------------------------------
+ID: 141
+Name: Kabutops
+Weight: 405 (decagrams)
+Height: 13 (decimetres)
+Body Mass Index (BMI): 2.40
+---------------------------------------------
+ID: 142
+Name: Aerodactyl
+Weight: 590 (decagrams)
+Height: 18 (decimetres)
+Body Mass Index (BMI): 1.82
+---------------------------------------------
+ID: 143
+Name: Snorlax
+Weight: 4600 (decagrams)
+Height: 21 (decimetres)
+Body Mass Index (BMI): 10.43
+---------------------------------------------
+ID: 144
+Name: Articuno
+Weight: 554 (decagrams)
+Height: 17 (decimetres)
+Body Mass Index (BMI): 1.92
+---------------------------------------------
+ID: 145
+Name: Zapdos
+Weight: 526 (decagrams)
+Height: 16 (decimetres)
+Body Mass Index (BMI): 2.05
+---------------------------------------------
+ID: 146
+Name: Moltres
+Weight: 600 (decagrams)
+Height: 20 (decimetres)
+Body Mass Index (BMI): 1.50
+---------------------------------------------
+ID: 147
+Name: Dratini
+Weight: 33 (decagrams)
+Height: 18 (decimetres)
+Body Mass Index (BMI): 0.10
+---------------------------------------------
+ID: 148
+Name: Dragonair
+Weight: 165 (decagrams)
+Height: 40 (decimetres)
+Body Mass Index (BMI): 0.10
+---------------------------------------------
+ID: 149
+Name: Dragonite
+Weight: 2100 (decagrams)
+Height: 22 (decimetres)
+Body Mass Index (BMI): 4.34
+---------------------------------------------
+ID: 150
+Name: Mewtwo
+Weight: 1220 (decagrams)
+Height: 20 (decimetres)
+Body Mass Index (BMI): 3.05
+---------------------------------------------
+ID: 151
+Name: Mew
+Weight: 40 (decagrams)
+Height: 4 (decimetres)
+Body Mass Index (BMI): 2.50
+---------------------------------------------

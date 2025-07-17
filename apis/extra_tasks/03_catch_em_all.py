@@ -10,39 +10,48 @@ BONUS: Using your script, create a folder and download the main 'front_default'
        sprites for each Pokémon using requests into that folder.
        Name the files appropriately using the name data from your response.
 '''
-
 import requests
 from pprint import pprint
 
-all_pokemons = []
-pokemon_main_series_list = []
+url = "https://pokeapi.co/api/v2/pokemon/?limit=151"
+response = requests.get(url)
+data = response.json()
 
-url_total = "https://pokeapi.co/api/v2/pokemon/?limit=151"
-response = requests.get(url_total)
-data_total = response.json()
-total_pokemon = int(len(data_total['results'])) # total number of pokemons
-print(f'There are a total of {total_pokemon}.')
-pprint(data_total)
+first_151_pokemons = {}
 
-for pokemon in data_total['results']:
+for index, pokemon in enumerate(data['results']):
     name = pokemon['name']
-    url_ability = pokemon['url']
+    id = index + 1
 
-    try:
-        response_pokemon = requests.get(url_ability)
-        response_pokemon.raise_for_status()
+    url_single_pokemon = pokemon['url']
+    response_single_pokemon = requests.get(url_single_pokemon)
+    data_single_pokemon = response_single_pokemon.json()
 
-        data_pokemon = response_pokemon.json()
+    weight = int(data_single_pokemon['weight'])
+    height = int(data_single_pokemon['height'])
+    body_mass_index = (weight / (height ** 2))
 
-        if data_pokemon['is_main_series'] == True:
-            print(f"✅ {name} is part of the main series.")
-            pokemon_main_series_list.append(name)
+    first_151_pokemons[name] = {
+        'id': id,
+        'name': name,
+        'weight': weight,
+        'height': height,
+        'body_mass_index': body_mass_index
+    }
 
-    except requests.exceptions.HTTPError as http_err:
-        print(f"❌ HTTP error for '{name}': {http_err}")
-    except requests.exceptions.RequestException as req_err:
-        print(f"❌ Request failed for '{name}': {req_err}")
-    except ValueError:
-        print(f"❌ JSON decode error for '{name}' — no se pudo interpretar respuesta.")
-    except Exception as e:
-        print(f"❌ Unexpected error for '{name}': {e}")
+#for pokemon in sorted(first_151_pokemons.values(), key=lambda p: p['id']):
+#    print(f"#{pokemon['id']:03} - {pokemon['name'].capitalize()}")
+#    print(f"  Weight: {pokemon['weight']}   Height: {pokemon['height']}   BMI: {pokemon['body_mass_index']:.2f}")
+#    print()
+
+with open(r"C:\Users\jordd\Documents\Repositorios Github\Python-201\apis\extra_tasks\03_catch_em_all.txt", "w", encoding="utf-8") as file:
+    for pokemon in sorted(first_151_pokemons.values(), key=lambda p: p['id']):
+        description = (
+            f"ID: {pokemon['id']:03}\n"
+            f"Name: {pokemon['name'].capitalize()}\n"
+            f"Weight: {pokemon['weight']} (decagrams)\n"
+            f"Height: {pokemon['height']} (decimetres)\n"
+            f"Body Mass Index (BMI): {pokemon['body_mass_index']:.2f}\n"
+            "---------------------------------------------\n"
+        )
+        file.write(description)
