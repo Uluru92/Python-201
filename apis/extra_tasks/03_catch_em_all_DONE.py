@@ -39,11 +39,6 @@ for index, pokemon in enumerate(data['results']):
         'body_mass_index': body_mass_index
     }
 
-#for pokemon in sorted(first_151_pokemons.values(), key=lambda p: p['id']):
-#    print(f"#{pokemon['id']:03} - {pokemon['name'].capitalize()}")
-#    print(f"  Weight: {pokemon['weight']}   Height: {pokemon['height']}   BMI: {pokemon['body_mass_index']:.2f}")
-#    print()
-
 with open(r"C:\Users\jordd\Documents\Repositorios Github\Python-201\apis\extra_tasks\03_catch_em_all.txt", "w", encoding="utf-8") as file:
     for pokemon in sorted(first_151_pokemons.values(), key=lambda p: p['id']):
         description = (
