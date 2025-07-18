@@ -12,6 +12,7 @@ BONUS: Using your script, create a folder and download the main 'front_default'
 '''
 import requests
 from pprint import pprint
+import os
 
 url = "https://pokeapi.co/api/v2/pokemon/?limit=151"
 response = requests.get(url)
@@ -39,6 +40,16 @@ for index, pokemon in enumerate(data['results']):
         'body_mass_index': body_mass_index
     }
 
+    #BONUS:
+    images_folder = r"C:\Users\jordd\Documents\Repositorios Github\Python-201\apis\extra_tasks\03_catch_em_all"
+    os.makedirs(images_folder, exist_ok=True)
+    
+    front_default_url = data_single_pokemon['sprites']['front_default']
+    img_data = requests.get(front_default_url).content
+    file_path = os.path.join(images_folder, f"{name}.png")
+    with open(file_path, "wb") as f:
+        f.write(img_data)
+
 with open(r"C:\Users\jordd\Documents\Repositorios Github\Python-201\apis\extra_tasks\03_catch_em_all.txt", "w", encoding="utf-8") as file:
     for pokemon in sorted(first_151_pokemons.values(), key=lambda p: p['id']):
         description = (
@@ -50,3 +61,4 @@ with open(r"C:\Users\jordd\Documents\Repositorios Github\Python-201\apis\extra_t
             "---------------------------------------------\n"
         )
         file.write(description)
+
