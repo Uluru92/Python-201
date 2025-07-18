@@ -7,5 +7,4 @@ Using the Chuck Norris API in combination with the datamuse API
   and use the rel_rhy (or rel_nry) query parameter to fetch a word that rhymes
 * Repeat a coupe of times and store the sentences and rhyme words
 * Synthesize the collected results into an avant-garde poem and post on the forum ;)
-
 '''
