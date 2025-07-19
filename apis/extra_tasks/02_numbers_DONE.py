@@ -22,7 +22,6 @@ TIP: consider using a cryptocurrency API such as coinmarketcap (but anything goe
 
 import requests
 import os
-from pprint import pprint
 from dotenv import load_dotenv
 import mysql.connector
 
