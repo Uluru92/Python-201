@@ -14,3 +14,19 @@ HINTS:
 BONUS: Explore the `logging` package for easier tracking
 
 '''
+
+# SOLUTION
+# For this exercise I am going to use Coinlayer API http://api.coinlayer.com/
+
+import requests
+import os
+from dotenv import load_dotenv
+from pprint import pprint
+
+# API resources:
+load_dotenv()
+api_key = os.getenv("API_COINLAYER")
+url_coinlayer = f"http://api.coinlayer.com/live?access_key={api_key}"
+data_coinlayer = requests.get(url_coinlayer).json()
+
+pprint(data_coinlayer)
