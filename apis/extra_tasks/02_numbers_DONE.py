@@ -11,9 +11,9 @@ however it needs to fulfill the following specs:
 TIP: consider using a cryptocurrency API such as coinmarketcap (but anything goes)!
 '''
 
-# Solution:  activate virtual enviroment venv37 path: \apis\extra_tasks\venv37
-# python -m sandman2 "mysql+pymysql://user:pasword@localhost/stocks_db"
-#   
+# Solution:  activate virtual enviroment venv37 path: \apis\extra_tasks\venv37 with command: venv37\Scripts\activate
+# while venv active run: python -m sandman2 "mysql+pymysql://user:pasword@localhost/stocks_db" with root as user and password as.... cant tell because this file is going to github 
+# while running go to: http://localhost:5000/recommendations/
 # Topic: Currencies
 #       GET: extract company's symbols, API https://finnhub.io/api/v1/stock/symbol?exchange=US&token={api_key}
 #       GET: extract recomendations for every company, API https://finnhub.io/api/v1/stock/recommendation?symbol=GWH&token={api_key}
