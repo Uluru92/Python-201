@@ -17,9 +17,8 @@ TIP: consider using a cryptocurrency API such as coinmarketcap (but anything goe
 # Topic: Currencies
 #       GET: extract company's symbols, API https://finnhub.io/api/v1/stock/symbol?exchange=US&token={api_key}
 #       GET: extract recomendations for every company, API https://finnhub.io/api/v1/stock/recommendation?symbol=GWH&token={api_key}
-#
-# FIRST STEP: ingest API data from at least 1 external source
 
+# FIRST STEP: ingest API data from at least 1 external source
 import requests
 import os
 from dotenv import load_dotenv
