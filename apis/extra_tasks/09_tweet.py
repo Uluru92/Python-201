@@ -11,6 +11,7 @@ BONUS: Look into CRON jobs to automate your tweets to go out at scheduled times.
 
 import tweepy
 import os
+import json
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -22,10 +23,18 @@ client = tweepy.Client(
     access_token_secret=os.getenv("API_tweepy_access_token_secret")
 )
 
-try:
-    tweet_text = "Hellow World! This tweet was posted using Tweepy + X API Free Tier @CodingNomads #PythonLearning"
-    response = client.create_tweet(text=tweet_text)
-    tweet_id = response.data['id']
-    print(f"🔗 Enlace al tuit: https://twitter.com/user/status/{tweet_id}")
-except tweepy.TweepyException as e:
-    print("❌ Error al publicar el tuit:", e)
+with open(r"C:\Users\jordd\Documents\Repositorios Github\Python-201\apis\extra_tasks\09_tweet.json", "r", encoding="utf-8") as f:
+    data = json.load(f)
+    tweets = data.get("tweets", [])
+
+if not tweets:
+    print("❌ No tweets found in JSON file.")
+else:
+    tweet_text = tweets
+
+    try:
+        response = client.create_tweet(text=tweet_text)
+        tweet_id = response.data['id']
+        print(f"🔗 Enlace al tuit: https://twitter.com/user/status/{tweet_id}")
+    except tweepy.TweepyException as e:
+        print("❌ Error al publicar el tuit:", e)
