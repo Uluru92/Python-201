@@ -10,10 +10,8 @@ BONUS: Look into CRON jobs to automate your tweets to go out at scheduled times.
 '''
 
 import tweepy
-import json
-import random
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -24,16 +22,10 @@ client = tweepy.Client(
     access_token_secret=os.getenv("API_tweepy_access_token_secret")
 )
 
-def post_random_tweet():
-    with open(, "r", encoding="utf-8") as f:
-        tweets = json.load(f)
-    tweet = random.choice(tweets)
-
-    try:
-        client.create_tweet(text=tweet)
-        print(f"✅ Tweet posted: {tweet}")
-    except Exception as e:
-        print(f"❌ Error posting tweet: {e}")
-
-if __name__ == "__main__":
-    post_random_tweet()
+try:
+    tweet_text = "Hellow World! This tweet was posted using Tweepy + X API Free Tier @CodingNomads #PythonLearning"
+    response = client.create_tweet(text=tweet_text)
+    tweet_id = response.data['id']
+    print(f"🔗 Enlace al tuit: https://twitter.com/user/status/{tweet_id}")
+except tweepy.TweepyException as e:
+    print("❌ Error al publicar el tuit:", e)
