@@ -8,6 +8,7 @@ whenever you run the script.
 BONUS: Look into CRON jobs to automate your tweets to go out at scheduled times.
        E.g.: "Don't start without me, I'm nearly there!" every weekday at 9:14... ;P
 '''
+# I created a schedule task using the file 09_tweet.bat and the Task Scheduler instead of a CRON job... because I am using Windows and not Linux! :)
 
 import tweepy
 import os
