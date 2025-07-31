@@ -12,10 +12,10 @@ From the result, create a new JSON file that includes the following:
 Save that info to a file.
 '''
 
-# When try to sign up: "An internal server error occurred" every time.
+# When try to sign up coinmarketcap API: "An internal server error occurred" every time.
 # For this exercise I am going to use Coinlayer API http://api.coinlayer.com/
-
 # API coin layer endpoint: https://api.coinlayer.com/api/list
+# For this exercise please activate the venv called venv_coincap
 
 import os
 import requests
@@ -26,8 +26,6 @@ load_dotenv()
 
 api_key = os.getenv("API_COINLAYER")
 url_coinlayer = f"http://api.coinlayer.com/api/list?access_key={api_key}"
-
-# Reemplaza con tu API key de Coinlayer
 
 try:
     response = requests.get(url_coinlayer)
@@ -47,13 +45,10 @@ try:
             cleaned_data.append(cleaned_entry)
 
         # Save as JSON file
-        with open("coinlayer_cryptos.json", "w", encoding="utf-8") as f:
+        with open(r"C:\Users\jordd\Documents\Repositorios Github\Python-201\apis\extra_tasks\10_coincryptos.json", "w", encoding="utf-8") as f:
             json.dump(cleaned_data, f, indent=4, ensure_ascii=False)
-
-        print("✅ Datos de criptomonedas guardados en 'coinlayer_cryptos.json'.")
-
     else:
-        print("❌ La solicitud a Coinlayer falló:", data)
+        print("The request to Coinlayer failed:", data)
 
 except Exception as e:
-    print("❌ Error al obtener o guardar los datos:", e)
+    print("Error:", e)
