@@ -10,5 +10,7 @@ From the result, create a new JSON file that includes the following:
 * quote
 
 Save that info to a file.
-
 '''
+
+# When try to sign up: "An internal server error occurred" every time.
+# For this exercise I am going to use Coinlayer API http://api.coinlayer.com/
