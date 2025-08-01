@@ -7,7 +7,7 @@ Consider each of the tasks below as a separate database query. Using SQLAlchemy,
 
 - Select all the actors that have appeared in a category of a comedy of your choice: DONE
 
-- Select all the comedic films and sort them by rental rate
+- Select all the comedic films and sort them by rental rate: DONE
 
 - Using one of the statements above, add a GROUP BY statement of your choice
 
@@ -15,7 +15,7 @@ Consider each of the tasks below as a separate database query. Using SQLAlchemy,
 
 '''
 
-from sqlalchemy import create_engine, MetaData, select
+from sqlalchemy import create_engine, MetaData, select, desc
 from sqlalchemy.orm import sessionmaker
 import os
 from dotenv import load_dotenv
@@ -50,6 +50,7 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 with engine.connect() as conn:
+
     # Select all the actors with the first name of your choice
     print("\nActors with the first name Frances:")
     result = conn.execute(actor_table.select()).fetchall()
@@ -58,7 +59,6 @@ with engine.connect() as conn:
 
     # Select all the actors and the films they have been in
     print("\nAll actors and the films they have been in:")
-
     query = select(
         actor_table.c.first_name,
         actor_table.c.last_name,
@@ -68,7 +68,7 @@ with engine.connect() as conn:
             .join(film_actor_table, actor_table.c.actor_id == film_actor_table.c.actor_id)
             .join(film_table, film_actor_table.c.film_id == film_table.c.film_id)
             )
-
+    
     result = conn.execute(query).fetchall()
 
     for row in result:
@@ -94,3 +94,24 @@ with engine.connect() as conn:
 
     for row in result:
         print(f"{row.first_name} {row.last_name} - {row.title} - {row.name}")
+
+    # Select all the comedic films and sort them by rental rate
+    print("\nAll comedic films sorted by rental rate:")
+    query = select(
+        film_table.c.title,                
+        film_table.c.rental_rate,
+        category_table.c.name,       
+    ).select_from(
+        film_table
+        .join(film_category_table, film_table.c.film_id == film_category_table.c.film_id)
+        .join(category_table, category_table.c.category_id == film_category_table.c.category_id)
+    ).where(
+        category_table.c.name=="Comedy"
+        ).order_by(
+            desc(film_table.c.rental_rate)
+            )
+
+    result = conn.execute(query).fetchall()
+
+    for row in result:
+        print(f"{row.title} - {row.name} - {row.rental_rate}")
