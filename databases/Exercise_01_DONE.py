@@ -6,11 +6,10 @@ print information about the film and category table.
 '''
 # I am using sakila-mv-schema.sql and sakila-mv-data.sql with MySQL Workbench
 
-from sqlalchemy import create_engine, MetaData, Table
+from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import sessionmaker
 import os
 from dotenv import load_dotenv
-import datetime
 
 load_dotenv()
 
