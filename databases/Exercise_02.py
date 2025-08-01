@@ -1,11 +1,11 @@
 '''
 Consider each of the tasks below as a separate database query. Using SQLAlchemy, which is the necessary code to:
 
-- Select all the actors with the first name of your choice
+- Select all the actors with the first name of your choice: DONE
 
-- Select all the actors and the films they have been in
+- Select all the actors and the films they have been in: DONE
 
-- Select all the actors that have appeared in a category of a comedy of your choice
+- Select all the actors that have appeared in a category of a comedy of your choice: DONE
 
 - Select all the comedic films and sort them by rental rate
 
@@ -42,6 +42,8 @@ metadata.reflect(bind=engine)
 actor_table = metadata.tables['actor']
 film_actor_table = metadata.tables['film_actor']
 film_table = metadata.tables['film']
+film_category_table = metadata.tables['film_category']
+category_table = metadata.tables['category']
 
 # Create session
 Session = sessionmaker(bind=engine)
@@ -49,13 +51,13 @@ session = Session()
 
 with engine.connect() as conn:
     # Select all the actors with the first name of your choice
-    print("Actors with the first name Frances:")
+    print("\nActors with the first name Frances:")
     result = conn.execute(actor_table.select()).fetchall()
     for row in result:
         print(row.first_name +" "+row.last_name) if row.first_name == "FRANCES" else None
 
     # Select all the actors and the films they have been in
-    print("All actors and the films they have been in:")
+    print("\nAll actors and the films they have been in:")
 
     query = select(
         actor_table.c.first_name,
@@ -73,4 +75,22 @@ with engine.connect() as conn:
         print(f"{row.first_name} {row.last_name} - {row.title}")
 
     # Select all the actors that have appeared in a category of a comedy of your choice
-    print("Actors appeared in Animation:")
+    print("\nActors appeared in Animation:")
+    query = select(
+        actor_table.c.first_name,
+        actor_table.c.last_name,
+        film_table.c.title,
+        category_table.c.name,
+        ).select_from(
+            actor_table
+            .join(film_actor_table, actor_table.c.actor_id == film_actor_table.c.actor_id)
+            .join(film_table, film_actor_table.c.film_id == film_table.c.film_id)
+            .join(film_category_table, film_table.c.film_id == film_category_table.c.film_id)
+            .join(category_table, category_table.c.category_id == film_category_table.c.category_id)
+            ).where(
+                category_table.c.name == "Animation")
+
+    result = conn.execute(query).fetchall()
+
+    for row in result:
+        print(f"{row.first_name} {row.last_name} - {row.title} - {row.name}")
