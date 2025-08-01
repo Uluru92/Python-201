@@ -9,9 +9,9 @@ Consider each of the tasks below as a separate database query. Using SQLAlchemy,
 
 - Select all the comedic films and sort them by rental rate: DONE
 
-- Using one of the statements above, add a GROUP BY statement of your choice
+- Using one of the statements above, add a GROUP BY statement of your choice: DONE
 
-- Using one of the statements above, add a ORDER BY statement of your choice
+- Using one of the statements above, add a ORDER BY statement of your choice: DONE
 
 '''
 
@@ -136,3 +136,18 @@ with engine.connect() as conn:
 
     for row in result:
         print(f"Rental rate: {row.rental_rate} - Movies available: {row.film_count}")
+
+    # Using one of the statements above, add a ORDER BY statement of your choice
+    print("\nActors with the first name CAMERON, ordered by last name length :")
+    query = select(
+        actor_table.c.first_name,
+        actor_table.c.last_name,
+    ).select_from(
+        actor_table
+    ).order_by(
+            func.length(actor_table.c.last_name)
+            )
+
+    result = conn.execute(query).fetchall()
+    for row in result:
+        print(row.first_name +" "+row.last_name) if row.first_name == "CAMERON" else None
