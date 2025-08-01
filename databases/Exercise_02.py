@@ -15,7 +15,7 @@ Consider each of the tasks below as a separate database query. Using SQLAlchemy,
 
 '''
 
-from sqlalchemy import create_engine, MetaData, select, desc
+from sqlalchemy import create_engine, MetaData, select, desc, func
 from sqlalchemy.orm import sessionmaker
 import os
 from dotenv import load_dotenv
@@ -115,3 +115,24 @@ with engine.connect() as conn:
 
     for row in result:
         print(f"{row.title} - {row.name} - {row.rental_rate}")
+
+    # Using one of the statements above, add a GROUP BY statement of your choice
+    print("\nAll comedic films sorted and grouped by rental rate:")
+
+    query = select(
+        func.count(film_table.c.film_id).label("film_count"),
+        film_table.c.rental_rate,       
+    ).select_from(
+        film_table
+        .join(film_category_table, film_table.c.film_id == film_category_table.c.film_id)
+        .join(category_table, category_table.c.category_id == film_category_table.c.category_id)
+    ).where(
+        category_table.c.name=="Comedy"
+        ).order_by(
+            desc(film_table.c.rental_rate)
+            ).group_by(film_table.c.rental_rate)
+
+    result = conn.execute(query).fetchall()
+
+    for row in result:
+        print(f"Rental rate: {row.rental_rate} - Movies available: {row.film_count}")
