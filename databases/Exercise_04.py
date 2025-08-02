@@ -15,7 +15,7 @@ The more dynamic the application, the better!
 print("Application name: URBN Escalante Parking\n")
 user_name = str(input(f"Insert your name: "))
 
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine, func, text, MetaData,Table, Column, Integer, String, Enum, DateTime, MetaData
 
 import os
 from dotenv import load_dotenv
@@ -41,6 +41,17 @@ with engine.connect() as conn:
     conn.execute(text(f"CREATE DATABASE IF NOT EXISTS {db_name}"))
     print(f"\nDatabase '{db_name}' created or already exists.")
 
+metadata = MetaData()
+
+users = Table(
+    "users", metadata,
+    Column("id", Integer, primary_key=True),
+    Column("name", String(100), nullable=False),
+    Column("email", String(100), nullable=False, unique=True),
+    Column("role", Enum("owner", "visitor"), nullable=False),
+    Column("created_at", DateTime, server_default=func.now())
+)
+
 while True:
     print("\n🔹 URBN Escalante Parking - Menu Options 🔹")
     print("1. Create tables")
@@ -54,7 +65,7 @@ while True:
     option = input("Select an option: ")
 
     if option == "1":
-        # Call your function to create tables
+                
         pass
     elif option == "2":
         # Call function to insert data
