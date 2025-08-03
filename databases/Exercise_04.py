@@ -107,10 +107,19 @@ def insert_data():
     except Exception as e:
         print(f"❌ Error inserting user: {e}")
 
+# check on sinpe
+def is_valid_sinpe(sinpe):
+    return sinpe.isdigit() and len(sinpe) == 8
+
 # update data in each table (as a function to call it later): 
 def update_users_table():
     print("\n🔄 Update User Data")
     email_to_update = input("Enter the email of the user to update: ").strip()
+    with engine.connect() as conn:
+        user_exists = conn.execute(select(users).where(users.c.email == email_to_update)).fetchone()
+        if not user_exists:
+            print("⚠️ User not found.")
+            return
     print("\nWhat would you like to update?")
     print("1. Name")
     print("2. Email")
@@ -125,6 +134,10 @@ def update_users_table():
     if option == "1":
         update_column = users.c.name
         new_value = input("Enter the new name: ").strip()
+
+        if not new_value:
+            print("❌ Name cannot be empty.")
+            return
 
     elif option == "2":
         new_value = input("Enter the new email: ").strip()
@@ -158,7 +171,7 @@ def update_users_table():
                 if result.sinpe_number is None:
                     print("ℹ️ This user does not have a SINPE number yet.")
                     sinpe = input("Please enter SINPE number (XXXXXXXX): ").strip()
-                    if len(sinpe) != 8 or not sinpe.isdigit():
+                    if not is_valid_sinpe(sinpe):
                         print("❌ Invalid SINPE format.")
                         return
 
@@ -175,27 +188,48 @@ def update_users_table():
                         .where(users.c.email == email_to_update)
                         .values({users.c.role: new_value})
                     )
+            
             else:
-                # If new role is visitor, no SINPE check required
+                # If new role is visitor, remove SINPE
                 stmt = (
                     users.update()
                     .where(users.c.email == email_to_update)
-                    .values({users.c.role: new_value})
+                    .values({users.c.role: new_value, users.c.sinpe_number: None})
                 )
 
             updated = conn.execute(stmt)
+
             if updated.rowcount:
-                print("✅ Role updated successfully.")
+                if new_value == "visitor":
+                    print("✅ Role updated and SINPE removed successfully.")
+                elif new_value == "owner" and result.sinpe_number is None:
+                    print("✅ Role and SINPE updated successfully.")
+                else:
+                    print("✅ Role updated successfully.")
+                
             else:
                 print("⚠️ No user found.")
 
+            return
+
     elif option == "4":
+
         new_value = input("Enter the new SINPE number (XXXXXXXX): ").strip()
-        if len(new_value) != 8 or not sinpe.isdigit():
+        if not is_valid_sinpe(new_value):
             print("❌ Invalid SINPE format.")
             return
-        update_column = users.c.sinpe_number
         
+        with engine.connect() as conn:
+            result = conn.execute(select(users.c.role).where(users.c.email == email_to_update)).fetchone()
+            if result is None:
+                print("⚠️ User not found.")
+                return
+            if result.role != "owner":
+                print("❌ Only users with role 'owner' can have a SINPE number.")
+                return
+        
+        update_column = users.c.sinpe_number
+
     else:
         print("❌ Invalid option.")
         return
