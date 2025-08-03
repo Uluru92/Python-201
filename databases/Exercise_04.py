@@ -191,10 +191,11 @@ def update_users_table():
 
     elif option == "4":
         new_value = input("Enter the new SINPE number (XXXXXXXX): ").strip()
-        if not new_value.startswith("+506") or len(new_value) != 8:
+        if len(new_value) != 8 or not sinpe.isdigit():
             print("❌ Invalid SINPE format.")
             return
         update_column = users.c.sinpe_number
+        
     else:
         print("❌ Invalid option.")
         return
