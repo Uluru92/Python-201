@@ -43,6 +43,7 @@ with engine.connect() as conn:
 
 metadata = MetaData()
 
+# create at least 3 tables: 
 users = Table(
     "users", metadata,
     Column("id", Integer, primary_key=True),
@@ -73,6 +74,41 @@ rentals = Table(
     Column("total_price", Integer, nullable=False)
 )
 
+# insert data to each table: For this step, I created a def to insert later on my tables
+def insert_data():
+    print("\n🟢 Insert a New User")
+
+    name = input("Full name: ").strip()
+    email = input("Email: ").strip()
+    role = input("Role (owner/visitor): ").strip().lower()
+
+    sinpe_number = None
+    if role == "owner":
+        sinpe_number = input("SINPE number (format XXXXXXXX): ").strip()
+        if len(sinpe_number) != 8:
+            print("❌ Invalid SINPE number format.")
+            return
+
+    elif role != "visitor":
+        print("❌ Invalid role. Must be 'owner' or 'visitor'.")
+        return
+
+    try:
+        with engine.connect() as conn:
+            insert_stmt = users.insert().values(
+                name=name,
+                email=email,
+                role=role,
+                sinpe_number=sinpe_number
+            )
+            conn.execute(insert_stmt)
+            print("✅ User inserted successfully.")
+
+    except Exception as e:
+        print(f"❌ Error inserting user: {e}")
+
+
+
 while True:
     print("\n🔹 URBN Escalante Parking - Menu Options 🔹")
     print("1. Insert data into a table")
@@ -88,7 +124,7 @@ while True:
         print("Exiting application.")
         break
     elif option == "1":
-        # insert_data()
+        insert_data() # Call the def to insert data:
         pass
     elif option == "2":
         # update_data()
