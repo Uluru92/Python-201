@@ -75,7 +75,7 @@ rentals = Table(
 )
 
 # insert data to each table (as a function to call it later):
-def insert_data():
+def insert_users():
     print("\n🟢 Insert a New User")
 
     name = input("Full name: ").strip()
@@ -112,7 +112,7 @@ def is_valid_sinpe(sinpe):
     return sinpe.isdigit() and len(sinpe) == 8
 
 # update data in each table (as a function to call it later): 
-def update_users_table():
+def update_users():
     print("\n🔄 Update User Data")
     email_to_update = input("Enter the email of the user to update: ").strip()
     with engine.connect() as conn:
@@ -249,6 +249,133 @@ def update_users_table():
     except Exception as e:
         print(f"❌ Error updating user: {e}")
 
+def select_users():
+    print("\n🔍 Select Users")
+    print("1. List all users")
+    print("2. Search user by email")
+    option = input("Choose an option (1-2): ").strip()
+
+    with engine.connect() as conn:
+        if option == "1":
+            # List all users
+            stmt = select(users)
+            result = conn.execute(stmt).fetchall()
+            if result:
+                for row in result:
+                    if row.role == "owner":
+                        print(f"Name: {row.name}, Email: {row.email}, Role: {row.role}, SINPE: {row.sinpe_number}")
+                    else:
+                        print(f"Name: {row.name}, Email: {row.email}, Role: {row.role}")
+            else:
+                print("⚠️ No users found.")
+
+        elif option == "2":
+            email_search = input("Enter email to search: ").strip()
+            stmt = select(users).where(users.c.email == email_search)
+            result = conn.execute(stmt).fetchone()
+            if result:
+                if result.role == "owner":
+                    print(f"Name: {result.name}, Email: {result.email}, Role: {result.role}, SINPE: {result.sinpe_number}")
+                else:
+                    print(f"Name: {result.name}, Email: {result.email}, Role: {result.role}")
+            else:
+                print("⚠️ User not found.")
+        else:
+            print("❌ Invalid option.")
+
+def delete_user():
+    print("\n🗑️ Delete User")
+    email_to_delete = input("Enter the email of the user to delete: ").strip()
+
+    with engine.connect() as conn:
+        user = conn.execute(select(users).where(users.c.email == email_to_delete)).fetchone()
+
+        if not user:
+            print("⚠️ User not found.")
+            return
+
+        print(f"\nAre you sure you want to delete the following user?")
+        print(f"📧 Email: {user.email}")
+        print(f"👤 Name: {user.name}")
+        print(f"👥 Role: {user.role}")
+
+        confirmation = input("Type 'yes' to confirm: ").strip().lower()
+        if confirmation != "yes":
+            print("❌ Deletion cancelled.")
+            return
+
+        delete_stmt = users.delete().where(users.c.email == email_to_delete)
+        result = conn.execute(delete_stmt)
+
+        if result.rowcount:
+            print("✅ User deleted successfully.")
+        else:
+            print("⚠️ No user deleted.")
+
+def run_join_query():
+    print("\n📄 View Rentals by Owner or Visitor")
+
+    print("1. Filter by Owner Email")
+    print("2. Filter by Visitor Email")
+    print("3. Show All Rentals")
+    option = input("Choose an option (1-3): ").strip()
+
+    email_filter = None
+    role_filter = None
+
+    if option == "1":
+        email_filter = input("Enter the owner's email: ").strip()
+        role_filter = "owner"
+    elif option == "2":
+        email_filter = input("Enter the visitor's email: ").strip()
+        role_filter = "visitor"
+    elif option == "3":
+        pass  # no filters
+    else:
+        print("❌ Invalid option.")
+        return
+
+    stmt = (
+        select(
+            rentals.c.id,
+            rentals.c.start_time,
+            rentals.c.end_time,
+            rentals.c.total_price,
+            users.c.name.label("user_name"),
+            users.c.role,
+            parking_spaces.c.number.label("space_number"),
+            parking_spaces.c.floor.label("floor"),
+        )
+        .select_from(
+            rentals
+            .join(users, rentals.c.visitor_id == users.c.id)
+            .join(parking_spaces, rentals.c.space_id == parking_spaces.c.id)
+            .join(users.alias("owners"), parking_spaces.c.owner_id == users.alias("owners").c.id)
+        )
+    )
+
+    if email_filter and role_filter == "visitor":
+        stmt = stmt.where(users.c.email == email_filter)
+    elif email_filter and role_filter == "owner":
+        owners = users.alias("owners")
+        stmt = stmt.where(owners.c.email == email_filter)
+
+    with engine.connect() as conn:
+        results = conn.execute(stmt).fetchall()
+
+        if not results:
+            print("⚠️ No rentals found.")
+            return
+
+        for row in results:
+            print(f"\n🆔 Rental ID: {row.id}")
+            print(f"👤 Visitor: {row.user_name}")
+            print(f"🏠 Owner Role: {row.role}")
+            print(f"🅿️ Parking Space: {row.space_number} (Floor {row.floor})")
+            print(f"⏱ Start: {row.start_time}")
+            print(f"⏱ End: {row.end_time}")
+            print(f"💰 Total Price: ₡{row.total_price}")
+
 while True:
     print("\n🔹 URBN Escalante Parking - Menu Options 🔹")
     print("1. Insert data into a table")
@@ -264,16 +391,16 @@ while True:
         print("Exiting application.")
         break
     elif option == "1":
-        insert_data() # Call the def to insert data:
+        insert_users() # Call the def to insert data:
         pass
     elif option == "2":
-        # update_data()
+        update_users()
         pass
     elif option == "3":
-        # select_data()
+        select_users()
         pass
     elif option == "4":
-        # delete_data()
+        delete_user()
         pass
     elif option == "5":
         # join_query()
