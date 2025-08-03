@@ -15,7 +15,7 @@ The more dynamic the application, the better!
 print("Application name: URBN Escalante Parking\n")
 user_name = str(input(f"Insert your name: "))
 
-from sqlalchemy import create_engine, func, text, ForeignKey, Boolean, MetaData,Table, Column, Integer, String, Enum, DateTime, MetaData
+from sqlalchemy import create_engine, func, text, select, ForeignKey, Boolean, MetaData,Table, Column, Integer, String, Enum, DateTime, MetaData
 
 import os
 from dotenv import load_dotenv
@@ -49,7 +49,7 @@ users = Table(
     Column("id", Integer, primary_key=True),
     Column("name", String(100), nullable=False),
     Column("email", String(100), nullable=False, unique=True),
-    Column("role", Enum("owner", "visitor"), nullable=False),
+    Column("role", Enum("owner", "visitor"), nullable=True),
     Column("sinpe_number", String(15), nullable=True, unique=True),
     Column("created_at", DateTime, server_default=func.now())
 )
@@ -74,7 +74,7 @@ rentals = Table(
     Column("total_price", Integer, nullable=False)
 )
 
-# insert data to each table: For this step, I created a def to insert later on my tables
+# insert data to each table (as a function to call it later):
 def insert_data():
     print("\n🟢 Insert a New User")
 
@@ -107,7 +107,112 @@ def insert_data():
     except Exception as e:
         print(f"❌ Error inserting user: {e}")
 
+# update data in each table (as a function to call it later): 
+def update_users_table():
+    print("\n🔄 Update User Data")
+    email_to_update = input("Enter the email of the user to update: ").strip()
+    print("\nWhat would you like to update?")
+    print("1. Name")
+    print("2. Email")
+    print("3. Role")
+    print("4. SINPE number")
 
+    option = input("Choose an option (1-4): ").strip()
+
+    update_column = None
+    new_value = None
+
+    if option == "1":
+        update_column = users.c.name
+        new_value = input("Enter the new name: ").strip()
+
+    elif option == "2":
+        new_value = input("Enter the new email: ").strip()
+        # Check if the new email already exists (important, it is the PK)
+        with engine.connect() as conn:
+            check_stmt = select(users).where(users.c.email == new_value)
+            existing_user = conn.execute(check_stmt).fetchone()
+            if existing_user:
+                print("❌ This email is already in use. Please choose a different one.")
+                return
+        update_column = users.c.email
+
+    elif option == "3":
+        new_value = input("Enter the new role (owner/visitor): ").strip().lower()
+        if new_value not in ("owner", "visitor"):
+            print("❌ Invalid role.")
+            return
+        update_column = users.c.role
+
+        with engine.connect() as conn:
+
+            if new_value == "owner":
+                # Check if SINPE is filled already, if not, ask for it (all owners must have SINPE)
+                check_sinpe = select(users.c.sinpe_number).where(users.c.email == email_to_update)
+                result = conn.execute(check_sinpe).fetchone()
+
+                if result is None:
+                    print("⚠️ User not found.")
+                    return
+                
+                if result.sinpe_number is None:
+                    print("ℹ️ This user does not have a SINPE number yet.")
+                    sinpe = input("Please enter SINPE number (XXXXXXXX): ").strip()
+                    if len(sinpe) != 8 or not sinpe.isdigit():
+                        print("❌ Invalid SINPE format.")
+                        return
+
+                    # Update role and SINPE together
+                    stmt = (
+                        users.update()
+                        .where(users.c.email == email_to_update)
+                        .values({users.c.role: new_value, users.c.sinpe_number: sinpe})
+                    )
+                else:
+                    # SINPE already exists, only update role
+                    stmt = (
+                        users.update()
+                        .where(users.c.email == email_to_update)
+                        .values({users.c.role: new_value})
+                    )
+            else:
+                # If new role is visitor, no SINPE check required
+                stmt = (
+                    users.update()
+                    .where(users.c.email == email_to_update)
+                    .values({users.c.role: new_value})
+                )
+
+            updated = conn.execute(stmt)
+            if updated.rowcount:
+                print("✅ Role updated successfully.")
+            else:
+                print("⚠️ No user found.")
+
+    elif option == "4":
+        new_value = input("Enter the new SINPE number (XXXXXXXX): ").strip()
+        if not new_value.startswith("+506") or len(new_value) != 8:
+            print("❌ Invalid SINPE format.")
+            return
+        update_column = users.c.sinpe_number
+    else:
+        print("❌ Invalid option.")
+        return
+
+    try:
+        with engine.connect() as conn:
+            stmt = (
+                users.update()
+                .where(users.c.email == email_to_update)
+                .values({update_column: new_value})
+            )
+            result = conn.execute(stmt)
+            if result.rowcount:
+                print("✅ User updated successfully.")
+            else:
+                print("⚠️ No user found with that email.")
+    except Exception as e:
+        print(f"❌ Error updating user: {e}")
 
 while True:
     print("\n🔹 URBN Escalante Parking - Menu Options 🔹")
