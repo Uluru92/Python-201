@@ -14,7 +14,7 @@ To prevent this, you should add a check to see if the record already exists befo
 '''
 
 import requests
-from sqlalchemy import create_engine, text, select, insert, ForeignKey, Boolean, Table, Column, MetaData
+from sqlalchemy import create_engine, text, select, insert, Integer,String, DateTime, ForeignKey, Boolean, Table, Column, MetaData
 import os
 
 # API info
@@ -44,3 +44,31 @@ engine = create_engine(DATABASE_URL)
 
 # Create the new database in MySQL Workbench
 db_name = "users_and_tasks_db"
+
+with engine.begin() as conn:
+    conn.execute(text(f"CREATE DATABASE IF NOT EXISTS {db_name}"))
+    print(f"\nDatabase '{db_name}' created or already exists.")
+
+metadata = MetaData()
+
+# create 2 tables: 
+users_table = Table(
+    "users", metadata,
+    Column("id", Integer, primary_key=True),
+    Column("email", String(100), nullable=False, unique=True),
+    Column("first_name", String(100), nullable=False),
+    Column("last_name", String(100), nullable=False),
+    Column("created_at", DateTime, nullable=False),
+    Column("updated_at", DateTime, nullable=False),
+)
+
+tasks_table = Table(
+    "tasks", metadata,
+    Column("id", Integer, primary_key=True),
+    Column("userId", Integer, ForeignKey("users.id")),
+    Column("name",  String(100), nullable=False),
+    Column("description",  String(100), nullable=False),
+    Column("created_at", DateTime, nullable=False),
+    Column("updated_at", DateTime, nullable=False),
+    Column("completed", Boolean, default=False),
+)
