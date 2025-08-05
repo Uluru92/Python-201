@@ -15,8 +15,9 @@ The more dynamic the application, the better!
 print("Application name: URBN Escalante Parking\n")
 user_name = str(input(f"Insert your name: "))
 
-from sqlalchemy import create_engine, func, text, select, insert, ForeignKey, Boolean, MetaData,Table, Column, Integer, String, Enum, DateTime, MetaData
+from sqlalchemy import create_engine,  and_, or_, func, text, select, insert, ForeignKey, Boolean, MetaData,Table, Column, Integer, String, Enum, DateTime, MetaData
 import re
+from datetime import datetime, timedelta
 import os
 from dotenv import load_dotenv
 
@@ -51,27 +52,34 @@ users = Table(
     Column("email", String(100), nullable=False, unique=True),
     Column("role", Enum("owner", "visitor"), nullable=True),
     Column("sinpe_number", String(15), nullable=True, unique=True),
-    Column("created_at", DateTime, server_default=func.now())
+    Column("created_at", DateTime, server_default=func.now()),
+    Column("updated_at", DateTime, onupdate=func.now()),
+    Column("phone", String(20)),
 )
 
 parking_spaces = Table(
     "parking_spaces", metadata,
     Column("number", String(10), primary_key=True),
-    Column("owner_id", Integer, ForeignKey("users.id")),
+    Column("owner_id", Integer, ForeignKey("users.id", ondelete="SET NULL")),
     Column("floor", Integer, nullable=False),
     Column("is_available", Boolean, default=True),
     Column("price_per_hour", Integer, nullable=False),
-    Column("is_deleted", Boolean, default=False)
+    Column("is_deleted", Boolean, default=False),
+    Column("updated_at", DateTime, onupdate=func.now())
 )
 
 rentals = Table(
     "rentals", metadata,
     Column("id", Integer, primary_key=True),
-    Column("space_id", Integer, ForeignKey("parking_spaces.id")),
+    Column("space_number", String(10), ForeignKey("parking_spaces.number")),
     Column("visitor_id", Integer, ForeignKey("users.id")),
     Column("start_time", DateTime, nullable=False),
     Column("end_time", DateTime, nullable=False),
-    Column("total_price", Integer, nullable=False)
+    Column("total_price", Integer, nullable=False),
+    Column("is_paid", Boolean, default=False),
+    Column("created_at", DateTime, server_default=func.now()),
+    Column("updated_at", DateTime, onupdate=func.now()),
+    Column("status", Enum("pending", "confirmed", "cancelled"), default="pending")
 )
 
 # def () for users menu:
@@ -378,60 +386,6 @@ def run_join_query():
             print(f"⏱ End: {row.end_time}")
             print(f"💰 Total Price: ₡{row.total_price}")
 
-def main_menu():
-    while True:
-        print("\n📋URBN Escalante - Main Menu")
-        print("1. Manage Users")
-        print("2. Manage Parking Spaces")
-        print("3. Manage Rentals")
-        print("4. Exit")
-
-        choice = input("Choose an option (1-4): ").strip()
-
-        if choice == "1":
-            users_menu()
-        elif choice == "2":
-            parking_spaces_menu()
-        elif choice == "3":
-            rentals_menu()
-        elif choice == "4":
-            print("👋 Exiting. Goodbye!")
-            break
-        else:
-            print("❌ Invalid choice. Please try again.")
-
-def users_menu():
-    while True:
-        print("\n👤 Users Menu")
-        print("1. Insert data")
-        print("2. Update data")
-        print("3. Select data")
-        print("4. Delete data")
-        print("5. View Rentals by Owner or Visitor")
-        print("0. Exit")
-
-        option = input("Select an option: ")
-
-        if option == "0":
-            print("Exiting application.")
-            break
-        elif option == "1":
-            insert_users()
-            pass
-        elif option == "2":
-            update_users()
-            pass
-        elif option == "3":
-            select_users()
-            pass
-        elif option == "4":
-            delete_user()
-            pass
-        elif option == "5":
-            run_join_query()
-            pass
-        else:
-            print("❌ Invalid option. Please try again.")
 
 # def () for parking spaces menu:
 def is_valid_parking_number(parking_number):
@@ -750,6 +704,180 @@ def delete_parking_space():
         else:
             print("⚠️ Something went wrong. No space deleted.")
 
+# def () for parking spaces menu:
+
+BUFFER_MINUTES = 30
+MIN_RENTAL_HOURS = 2
+DISCOUNT_12H = 0.10
+DISCOUNT_24H = 0.20
+
+def is_space_available(space_number, new_start, new_end):
+    with engine.connect() as conn:
+        buffer = timedelta(minutes=30)
+
+        stmt = (
+            select(rentals)
+            .select_from(
+                rentals.join(parking_spaces, rentals.c.space_number == parking_spaces.c.number)
+            )
+            .where(
+                (rentals.c.space_number == space_number) &
+                (parking_spaces.c.is_deleted == False) &
+                (
+                    (new_start < rentals.c.end_time + buffer) &
+                    (new_end > rentals.c.start_time - buffer)
+                )
+            )
+        )
+
+        conflicting = conn.execute(stmt).fetchall()
+        return len(conflicting) == 0
+
+def add_rental():
+    print("\n➕ Add Rental")
+
+    visitor_email = input("Enter your email: ").strip()
+
+    # Get visitor_id from email
+    with engine.connect() as conn:
+        visitor_stmt = select(users.c.id).where(users.c.email == visitor_email)
+        visitor_result = conn.execute(visitor_stmt).fetchone()
+        if not visitor_result:
+            print("❌ No user found with that email.")
+            return
+
+        visitor_id = visitor_result.id
+
+    # Input desired rental time (without buffer)
+    try:
+        start_input = input("Enter start time (YYYY-MM-DD HH:MM): ").strip()
+        end_input = input("Enter end time (YYYY-MM-DD HH:MM): ").strip()
+        start_time = datetime.strptime(start_input, "%Y-%m-%d %H:%M")
+        end_time = datetime.strptime(end_input, "%Y-%m-%d %H:%M")
+    except ValueError:
+        print("❌ Invalid datetime format.")
+        return
+
+    # Validate rental duration
+    if end_time <= start_time:
+        print("❌ End time must be after start time.")
+        return
+
+    min_end_time = start_time + timedelta(hours=MIN_RENTAL_HOURS)
+    if end_time < min_end_time:
+        print(f"❌ Minimum rental duration is {MIN_RENTAL_HOURS} hours.")
+        return
+
+    # Apply buffer to query period
+    query_start = start_time - timedelta(minutes=BUFFER_MINUTES)
+    query_end = end_time + timedelta(minutes=BUFFER_MINUTES)
+
+    with engine.connect() as conn:
+        # Get all available spaces with owner ready for payment
+        stmt = select(
+            parking_spaces, users
+            ).select_from(
+                parking_spaces.join(users, parking_spaces.c.owner_id == users.c.id)
+                ).where(
+                    and_(
+                    parking_spaces.c.is_available == True,
+                    parking_spaces.c.is_deleted == False,
+                    users.c.is_available_to_payments == True,
+                    ~parking_spaces.c.number.in_(
+                        select(rentals.c.space_number).where(
+                            or_(
+                                and_(
+                                    rentals.c.start_time < query_end,
+                                    rentals.c.end_time > query_start
+                                ),
+                                rentals.c.status.in_(["pending", "confirmed"])
+                            )
+                        )
+                    )
+                )
+        )
+
+        results = conn.execute(stmt).fetchall()
+
+        if not results:
+            print("⚠️ No available parking spaces match your time window.")
+            return
+
+        print("\nAvailable Parking Spaces:")
+        for idx, (space, owner) in enumerate(results, start=1):
+            print(f"{idx}. Number: {space.number} | Floor: {space.floor} | Owner: {owner.name} | SINPE: {owner.sinpe_number}")
+
+        # Select one space
+        try:
+            choice = int(input("Select a parking space by number: ").strip())
+            if choice < 1 or choice > len(results):
+                print("❌ Invalid selection.")
+                return
+        except ValueError:
+            print("❌ Invalid input.")
+            return
+
+        selected_space, selected_owner = results[choice - 1]
+
+        # Calculate price
+        duration = (end_time - start_time).total_seconds() / 3600  # in hours
+        base_price = duration * selected_space.price_per_hour
+        if duration <= 12:
+            discount = DISCOUNT_12H
+        elif duration <= 24:
+            discount = DISCOUNT_24H
+        else:
+            discount = 0
+
+        total_price = int(base_price * (1 - discount))
+
+        # Create rental as pending (awaiting owner approval)
+        insert_stmt = rentals.insert().values(
+            space_number=selected_space.number,
+            visitor_id=visitor_id,
+            start_time=start_time,
+            end_time=end_time,
+            total_price=total_price,
+            status="pending"
+        )
+
+        conn.execute(insert_stmt)
+        print(f"✅ Rental request submitted for parking space {selected_space.number}.")
+        print("🔔 Owner will be notified to approve the reservation before payment is made.")
+
+# Menus
+def users_menu():
+    while True:
+        print("\n👤 Users Menu")
+        print("1. Insert data")
+        print("2. Update data")
+        print("3. Select data")
+        print("4. Delete data")
+        print("5. View Rentals by Owner or Visitor")
+        print("0. Exit")
+
+        option = input("Select an option: ")
+
+        if option == "0":
+            print("Exiting application.")
+            break
+        elif option == "1":
+            insert_users()
+            pass
+        elif option == "2":
+            update_users()
+            pass
+        elif option == "3":
+            select_users()
+            pass
+        elif option == "4":
+            delete_user()
+            pass
+        elif option == "5":
+            run_join_query()
+            pass
+        else:
+            print("❌ Invalid option. Please try again.")
 
 def parking_spaces_menu():
     while True:
@@ -775,6 +903,207 @@ def parking_spaces_menu():
         else:
             print("❌ Invalid choice.")
 
+def list_rentals():
+    visitor = users.alias("visitor")
+    owner = users.alias("owner")
+
+    while True:
+        print("\n📋 List Rentals")
+        print("1. Past Rentals")
+        print("2. Current Rentals")
+        print("3. Future Rentals")
+        print("4. All Rentals")
+        print("5. ❌ Exit")
+
+        choice = input("Choose an option (1-5): ").strip()
+        now = datetime.now()
+
+        with engine.connect() as conn:
+            base_stmt = (
+                select(
+                    rentals.c.id,
+                    rentals.c.space_number,
+                    rentals.c.start_time,
+                    rentals.c.end_time,
+                    rentals.c.total_price,
+                    visitor.c.email.label("visitor_email"),
+                    owner.c.email.label("owner_email")
+                )
+                .select_from(
+                    rentals
+                    .join(visitor, rentals.c.visitor_id == visitor.c.id)
+                    .join(parking_spaces, rentals.c.space_number == parking_spaces.c.number)
+                    .join(owner, parking_spaces.c.owner_id == owner.c.id)
+                )
+            )
+
+            if choice == "1":  # Past
+                stmt = base_stmt.where(rentals.c.end_time < now)
+            elif choice == "2":  # Current
+                stmt = base_stmt.where(
+                    and_(rentals.c.start_time <= now, rentals.c.end_time >= now)
+                )
+            elif choice == "3":  # Future
+                stmt = base_stmt.where(rentals.c.start_time > now)
+            elif choice == "4":  # All
+                stmt = base_stmt
+            elif choice == "5":  # Exit
+                break
+            else:
+                print("❌ Invalid choice.")
+                continue
+
+            results = conn.execute(stmt).fetchall()
+
+            if not results:
+                print("⚠️ No rentals found for this option.")
+            else:
+                for rental in results:
+                    print(
+                        f"Rental ID: {rental.id} | Visitor Email: {rental.visitor_email} | Owner Email: {rental.owner_email} | "
+                        f"Space Number: {rental.space_number} | Start: {rental.start_time} | "
+                        f"End: {rental.end_time} | Total Price: {rental.total_price}"
+                    )
+
+def update_rental():
+    print("\n✏️ Update Rental")
+    rental_id = input("Enter rental ID to update: ").strip()
+
+    with engine.connect() as conn:
+        # Obtener la reserva
+        stmt = select(rentals).where(rentals.c.id == rental_id)
+        rental = conn.execute(stmt).fetchone()
+
+        if not rental:
+            print("❌ Rental not found.")
+            return
+
+        try:
+            new_start_input = input("Enter new start time (YYYY-MM-DD HH:MM): ").strip()
+            new_end_input = input("Enter new end time (YYYY-MM-DD HH:MM): ").strip()
+            new_start_time = datetime.strptime(new_start_input, "%Y-%m-%d %H:%M")
+            new_end_time = datetime.strptime(new_end_input, "%Y-%m-%d %H:%M")
+        except ValueError:
+            print("❌ Invalid datetime format.")
+            return
+
+        if new_end_time <= new_start_time:
+            print("❌ End time must be after start time.")
+            return
+
+        # Ajustar si la duración es menor a 2 horas
+        min_end_time = new_start_time + timedelta(hours=MIN_RENTAL_HOURS)
+        if new_end_time < min_end_time:
+            print(f"⚠️ Duration is less than {MIN_RENTAL_HOURS} hours.")
+            new_end_time = min_end_time
+            print(f"⏰ End time automatically adjusted to: {new_end_time.strftime('%Y-%m-%d %H:%M')}")
+            confirm = input("Do you want to continue with this adjusted time? (y/n): ").strip().lower()
+            if confirm != "y":
+                print("❌ Update cancelled.")
+                return
+
+        # Obtener el espacio de parqueo
+        space_stmt = select(parking_spaces).where(parking_spaces.c.number == rental.space_number)
+        space = conn.execute(space_stmt).fetchone()
+        if not space:
+            print("❌ Parking space not found.")
+            return
+
+        # Calcular nuevo total
+        duration = (new_end_time - new_start_time).total_seconds() / 3600
+        base_price = duration * space.price_per_hour
+
+        if duration <= 12:
+            discount = DISCOUNT_12H
+        elif duration <= 24:
+            discount = DISCOUNT_24H
+        else:
+            discount = 0
+
+        total_price = int(base_price * (1 - discount))
+
+        # Actualizar la reserva
+        update_stmt = rentals.update().where(rentals.c.id == rental_id).values(
+            start_time=new_start_time,
+            end_time=new_end_time,
+            total_price=total_price,
+            status="pending",
+            updated_at=datetime.now()
+        )
+        conn.execute(update_stmt)
+
+        # get owner email
+        owner_stmt = select(
+            users.c.email, users.c.phone, parking_spaces.c.floor
+            ).where(
+                users.c.id == space.owner_id
+                ).select_from(parking_spaces.join(users, parking_spaces.c.owner_id == users.c.id))
+        
+        owner = conn.execute(owner_stmt).fetchone()
+
+        print("✅ Rental updated successfully.")
+        print(f"💰 New total price: {total_price} colones.")
+
+        # Simulated notification
+        space_code = f"N{space.floor}P{space.number}"
+        print(f"\n📲 Simulated WhatsApp to owner ({owner.phone}):")
+        print(f"👉 Hello, a reservation for parking space {space_code} has been updated.")
+        print(f"⏰ New time: {new_start_time.strftime('%Y-%m-%d %H:%M')} to {new_end_time.strftime('%Y-%m-%d %H:%M')}.")
+        print(f"💵 New amount to be paid: {total_price} colones.")
+        print("🕓 Please confirm the updated reservation within 10 minutes.\n")
+
+def delete_rental():
+    print("\n🗑️ Delete Rental")
+
+    visitor_email = input("Enter your email: ").strip()
+
+    with engine.connect() as conn:
+        visitor_stmt = select(users.c.id).where(users.c.email == visitor_email)
+        visitor_result = conn.execute(visitor_stmt).fetchone()
+        if not visitor_result:
+            print("❌ No user found with that email.")
+            return
+
+        visitor_id = visitor_result.id
+        now = datetime.now()
+
+        # Fetch future rentals only
+        stmt = select(rentals).where(
+            and_(
+                rentals.c.visitor_id == visitor_id,
+                rentals.c.start_time > now
+            )
+        )
+        results = conn.execute(stmt).fetchall()
+
+        if not results:
+            print("ℹ️ You have no future rentals to delete.")
+            return
+
+        print("\n🗓️ Your Future Rentals:")
+        for idx, rental in enumerate(results, start=1):
+            print(f"{idx}. Rental ID: {rental.id} | Space: N{rental.space_number} | Start: {rental.start_time} | End: {rental.end_time} | Paid: {rental.is_paid} | Status: {rental.status}")
+
+        print("0. ❌ Cancel")
+        try:
+            choice = int(input("Select a rental to delete by number: ").strip())
+            if choice == 0:
+                print("❌ Cancelled.")
+                return
+            if choice < 1 or choice > len(results):
+                print("❌ Invalid selection.")
+                return
+        except ValueError:
+            print("❌ Invalid input.")
+            return
+
+        selected_rental = results[choice - 1]
+
+        # Proceed with delete
+        delete_stmt = rentals.delete().where(rentals.c.id == selected_rental.id)
+        conn.execute(delete_stmt)
+        print(f"✅ Rental ID {selected_rental.id} has been successfully deleted.")
+
 def rentals_menu():
     while True:
         print("\n📅 Rentals Menu")
@@ -798,3 +1127,25 @@ def rentals_menu():
             break
         else:
             print("❌ Invalid choice.")
+
+def main_menu():
+    while True:
+        print("\n📋URBN Escalante - Main Menu")
+        print("1. Manage Users")
+        print("2. Manage Parking Spaces")
+        print("3. Manage Rentals")
+        print("4. Exit")
+
+        choice = input("Choose an option (1-4): ").strip()
+
+        if choice == "1":
+            users_menu()
+        elif choice == "2":
+            parking_spaces_menu()
+        elif choice == "3":
+            rentals_menu()
+        elif choice == "4":
+            print("👋 Exiting. Goodbye!")
+            break
+        else:
+            print("❌ Invalid choice. Please try again.")
