@@ -14,7 +14,7 @@ To prevent this, you should add a check to see if the record already exists befo
 '''
 
 import requests
-from sqlalchemy import create_engine, text, select, insert, Integer,String, DateTime, ForeignKey, Boolean, Table, Column, MetaData
+from sqlalchemy import create_engine, text, insert, Integer,String, DateTime, ForeignKey, Boolean, Table, Column, MetaData
 import os
 from datetime import datetime
 
