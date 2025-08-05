@@ -13,7 +13,6 @@ The more dynamic the application, the better!
 '''
 
 print("Application name: URBN Escalante Parking\n")
-user_name = str(input(f"Insert your name: "))
 
 from sqlalchemy import create_engine,  and_, or_, func, text, select, insert, ForeignKey, Boolean, MetaData,Table, Column, Integer, String, Enum, DateTime, MetaData
 import re
