@@ -27,20 +27,21 @@ DB_USER = os.getenv("MYSQL_USER")
 DB_PASSWORD = os.getenv("MYSQL_PASSWORD")
 DB_HOST = os.getenv("MYSQL_HOST")
 DB_PORT = os.getenv("MYSQL_PORT")
-DB_NAME = os.getenv("MYSQL_DATABASE_EXERCISES")
+MYSQL_DB_PARKING_URBN = os.getenv("MYSQL_DB_PARKING_URBN")
 
 # Build database URL
-DATABASE_URL = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+DATABASE_URL_URBN_PARKING = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{MYSQL_DB_PARKING_URBN}"
 
 # Create the engine
-engine = create_engine(DATABASE_URL)
+engine = create_engine(DATABASE_URL_URBN_PARKING)
 
 # Create the new database in MySQL Workbench
 db_name = "parking_URBN_db"
 
-with engine.connect() as conn:
+with engine.begin() as conn:
     conn.execute(text(f"CREATE DATABASE IF NOT EXISTS {db_name}"))
     print(f"\nDatabase '{db_name}' created or already exists.")
+
 
 metadata = MetaData()
 
@@ -82,6 +83,8 @@ rentals = Table(
     Column("status", Enum("pending", "confirmed", "cancelled"), default="pending")
 )
 
+metadata.create_all(engine)
+
 # def () for users menu:
 def insert_users():
     print("\n🟢 Insert a New User")
@@ -102,7 +105,7 @@ def insert_users():
         return
 
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             insert_stmt = users.insert().values(
                 name=name,
                 email=email,
@@ -121,7 +124,7 @@ def is_valid_sinpe(sinpe):
 def update_users():
     print("\n🔄 Update User Data")
     email_to_update = input("Enter the email of the user to update: ").strip()
-    with engine.connect() as conn:
+    with engine.begin() as conn:
         user_exists = conn.execute(select(users).where(users.c.email == email_to_update)).fetchone()
         if not user_exists:
             print("⚠️ User not found.")
@@ -148,7 +151,7 @@ def update_users():
     elif option == "2":
         new_value = input("Enter the new email: ").strip()
         # Check if the new email already exists (important, it is the PK)
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             check_stmt = select(users).where(users.c.email == new_value)
             existing_user = conn.execute(check_stmt).fetchone()
             if existing_user:
@@ -163,7 +166,7 @@ def update_users():
             return
         update_column = users.c.role
 
-        with engine.connect() as conn:
+        with engine.begin() as conn:
 
             if new_value == "owner":
                 # Check if SINPE is filled already, if not, ask for it (all owners must have SINPE)
@@ -225,7 +228,7 @@ def update_users():
             print("❌ Invalid SINPE format.")
             return
         
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             result = conn.execute(select(users.c.role).where(users.c.email == email_to_update)).fetchone()
             if result is None:
                 print("⚠️ User not found.")
@@ -241,7 +244,7 @@ def update_users():
         return
 
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             stmt = (
                 users.update()
                 .where(users.c.email == email_to_update)
@@ -261,7 +264,7 @@ def select_users():
     print("2. Search user by email")
     option = input("Choose an option (1-2): ").strip()
 
-    with engine.connect() as conn:
+    with engine.begin() as conn:
         if option == "1":
             # List all users
             stmt = select(users)
@@ -293,7 +296,7 @@ def delete_user():
     print("\n🗑️ Delete User")
     email_to_delete = input("Enter the email of the user to delete: ").strip()
 
-    with engine.connect() as conn:
+    with engine.begin() as conn:
         user = conn.execute(select(users).where(users.c.email == email_to_delete)).fetchone()
 
         if not user:
@@ -370,7 +373,7 @@ def run_join_query():
     elif email_filter and role_filter == "owner":
         stmt = stmt.where(owners.c.email == email_filter)
 
-    with engine.connect() as conn:
+    with engine.begin() as conn:
         results = conn.execute(stmt).fetchall()
 
         if not results:
@@ -396,7 +399,7 @@ def insert_parking_space():
     print("\n➕ Add Parking Space")
     try:
         owner_email = input("Enter owner's email: ").strip()
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             # Verificar que el owner existe y es "owner"
             owner = conn.execute(
                 select(users.c.id, users.c.role).where(users.c.email == owner_email)
@@ -493,13 +496,12 @@ def list_parking_spaces():
         return
 
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             stmt = (
                 select(
-                    parking_spaces.c.id,
+                    parking_spaces.c.number,
                     users.c.name.label("owner_name"),
                     parking_spaces.c.floor,
-                    parking_spaces.c.number,
                     parking_spaces.c.is_available,
                     parking_spaces.c.price_per_hour
                 )
@@ -522,10 +524,9 @@ def list_parking_spaces():
             for row in results:
                 availability = "✅ Available" if row.is_available else "❌ Occupied"
                 print(f"""
-                    🅿️ ID: {row.id}
+                    🅿️ Number: {row.number}
                     👤 Owner: {row.owner_name}
                     🏢 Floor: {row.floor}
-                    🔢 Number: {row.number}
                     💰 Price/hr: ₡{row.price_per_hour}
                     📶 Status: {availability}
                     -------------------------
@@ -541,7 +542,7 @@ def update_parking_space():
         print("❌ Invalid parking number format. Use format like N3P10.")
         return
 
-    with engine.connect() as conn:
+    with engine.begin() as conn:
         # Buscar espacio que NO esté eliminado
         space = conn.execute(
             select(parking_spaces)
@@ -671,7 +672,7 @@ def delete_parking_space():
         print("❌ Invalid parking space number format. Use something like N3P10.")
         return
 
-    with engine.connect() as conn:
+    with engine.begin() as conn:
         # Buscar espacio que no esté eliminado
         space = conn.execute(
             select(parking_spaces)
@@ -712,7 +713,7 @@ DISCOUNT_12H = 0.10
 DISCOUNT_24H = 0.20
 
 def is_space_available(space_number, new_start, new_end):
-    with engine.connect() as conn:
+    with engine.begin() as conn:
         buffer = timedelta(minutes=30)
 
         stmt = (
@@ -739,7 +740,7 @@ def add_rental():
     visitor_email = input("Enter your email: ").strip()
 
     # Get visitor_id from email
-    with engine.connect() as conn:
+    with engine.begin() as conn:
         visitor_stmt = select(users.c.id).where(users.c.email == visitor_email)
         visitor_result = conn.execute(visitor_stmt).fetchone()
         if not visitor_result:
@@ -772,7 +773,7 @@ def add_rental():
     query_start = start_time - timedelta(minutes=BUFFER_MINUTES)
     query_end = end_time + timedelta(minutes=BUFFER_MINUTES)
 
-    with engine.connect() as conn:
+    with engine.begin() as conn:
         # Get all available spaces with owner ready for payment
         stmt = select(
             parking_spaces, users
@@ -918,7 +919,7 @@ def list_rentals():
         choice = input("Choose an option (1-5): ").strip()
         now = datetime.now()
 
-        with engine.connect() as conn:
+        with engine.begin() as conn:
             base_stmt = (
                 select(
                     rentals.c.id,
@@ -969,7 +970,7 @@ def update_rental():
     print("\n✏️ Update Rental")
     rental_id = input("Enter rental ID to update: ").strip()
 
-    with engine.connect() as conn:
+    with engine.begin() as conn:
         # Obtener la reserva
         stmt = select(rentals).where(rentals.c.id == rental_id)
         rental = conn.execute(stmt).fetchone()
@@ -1057,7 +1058,7 @@ def delete_rental():
 
     visitor_email = input("Enter your email: ").strip()
 
-    with engine.connect() as conn:
+    with engine.begin() as conn:
         visitor_stmt = select(users.c.id).where(users.c.email == visitor_email)
         visitor_result = conn.execute(visitor_stmt).fetchone()
         if not visitor_result:
@@ -1149,3 +1150,5 @@ def main_menu():
             break
         else:
             print("❌ Invalid choice. Please try again.")
+
+main_menu()
